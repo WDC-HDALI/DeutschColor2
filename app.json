@@ -1,0 +1,32 @@
+{
+  "id": "7a375e72-947e-4c9a-8b95-e68ab76d9993",
+  "name": "Deusch Color",
+  "publisher": "WEDATA CONSULT",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "Payment Tracking",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "https://www.wedata-consult.com/",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "a6e8f13e-41c7-4628-bc26-4fe55976bd3b",
+      "publisher": "IBS",
+      "name": "IBS DeltaTunizi Ext.",
+      "version": "1.0.2.9"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "17.0.0.0",
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 70149
+    }
+  ],
+  "showMyCode": true,
+  "runtime": "6.0"
+}
