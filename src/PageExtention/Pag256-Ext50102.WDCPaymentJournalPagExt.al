@@ -14,15 +14,13 @@ pageextension 50102 "WDC PaymentJournalPagExt" extends "Payment Journal" //256
                 ApplicationArea = All;
                 trigger OnValidate()
                 var
-                    lCUApply: Codeunit 50101;
                     lBatchName: Record 232;
                     lCHQHeader: Record "Cheque Header";
                 begin
-                    Rec.checkbatchName("Cheque No.");
+                    Rec.checkbatchName(Rec."Cheque No.");
                     If Rec."Cheque No." <> '' then begin
                         If Rec."Document No." = '' then
                             Rec."Document No." := Rec."Cheque No.";
-                        //lCUApply.Run(Rec);
                     end;
                 end;
             }

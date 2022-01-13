@@ -25,13 +25,12 @@ tableextension 50100 "WDC GenJournalLineTabExt" extends "Gen. Journal Line" //81
                 lBatchName: Record 232;
                 lCHQHeader: Record "Cheque Header";
             begin
-                checkbatchName("Cheque No.");
+                //checkbatchName("Cheque No."); //Hdali
                 Clear("Code Status");
                 Clear("Payment Type");
                 Clear("Description Status");
                 Clear("Customer No.");
                 Clear("Sales person No.");
-                //Clear("Document No.");
                 IF lBatchName.Get(rec."Journal Template Name", Rec."Journal Batch Name") then begin
                     "Code Status" := lBatchName."Code Status";
                     "Payment Type" := lBatchName."Payment Type";
@@ -76,7 +75,7 @@ tableextension 50100 "WDC GenJournalLineTabExt" extends "Gen. Journal Line" //81
     var
         lBatchName: Record 232;
         lchequeHeader: Record "Cheque Header";
-        lText001: label 'Batch name status code is incompatible with the check';
+        lText001: label 'Batch name status code is incompatible with the Cheque';
         lText002: label 'The current status of this cheque is the same as %1  ';
 
     begin

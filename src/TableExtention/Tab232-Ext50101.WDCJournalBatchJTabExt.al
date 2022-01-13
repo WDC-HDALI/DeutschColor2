@@ -34,13 +34,12 @@ tableextension 50101 "WDC JournalBatchJTabExt" extends "Gen. Journal Batch" //23
             trigger OnValidate()
             var
                 lBatchName: record 232;
-                ltext0001: Label 'There is another batch name which is checked to do this';
             begin
                 lBatchName.Reset();
                 lBatchName.SetRange("First Step of cheque", true);
                 if lBatchName.FindFirst() then
                     if lBatchName.Name <> rec.Name then
-                        Error(ltext0001);
+                        Error(Text0001);
             end;
         }
         field(50205; "First Step of Traite"; Boolean)
@@ -49,13 +48,12 @@ tableextension 50101 "WDC JournalBatchJTabExt" extends "Gen. Journal Batch" //23
             trigger OnValidate()
             var
                 lBatchName: record 232;
-                ltext0001: Label 'There is another batch name which is checked to do this';
             begin
                 lBatchName.Reset();
                 lBatchName.SetRange("First Step of Traite", true);
                 if lBatchName.FindFirst() then
                     if lBatchName.Name <> rec.Name then
-                        Error(ltext0001);
+                        Error(Text0001);
             end;
         }
         field(50206; "Last Step of Cheque"; Boolean)
@@ -64,13 +62,12 @@ tableextension 50101 "WDC JournalBatchJTabExt" extends "Gen. Journal Batch" //23
             trigger OnValidate()
             var
                 lBatchName: record 232;
-                ltext0001: Label 'There is another batch name which is checked to do this';
             begin
                 lBatchName.Reset();
                 lBatchName.SetRange("Last Step of cheque", true);
                 if lBatchName.FindFirst() then
                     if lBatchName.Name <> rec.Name then
-                        Error(ltext0001);
+                        Error(Text0001);
             end;
         }
         field(50207; "Last Step of Traite"; Boolean)
@@ -79,16 +76,18 @@ tableextension 50101 "WDC JournalBatchJTabExt" extends "Gen. Journal Batch" //23
             trigger OnValidate()
             var
                 lBatchName: record 232;
-                ltext0001: Label 'There is another batch name which is checked to do this';
+
             begin
                 lBatchName.Reset();
                 lBatchName.SetRange("First Step of traite", true);
                 if lBatchName.FindFirst() then
                     if lBatchName.Name <> rec.Name then
-                        Error(ltext0001);
+                        Error(Text0001);
             end;
         }
 
     }
+    var
+        Text0001: Label 'There is another batch name which is checked to do this Step';
 
 }

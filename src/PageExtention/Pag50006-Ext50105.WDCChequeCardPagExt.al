@@ -68,9 +68,9 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
         lBatchName: record 232;
         ltext0001: label 'Cheque genereted';
         lchequeHeader: record "Cheque Header";
+        lchequeLines: Record "Cheque Line";
 
     begin
-
         lGenjournalLine.Init();
         lGenjournalLine."Journal Template Name" := 'PAYMENTS';
         lGenjournalLine."Source Code" := 'PAYMENTJNL';
@@ -101,6 +101,7 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
 
         If lGenjournalLine.Insert then begin
             lGenjournalLine.Validate("Cheque No.", Rec."Cheque No.");
+            lGenjournalLine.Validate("Amount (LCY)", -Rec."Cheque Value");
             IF lGenjournalLine.Modify THEN begin
                 If lchequeHeader.Get(Rec."Cheque No.") then begin
                     lchequeHeader."Cheque Generated" := true;
@@ -113,10 +114,22 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
         end;
     end;
 
+    procedure GetAmountFromChequeLines(pChequeNo: code[20]): Decimal
+    var
+        lchequeLines: record "Cheque Line";
+    begin
+        lchequeLines.Reset();
+        lchequeLines.SetRange("Cheque No.", pChequeNo);
+        if lchequeLines.FindFirst() then
+            lchequeLines.CalcSums("Amount LCY");
+        Exit(lchequeLines."Amount LCY");
+
+    end;
+
     procedure SelectBatcNameFromPaymentStatus(pPaymentType: Enum "WDC Payment Type"): code[20]
     var
         lBatchName: Record 232;
-        ltext0001: Label 'There is no payment batch name configured for the step: doc to sales person ';
+        ltext0001: Label 'There is no payment batch name configured for the first step';
     begin
         lBatchName.Reset();
         lBatchName.SetRange("Payment Type", pPaymentType);
@@ -126,7 +139,6 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
         else
             Error(ltext0001);
     end;
-
 
     procedure WDC_GetNewLineNo(TemplateName: Code[10]; BatchName: Code[10]): Integer
     var

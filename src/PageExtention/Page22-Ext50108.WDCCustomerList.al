@@ -4,10 +4,6 @@ pageextension 50108 "WDC Customer myList" extends "Customer List" //22
     {
         addfirst(processing)
         {
-
-
-            // addbefore("Customer - Order Summary")
-            // {
             action(WDC_CustomerPaymentsTracking)
             {
                 ApplicationArea = All;
@@ -31,6 +27,5 @@ pageextension 50108 "WDC Customer myList" extends "Customer List" //22
 
             }
         }
-        //}
     }
 }

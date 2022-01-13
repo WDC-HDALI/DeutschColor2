@@ -58,17 +58,45 @@ codeunit 50100 "ST PaymentSubscribers"
     end;
 
 
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnafterPostGenJnlLine', '', FALSE, FALSE)]
-    // local procedure OnBeforePostGenJnlLine(var GenJournalLine: Record "Gen. Journal Line"; Balancing: Boolean)
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnAfterPostGenJnlLine', '', FALSE, FALSE)]
+    local procedure OnAfterPostGenJnlLine(var GenJournalLine: Record "Gen. Journal Line"; Balancing: Boolean)
 
-    // var
-    //     lCustEntrySetApplID: Codeunit "Cust. Entry-SetAppl.ID";
-    // begin
-    //     If (GenJournalLine."Cheque No." = '') Then; //AND (GenJournalLine."Code Status" = '') then
-    //                                                 //AppliedCustLedger(GenJournalLine, GenJournalLine."Cheque No.")
-    //                                                 // Error('ok');
-    // end;
+    var
+        lpaymentApply: Codeunit "WDC Payment Aplly";
+        lchequeLines: record "Cheque Line";
+        lCustLedgerEntry: Record "Cust. Ledger Entry";
+        lCustLedgEntry: Record "Cust. Ledger Entry";
+        lBatchName: record 232;
+    begin
+        If (GenJournalLine."Cheque No." <> '') AND StepOfApply(GenJournalLine."Code Status") then begin
+            lCustLedgEntry.Reset();
+            lCustLedgEntry.SetRange("Document Type", lCustLedgEntry."Document Type"::Payment);
+            lCustLedgEntry.SetRange("Document No.", GenJournalLine."Cheque No.");
+            if lCustLedgEntry.FindFirst() Then Begin
+                lchequeLines.Reset();
+                lchequeLines.SetRange("Cheque No.", GenJournalLine."Cheque No.");
+                if lchequeLines.FindFirst() then
+                    repeat
+                        lpaymentApply.ApplyInvoiceEntry_DetCustLedgerEntry(lchequeLines."Invoice No.", lchequeLines."Cheque No.", lCustLedgEntry."Transaction No.");
+                        lpaymentApply.ClosedInvoiceCustomerLedgerEntry(lchequeLines."Invoice No.", lCustLedgEntry."Entry No.", lchequeLines."Amount LCY");
+                        Message('Facture %1', lchequeLines."Invoice No.");
+                    Until lchequeLines.Next = 0;
+                Message('Payment %1', GenJournalLine."Document No.");
+                lpaymentApply.ApplyPaymentEntry_DetCustLedgerEntry(GenJournalLine."Cheque No.", lCustLedgEntry."Transaction No.");
+                lpaymentApply.ClosedPaymentCustomerLedgerEntry(GenJournalLine."Cheque No.");
+            End;
+        end;
+    End;
 
+    procedure StepOfApply(pStatusCode: Code[20]): Boolean
+    var
+        lBatchName: record 232;
+    begin
+        lBatchName.Reset();
+        lBatchName.SetRange("Code Status", pStatusCode);
+        If lBatchName.FindFirst() Then;
+        exit(lBatchName."First Step of cheque");
+    end;
 
     procedure SetCHQStatus(pChqNo: Code[20]; "pStatusCode": Code[20])
     var
@@ -94,51 +122,5 @@ codeunit 50100 "ST PaymentSubscribers"
                 lCustomerLedgEntry.Modify;
             until lCustomerLedgEntry.Next = 0;
     end;
-
-    procedure AppliedCustLedger(pGenJournalLine: Record "Gen. Journal Line"; pChqNo: Code[20])
-    var
-        lCustEntrySetApplID: Codeunit "Cust. Entry-SetAppl.ID";
-        lpageApplied: Page 232;
-        lCustLedgEntry: Record "Cust. Ledger Entry";
-        lChequelines: Record "Cheque Line";
-        lGenJNlApply: Codeunit 225;
-    begin
-        lChequelines.Reset();
-        lChequelines.SetRange("Cheque No.", pChqNo);
-        If lChequelines.FindFirst() then
-            repeat
-            // Clear(lpageApplied);
-            // lCustLedgEntry.Reset();
-            // lCustLedgEntry.SetRange("Document No.", lChequelines."Invoice No.");
-            // If lCustLedgEntry.FindFirst Then begin
-            //     lpageApplied.SetRecord(lCustLedgEntry);
-            //     lpageApplied.SetTableView(lCustLedgEntry);
-
-            //     lpageApplied.SetCustLedgEntry(lCustLedgEntry);
-            //     lpageApplied.SetApplyingCustLedgEntry;
-            //     //lpageApplied.Run();
-            //     lpageApplied.SetCustApplId(false);
-
-            //     Error('ok');
-            //end;
-
-            // with pGenJournalLine do begin
-            //     lCustLedgEntry.SetCurrentKey("Customer No.", Open, Positive);
-            //     lCustLedgEntry.SetRange("Document No.", lChequelines."Invoice No.");
-            //     lCustLedgEntry.SetRange(Open, true);
-            //     If lCustLedgEntry.FindFirst() Then Begin
-            //         If "Applies-to ID" = '' then
-            //             "Applies-to ID" := "Document No.";
-            //         lpageApplied.CalcApplnAmount();
-            //         //lpageApplied.CalcApplnRemainingAmount(lCustLedgEntry.Amount);
-            //         lpageApplied.SetGenJnlLine(pGenJournalLine, FieldNo("Applies-to ID"));
-            //         lpageApplied.SetRecord(lCustLedgEntry);
-            //         lpageApplied.SetTableView(lCustLedgEntry);
-            //         lpageApplied.SetCustApplId(false);
-            //     end;
-            // End;
-            until lChequelines.Next = 0;
-    End;
-
 
 }

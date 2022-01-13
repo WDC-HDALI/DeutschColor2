@@ -8,7 +8,6 @@ report 50101 "WDC Customer Inv. by Cheque"
     EnableHyperlinks = true;
     UsageCategory = ReportsAndAnalysis;
     Description = 'Customer Inv. by Cheque';
-
     dataset
     {
         dataitem(Header; "Integer")
@@ -82,8 +81,6 @@ report 50101 "WDC Customer Inv. by Cheque"
                 {
                     DataItemLink = "Customer No." = FIELD("No."), "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"), "Currency Code" = FIELD("Currency Filter"), "Date Filter" = FIELD("Date Filter");
                     DataItemTableView = SORTING("Customer No.", "Posting Date", "Currency Code") order(descending);
-
-
                     column(Cust_Ledger_Entry_Posting_Date_;
                     Format("Posting Date"))
                     {
@@ -197,8 +194,6 @@ report 50101 "WDC Customer Inv. by Cheque"
                         Remainning_Amount__LCY := 0;
                         "Cust. Ledger Entry".CalcFields("Amount (LCY)");
                         "Cust. Ledger Entry".CalcFields("Remaining Amt. (LCY)");
-
-                        //If lBatchName.Get('PAYMENTS', "Cust. Ledger Entry"."Journal Batch Name") then;
                         lBatchName.Reset();
                         lBatchName.SetRange("Code Status", "Cust. Ledger Entry"."Code Status");
                         if lBatchName.FindFirst() then;
