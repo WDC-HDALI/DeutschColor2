@@ -1,5 +1,6 @@
 pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
 {
+
     layout
     {
         addafter(Status)
@@ -13,6 +14,8 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
             {
                 ApplicationArea = All;
             }
+
+
         }
     }
 
@@ -24,7 +27,7 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
             action("Generate Cheque")
             {
                 Promoted = true;
-                PromotedCategory = Process;
+                PromotedCategory = Category4;
                 PromotedIsBig = true;
                 PromotedOnly = true;
                 Image = CreateLedgerBudget;
@@ -48,11 +51,6 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
                         Error(ltext0005);
                     If Rec."Cheque Generated" then
                         Error(ltext0003);
-                    if rec."Cheque Value" = 0 Then
-                        lchequeLines.Reset();
-                    lchequeLines.SetRange("Cheque No.", rec."Cheque No.");
-                    if lchequeLines.IsEmpty Then
-                        Error(ltext0006);
                     If Not Confirm(Ltext0002) THEN
                         exit;
                     GenerateCheque;
@@ -102,6 +100,7 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
         If lGenjournalLine.Insert then begin
             lGenjournalLine.Validate("Cheque No.", Rec."Cheque No.");
             lGenjournalLine.Validate("Amount (LCY)", -Rec."Cheque Value");
+            lGenjournalLine."Invoices To Paid" := GetAllInvoiceToPaid(Rec."Cheque No.");
             IF lGenjournalLine.Modify THEN begin
                 If lchequeHeader.Get(Rec."Cheque No.") then begin
                     lchequeHeader."Cheque Generated" := true;
@@ -123,8 +122,27 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
         if lchequeLines.FindFirst() then
             lchequeLines.CalcSums("Amount LCY");
         Exit(lchequeLines."Amount LCY");
-
     end;
+
+    procedure GetAllInvoiceToPaid(pChequeNo: code[20]): Text[250]
+    var
+        lchequeLines: record "Cheque Line";
+        AllInvoiceToPaid: Text;
+    begin
+        Clear(AllInvoiceToPaid);
+        lchequeLines.Reset();
+        lchequeLines.SetRange("Cheque No.", pChequeNo);
+        if lchequeLines.FindFirst() then
+            repeat
+                If StrLen(AllInvoiceToPaid) <= 230 then
+                    AllInvoiceToPaid := AllInvoiceToPaid + lchequeLines."Invoice No." + ' | ';
+            Until lchequeLines.Next = 0;
+        If StrLen(AllInvoiceToPaid) >= 2 then
+            AllInvoiceToPaid := DelStr(AllInvoiceToPaid, StrLen(AllInvoiceToPaid) - 2, 2);
+        Exit(AllInvoiceToPaid);
+    end;
+
+
 
     procedure SelectBatcNameFromPaymentStatus(pPaymentType: Enum "WDC Payment Type"): code[20]
     var
@@ -151,5 +169,8 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
             exit(GenJournalLine."Line No." + 10000);
         exit(10000);
     end;
+
+    var
+        IsNoTGenerated: Boolean;
 
 }

@@ -26,17 +26,18 @@ tableextension 50103 "WDC CustLedgerEntrTabExt" extends "Cust. Ledger Entry" //2
             DataClassification = ToBeClassified;
             Editable = False;
         }
-        field(50204; "Cheque No. Of Invoivce"; Code[20])
-        {
-            Editable = false;
-            FieldClass = FlowField;
-            CalcFormula = lookup("Cheque Line"."Cheque No." where("Invoice No." = field("Document No.")));
-        }
+
 
         field(50205; "Sales person No."; Code[20])
         {
             DataClassification = ToBeClassified;
             Editable = False;
+        }
+
+        field(50206; "Amt(LCY) Not Applied"; Decimal)
+        {
+            Editable = False;
+            DataClassification = ToBeClassified;
         }
 
     }

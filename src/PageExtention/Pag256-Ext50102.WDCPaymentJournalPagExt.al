@@ -2,7 +2,14 @@ pageextension 50102 "WDC PaymentJournalPagExt" extends "Payment Journal" //256
 {
     layout
     {
-        addbefore("Currency Code")
+        addbefore("Posting Date")
+        {
+            field("To Post"; Rec."To Post")
+            {
+                Editable = true;
+            }
+        }
+        addbefore("Recipient Bank Account")
         {
             field("Posting Group"; Rec."Posting Group")
             {
@@ -17,14 +24,18 @@ pageextension 50102 "WDC PaymentJournalPagExt" extends "Payment Journal" //256
                     lBatchName: Record 232;
                     lCHQHeader: Record "Cheque Header";
                 begin
+                    Clear("Document No.");
                     Rec.checkbatchName(Rec."Cheque No.");
                     If Rec."Cheque No." <> '' then begin
-                        If Rec."Document No." = '' then
-                            Rec."Document No." := Rec."Cheque No.";
+                        Rec."Document No." := Rec."Cheque No.";
                     end;
                 end;
             }
             field("Customer No."; Rec."Customer No.")
+            {
+                ApplicationArea = All;
+            }
+            field("Invoices To Paid"; Rec."Invoices To Paid")
             {
                 ApplicationArea = All;
             }
@@ -46,10 +57,57 @@ pageextension 50102 "WDC PaymentJournalPagExt" extends "Payment Journal" //256
             }
         }
 
+
     }
+
 
     actions
     {
 
+        addafter(Post)
+        {
+            action("Select all / Deselect all")
+            {
+                caption = 'Select all/Deselect all';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+                Image = SelectLineToApply;
+                ShortcutKey = 'Ctrl+A';
+                InFooterBar = true;
+                trigger OnAction()
+                begin
+                    SeelectDeselectAll;
+                end;
+            }
+        }
+
+
     }
+    trigger OnOpenPage()
+    begin
+        rec.ModifyAll("To Post", false);
+    end;
+
+    var
+        SelectedAll: Boolean;
+
+    procedure SeelectDeselectAll()
+    var
+
+    begin
+        If Not SelectedAll then begin
+            Rec.ModifyAll(Rec."To Post", true);
+            SelectedAll := true;
+            CurrPage.Update;
+        end Else begin
+            SelectedAll := false;
+            Rec.ModifyAll(Rec."To Post", false);
+            CurrPage.Update;
+        end;
+
+    end;
+
+
 }

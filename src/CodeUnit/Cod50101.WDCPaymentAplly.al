@@ -10,18 +10,6 @@ codeunit 50101 "WDC Payment Aplly"
 
     var
 
-    procedure GetAmountInvoiceFromCHQ(pInvoiceNo: Code[20]; pChequeNo: Code[20]): Decimal
-    var
-        lchequeLines: record "Cheque Line";
-    Begin
-        lchequeLines.Reset();
-        lchequeLines.SetRange("Cheque No.", pChequeNo);
-        lchequeLines.setrange("Invoice No.", pInvoiceNo);
-        If lchequeLines.FindFirst then;
-        exit(lchequeLines."Amount LCY");
-    End;
-
-
     procedure ApplyPaymentEntry_DetCustLedgerEntry(pChequeNo: Code[20]; pTransactionNo: Integer)
     var
         lDetCustLedger: record "Detailed Cust. Ledg. Entry";
@@ -40,11 +28,11 @@ codeunit 50101 "WDC Payment Aplly"
             lApplyDetCustLedger."Document Type" := lDetCustLedger."Document Type"::Payment;
             lApplyDetCustLedger."Document No." := pChequeNo;
             lApplyDetCustLedger.Insert;
-            lApplyDetCustLedger.Amount := abs(lDetCustLedger.Amount);
-            lApplyDetCustLedger."Amount (LCY)" := abs(lDetCustLedger."Amount (LCY)");
+            lApplyDetCustLedger.Amount := GetSumAmountsInvoicesFromCHQ(pChequeNo);
+            lApplyDetCustLedger."Amount (LCY)" := GetSumAmountsInvoicesFromCHQ(pChequeNo);
+            lApplyDetCustLedger."Debit Amount" := GetSumAmountsInvoicesFromCHQ(pChequeNo);
+            lApplyDetCustLedger."Debit Amount (LCY)" := GetSumAmountsInvoicesFromCHQ(pChequeNo);
             lApplyDetCustLedger."Transaction No." := pTransactionNo;
-            lApplyDetCustLedger."Debit Amount" := lDetCustLedger."Credit Amount";
-            lApplyDetCustLedger."Debit Amount (LCY)" := lDetCustLedger."Credit Amount (LCY)";
             lApplyDetCustLedger."Credit Amount" := 0;
             lApplyDetCustLedger."Credit Amount (LCY)" := 0;
             lApplyDetCustLedger."Initial Document Type" := lApplyDetCustLedger."Initial Document Type"::Payment;
@@ -87,7 +75,6 @@ codeunit 50101 "WDC Payment Aplly"
             lApplyDetCustLedger.Modify;
         end;
     End;
-
 
     procedure GetAppliedCustomerLedgerEntry(pChequeNo: Code[20]): Integer
     var
@@ -142,6 +129,37 @@ codeunit 50101 "WDC Payment Aplly"
         if lCustLedgEntry.FindFirst() Then;
         exit(lCustLedgEntry."Transaction No.");
     end;
+
+
+    procedure GetAmountInvoiceFromCHQ(pInvoiceNo: Code[20]; pChequeNo: Code[20]): Decimal
+    var
+        lchequeLines: record "Cheque Line";
+    Begin
+        lchequeLines.Reset();
+        lchequeLines.SetRange("Cheque No.", pChequeNo);
+        lchequeLines.setrange("Invoice No.", pInvoiceNo);
+        If lchequeLines.FindFirst then;
+        exit(lchequeLines."Amount LCY");
+    End;
+
+    procedure GetSumAmountsInvoicesFromCHQ(pChequeNo: Code[20]): Decimal
+    var
+        lchequeLines: record "Cheque Line";
+    Begin
+        lchequeLines.Reset();
+        lchequeLines.SetRange("Cheque No.", pChequeNo);
+        If lchequeLines.FindFirst then
+            lchequeLines.CalcSums("Amount LCY");
+        exit(lchequeLines."Amount LCY");
+    End;
+
+    procedure GetValueChequeFromCHQ(pChequeNo: Code[20]): Decimal
+    var
+        lChequeHeader: record "Cheque Header";
+    Begin
+        lChequeHeader.Get(pChequeNo);
+        exit(lChequeHeader."Cheque Value");
+    End;
 
 }
 
