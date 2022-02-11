@@ -1,13 +1,14 @@
-report 50101 "WDC Customer Inv. by Cheque"
+report 50100 "WDC Customer Payments Tracking"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './src/Report/RDLC/WDCCustomerInvCHQ.rdl';
-    AdditionalSearchTerms = 'Customer Inv. by Cheque';
+    RDLCLayout = './src/Report/RDLC/WDCCustomerBalance.rdl';
+    AdditionalSearchTerms = 'Customer Payments Tracking';
     ApplicationArea = Basic, Suite;
-    Caption = 'Customer Inv. by Cheque';
+    Caption = 'Customer Payments Tracking';
     EnableHyperlinks = true;
     UsageCategory = ReportsAndAnalysis;
-    Description = 'Customer Inv. by Cheque';
+    Description = 'WDC Customer Payments Tracking';
+
     dataset
     {
         dataitem(Header; "Integer")
@@ -77,18 +78,12 @@ report 50101 "WDC Customer Inv. by Cheque"
                 column(EMail; "E-Mail")
                 {
                 }
-                column(TTC_Return_Not_Invoiced; "Return Not Invoiced")
-                {
-                }
-                column(TTC_Shippement_Not_Invoiced; "Shipment Not Invoiced")
-                {
-                }
                 dataitem("Cust. Ledger Entry"; "Cust. Ledger Entry")
                 {
                     DataItemLink = "Customer No." = FIELD("No."), "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"), "Currency Code" = FIELD("Currency Filter"), "Date Filter" = FIELD("Date Filter");
                     DataItemTableView = SORTING("Customer No.", "Posting Date", "Currency Code") order(descending);
-                    column(Cust_Ledger_Entry_Posting_Date_;
-                    Format("Posting Date"))
+
+                    column(Cust_Ledger_Entry_Posting_Date_; Format("Posting Date"))
                     {
                     }
                     column(Cust_Ledger_Entry_Document_No_; "Document No.")
@@ -97,11 +92,7 @@ report 50101 "WDC Customer Inv. by Cheque"
                     column(Cust_Ledger_Entry_Description; Description)
                     {
                     }
-                    column(Cust_Ledger_Entry_Due_Date_; Format(DocDueDate))
-                    {
-                    }
-
-                    column(DocState; DocState)
+                    column(Cust_Ledger_Entry_Due_Date_; Format("Due Date"))
                     {
                     }
                     column(OverDueMonths; OverDueMonths)
@@ -151,135 +142,43 @@ report 50101 "WDC Customer Inv. by Cheque"
 
                     }
 
-                    column(AmountInvoiceInCHQ; AmountInvoiceInCHQ)//WDC_HD
-                    {
-
-                    }
-                    column(AmountCHQ; AmountCHQ)//WDC_HD
-                    {
-
-                    }
-
-                    column(Amount__LCY_; Amount__LCY)//WDC_HD
-                    {
-
-                    }
-                    column(Remainning_Amount__LCY; Remainning_Amount__LCY)//WDC_HD
-                    {
-
-                    }
-                    column(Paymet_Type_Text; Paymet_Type_Text)//WDC_HD
-                    {
-
-                    }
-
-                    column(TotalInvoices; TotalInvoices)//WDC_HD
-                    {
-
-                    }
-                    column(TotalPaymennt; TotalPaymennt)//WDC_HD
-                    {
-
-                    }
-                    column(TotalStartigAmount; TotalStartigAmount)//WDC_HD
-                    {
-
-                    }
-                    column(TotalEmptyDocuType; TotalEmptyDocuType)//WDC_HD
-                    {
-
-                    }
-                    column(TotalCheque; TotalCheque)//WDC_HD
-                    {
-
-                    }
-                    column(DocumentNo; DocumentNo)//WDC_HD
-                    {
-
-                    }
-                    column(DueDatePassed; DueDatePassed)//WDC_HD
-                    {
-
-                    }
-                    column(Reversed; Reversed)
-                    {
-
-                    }
-
-
+                    //>>WDC
                     trigger OnAfterGetRecord()
-                    var
-                        lCHQLines: record "Cheque Line";
-                        lBatchName: record 232;
-                        LchequeHeader: record "Cheque Header";
-                        TextDocState: Label 'Expired';
                     begin
-                        //>>WDC_HD
-                        Clear(Paymet_Type_Text);
-                        Clear(DocumentNo);
-                        Clear(DocState);
-                        DueDatePassed := 0;
-                        Amount__LCY := 0;
-                        Remainning_Amount__LCY := 0;
-                        "Cust. Ledger Entry".CalcFields("Amount (LCY)");
-                        "Cust. Ledger Entry".CalcFields("Remaining Amt. (LCY)");
+                        if "Due Date" = 0D then
+                            OverDueMonths := 0
+                        else
+                            OverDueMonths := CalcFullMonthsBetweenDates("Due Date", EndDate);
+                        if ("Remaining Amount" = 0) and (OnlyOpen) then
+                            CurrReport.Skip();
+                        TempCurrencyTotalBuffer.UpdateTotal(
+                          "Currency Code", "Remaining Amount", "Remaining Amt. (LCY)", Counter);
 
-                        lBatchName.Reset();
-                        lBatchName.SetRange("Code Status", "Cust. Ledger Entry"."Code Status");
-                        if lBatchName.FindFirst() then;
+                        //<<WDC
+                        CLEAR(Description_CustLedEntries);
+                        if ("Description Status" <> '') AND ("Cheque No." <> '') THEN begin
+                            ChequeHeader.Reset();
+                            if ChequeHeader.Get("Cheque No.") then begin
+                                ChequeHeader.CalcFields("Description Status");
+                                Description_CustLedEntries := chequeHeader."Description Status";
+                            end else
+                                Description_CustLedEntries := "Description Status";
+                        end ELSE
+                            Description_CustLedEntries := Description;
+                        //>>WDC
 
-                        If ("Cust. Ledger Entry".Open = TRUE) AND (("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::Invoice) or ("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::"Credit Memo")) Then Begin
-                            Paymet_Type_Text := 'Invoices /Credit Memo';
-                            DocumentNo := "Cust. Ledger Entry"."Document No.";
-                            Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
-                            Remainning_Amount__LCY := "Cust. Ledger Entry"."Remaining Amt. (LCY)";
-                            TotalInvoices += "Cust. Ledger Entry"."Remaining Amt. (LCY)";
-                            DocDueDate := "Cust. Ledger Entry"."Due Date";
-                            DueDatePassed := GetDueDatePassed(DocumentNo);
-                        ENd ELSE
-                            If ("Cust. Ledger Entry".Open = TRUE) AND (("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::payment) AND ("Cust. Ledger Entry"."Cheque No." = '')) Then Begin
-                                Paymet_Type_Text := 'Payment';
-                                Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
-                                TotalPaymennt += "Cust. Ledger Entry"."Amount (LCY)";
-                                DocumentNo := "Cust. Ledger Entry"."Cheque No.";
-                                DocDueDate := GetDueDateFromCheque("Cust. Ledger Entry"."Cheque No.");
-                            End ELSE
-                                If ("Cust. Ledger Entry".Open = TRUE) AND (("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::" ") AND ("Cust. Ledger Entry"."Posting Date" = "Starting Date")) Then Begin
-                                    Paymet_Type_Text := 'Amount 01.08.2021';
-                                    DocumentNo := "Cust. Ledger Entry"."Document No.";
-                                    Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
-                                    Remainning_Amount__LCY := "Cust. Ledger Entry"."Remaining Amt. (LCY)";
-                                    TotalStartigAmount += "Cust. Ledger Entry"."Remaining Amt. (LCY)";
-                                    DocDueDate := "Cust. Ledger Entry"."Due Date";
-                                    DueDatePassed := GetDueDatePassed(DocumentNo)
-                                End ELSE
-                                    If ("Cust. Ledger Entry".Open = TRUE) AND (("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::" ") AND ("Cust. Ledger Entry"."Posting Date" <> "Starting Date")) THEN Begin
-                                        Paymet_Type_Text := '';
-                                        DocumentNo := "Cust. Ledger Entry"."Document No.";
-                                        Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
-                                        Remainning_Amount__LCY := "Cust. Ledger Entry"."Remaining Amt. (LCY)";
-                                        TotalEmptyDocuType += "Cust. Ledger Entry"."Remaining Amt. (LCY)";
-                                        DocDueDate := "Cust. Ledger Entry"."Due Date";
-                                        DueDatePassed := GetDueDatePassed(DocumentNo);
-                                    End else begin
-                                        If ("Cust. Ledger Entry"."Cheque No." <> '') and (Not lBatchName."Last Step of Cheque") and (Not lBatchName."Last Step of Traite") and
-                                        ("Cust. Ledger Entry"."Source Code" <> 'REVERSAL') AND ("Cust. Ledger Entry"."Code Status" <> '') then begin
-                                            Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
-                                            TotalCheque += "Cust. Ledger Entry"."Amount (LCY)";
-                                            Paymet_Type_Text := 'Cheque/Traite';
-                                            DocumentNo := "Cust. Ledger Entry"."Cheque No.";
-                                            DocDueDate := GetDueDateFromCheque("Cust. Ledger Entry"."Cheque No.");
-                                        end else
-                                            CurrReport.Skip();
-                                    end;
-                        If DocDueDate < Today Then
-                            DocState := TextDocState;
-                        //<<WDC_HD 
                     end;
 
                     trigger OnPreDataItem()
                     begin
-
+                        if OnlyOpen then begin
+                            SetRange(Open, true);
+                            SetRange("Due Date", 0D, EndDate);
+                        end else
+                            SetRange("Due Date", 0D, EndDate);
+                        Counter := 0;
+                        SetRange("Date Filter", 0D, EndDate);
+                        SetAutoCalcFields("Remaining Amount", "Remaining Amt. (LCY)");
                     end;
 
                 }
@@ -321,17 +220,14 @@ report 50101 "WDC Customer Inv. by Cheque"
 
                 trigger OnAfterGetRecord()
                 begin
-                    TotalInvoices := 0;
-                    TotalCheque := 0;
-                    TotalPaymennt := 0;
-                    TotalStartigAmount := 0;
-                    TotalEmptyDocuType := 0;
+                    if not CustomersWithLedgerEntriesList.Contains("No.") then
+                        CurrReport.Skip();
                 end;
 
                 trigger OnPreDataItem()
                 begin
                     if OnlyOpen then
-                        NumCustLedgEntriesperCust.SetRange(OpenValue, TRUE);
+                        NumCustLedgEntriesperCust.SetFilter(OpenValue, 'TRUE');
 
                     if NumCustLedgEntriesperCust.Open then
                         while NumCustLedgEntriesperCust.Read do
@@ -410,10 +306,10 @@ report 50101 "WDC Customer Inv. by Cheque"
         trigger OnOpenPage()
         begin
             if EndDate = 0D then
+                //     //EndDate := WorkDate;  //WDC
                 EndDate := CALCDATE('<CM+30D>', WORKDATE);   //WDC  
 
             OnlyOpen := TRUE;   //WDC
-            "Starting Date" := 20210801D;
         end;
     }
 
@@ -451,51 +347,17 @@ report 50101 "WDC Customer Inv. by Cheque"
         Cust_Ledger_Entry_Due_Date_CaptionLbl: Label 'Due Date';
         OverDueMonthsCaptionLbl: Label 'Months Due';
         TotalCaptionLbl: Label 'Total';
-        DocStateCaption: Label 'Document Satate';
         Description_CustLedEntries: Text;   //WDC
 
         ChequeHeader: Record "Cheque Header"; //WDC 
 
-        i: Integer;
-        //>>WDC_HD
-        AmountInvoiceInCHQ: Decimal;
-        AmountCHQ: Decimal;
-        Amount__LCY: Decimal;
-        Remainning_Amount__LCY: Decimal;
-        Paymet_Type_Text: text;
-        TotalInvoices: Decimal;
-        TotalPaymennt: Decimal;
-        TotalStartigAmount: Decimal;
-        TotalEmptyDocuType: Decimal;
-        TotalCheque: Decimal;
-        DocumentNo: Text;
-        DocDueDate: Date;
-        DocState: Text;
-        DueDatePassed: Integer;
-        "Starting Date": date;
-    //<<WDC_HD
+        i: Integer;  //WDC
+
+
     procedure InitializeRequest(SetEndDate: Date; SetOnlyOpen: Boolean)
     begin
         EndDate := SetEndDate;
         OnlyOpen := SetOnlyOpen;
-    end;
-
-    procedure GetDueDateFromCheque(pCHEqueNo: Code[20]): Date;
-    var
-        lchequeHeader: Record "Cheque Header";
-    begin
-        if lchequeHeader.Get(pCHEqueNo) then
-            exit(lchequeHeader."Due Date");
-        exit(0D);
-    end;
-
-    procedure GetDueDatePassed(pInvoiceNo: Code[20]): Integer;
-    var
-        lSalesInvoiceHeader: Record "Sales Invoice Header";
-    begin
-        if lSalesInvoiceHeader.Get(pInvoiceNo) then
-            exit(today - lSalesInvoiceHeader."Due Date");
-        exit(0);
     end;
 
     local procedure CalcFullMonthsBetweenDates(FromDate: Date; ToDate: Date): Integer
