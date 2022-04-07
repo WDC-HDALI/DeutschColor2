@@ -33,24 +33,24 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
                 Image = CreateLedgerBudget;
                 trigger OnAction()
                 var
-                    ltext0001: label 'Value cheque must be not null ';
-                    ltext0002: label 'Are you sure to generate the current cheque';
-                    ltext0003: label 'Cheque is already Generated';
-                    ltext0004: label 'Please check the due date of cheque';
-                    ltext0005: label 'Please check the starting date of cheque';
+                    ltext0001: label 'Value %1 must be not null ';
+                    ltext0002: label 'Are you sure to generate the current document';
+                    ltext0003: label '%1 is already Generated';
+                    ltext0004: label 'Please check the due date of %1';
+                    ltext0005: label 'Please check the starting date of %1';
                     ltext0006: label 'Must input an invoice in cheque lines';
                     lchequeLines: record "Cheque Line";
 
                 begin
                     Rec.TestField("Customer No.");
                     If rec."Cheque Value" = 0 then
-                        error(ltext0001);
+                        error(ltext0001, Rec."Cheque/Traite");
                     If rec."Due Date" = 0D then
-                        Error(ltext0004);
+                        Error(ltext0004, Rec."Cheque/Traite");
                     If rec."Starting Date" = 0D then
-                        Error(ltext0005);
+                        Error(ltext0005, Rec."Cheque/Traite");
                     If Rec."Cheque Generated" then
-                        Error(ltext0003);
+                        Error(ltext0003, Rec."Cheque/Traite");
                     If Not Confirm(Ltext0002) THEN
                         exit;
                     GenerateCheque;
@@ -64,7 +64,7 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
         lGenjournalLine: record "Gen. Journal Line";
         lpaymentStatus: Record 50100;
         lBatchName: record 232;
-        ltext0001: label 'Cheque genereted';
+        ltext0001: label '%1 genereted';
         lchequeHeader: record "Cheque Header";
         lchequeLines: Record "Cheque Line";
 
@@ -90,7 +90,7 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
             lGenjournalLine."Line No." := WDC_GetNewLineNo('PAYMENTS', SelectBatcNameFromPaymentStatus(lGenjournalLine."Payment Type"::Traite));
             lBatchName.Reset();
             lBatchName.SetRange("Payment Type", lGenjournalLine."Payment Type"::Traite);
-            lBatchName.SetRange("First Step of Cheque", true);
+            lBatchName.SetRange("First Step of Traite", true);
             if lBatchName.FindFirst() then begin
                 lGenjournalLine."Account Type" := lBatchName."Account Type";
                 lGenjournalLine."Bal. Account No." := lBatchName."Bal. Account No.";
@@ -108,7 +108,7 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
                 end;
             end;
             Clear(lGenjournalLine);
-            Message(ltext0001);
+            Message(ltext0001, lchequeHeader."Cheque/Traite");
             CurrPage.Update();
         end;
     end;
@@ -151,8 +151,12 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
     begin
         lBatchName.Reset();
         lBatchName.SetRange("Payment Type", pPaymentType);
-        lBatchName.SetRange("First Step of Cheque", true);
-        if lBatchName.FindFirst() then
+        If pPaymentType = pPaymentType::Cheque then
+            lBatchName.SetRange("First Step of Cheque", true)
+        Else
+            If pPaymentType = pPaymentType::Traite then
+                lBatchName.SetRange("First Step of Traite", true);
+        If lBatchName.FindFirst() then
             Exit(lBatchName.Name)
         else
             Error(ltext0001);

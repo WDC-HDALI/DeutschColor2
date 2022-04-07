@@ -90,9 +90,9 @@ tableextension 50100 "WDC GenJournalLineTabExt" extends "Gen. Journal Line" //81
     var
         lBatchName: Record 232;
         lchequeHeader: Record "Cheque Header";
-        lText001: label 'Batch name status code is incompatible with this Cheque';
-        lText002: label 'The current status of this cheque is the same as %1  ';
-        lText003: label 'you cannot put a cheque with Status %1 ';
+        lText001: label 'Batch name status code is incompatible with this %1';
+        lText002: label 'The current status of this %1 is the same as %2  ';
+        lText003: label 'You cannot put a %1 with Status %2 ';
 
     begin
 
@@ -101,12 +101,12 @@ tableextension 50100 "WDC GenJournalLineTabExt" extends "Gen. Journal Line" //81
             If IsDocumentInLastStep(lchequeHeader."Code Status") Then
                 Error(ltext003, lchequeHeader."Description Status");
             if lBatchName.Get(Rec."Journal Template Name", Rec."Journal Batch Name") then begin
-                if ((lchequeHeader."Code Status" = '') and (Not lBatchName."First Step of cheque")) or
-                   ((lchequeHeader."Code Status" <> '') and (lBatchName."First Step of cheque")) then
-                    Error(lText001)
+                if ((lchequeHeader."Code Status" = '') and ((Not lBatchName."First Step of cheque") AND (Not lBatchName."First Step of Traite"))) or
+                   ((lchequeHeader."Code Status" <> '') and (lBatchName."First Step of cheque" or lBatchName."First Step of Traite")) then
+                    Error(lText001, lchequeHeader."Cheque/Traite")
                 Else
-                    If (lchequeHeader."Code Status" = Rec."Code Status") and (Not lBatchName."First Step of cheque") Then
-                        Error(lText002, lBatchName."Code Status")
+                    If (lchequeHeader."Code Status" = Rec."Code Status") and ((Not lBatchName."First Step of cheque") and (Not lBatchName."First Step of Traite")) Then
+                        Error(lText002, lchequeHeader."Cheque/Traite", lBatchName."Code Status")
             end;
 
         end;
@@ -120,8 +120,10 @@ tableextension 50100 "WDC GenJournalLineTabExt" extends "Gen. Journal Line" //81
     begin
         lBatchName.Reset();
         lBatchName.SetRange("Code Status", pCodeStatus);
-        If lBatchName.FindFirst() Then;
-        exit(lBatchName."Last Step of Cheque");
+        If lBatchName.FindFirst() Then
+            IF lBatchName."Last Step of Cheque" or lBatchName."Last Step of Traite" THEN
+                exit(true);
+        exit(false);
     end;
 
 

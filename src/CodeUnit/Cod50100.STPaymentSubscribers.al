@@ -175,9 +175,9 @@ codeunit 50100 "ST PaymentSubscribers"
                 lChequeHeader.CalcFields("Description Status");
                 lGenJournalBatch.Reset();
                 lGenJournalBatch.SetRange("Code Status", lChequeHeader."Code Status");
-                lGenJournalBatch.Setrange("Last Step of Cheque", True);
-                If Not lGenJournalBatch.IsEmpty then
-                    Error(Ltext001, lChequeHeader."Description Status");
+                If lGenJournalBatch.FindFirst() then
+                    If lGenJournalBatch."Last Step of Cheque" or lGenJournalBatch."Last Step of Traite" THEN
+                        Error(Ltext001, lChequeHeader."Description Status");
             end;
     end;
 
@@ -190,7 +190,7 @@ codeunit 50100 "ST PaymentSubscribers"
         lChequelines.Reset();
         lChequelines.SetRange("Cheque No.", Rec."Cheque No.");
         lChequelines.SetRange("Invoice No.", Rec."Invoice No.");
-        lChequelines.setfilter("Line No.", '<> %1', Rec."Line No.");
+        lChequelines.Setfilter("Line No.", '<> %1', Rec."Line No.");
         if lChequelines.FindFirst() then
             Error(ltext001);
     end;
@@ -211,8 +211,10 @@ codeunit 50100 "ST PaymentSubscribers"
     begin
         lBatchName.Reset();
         lBatchName.SetRange("Code Status", pStatusCode);
-        If lBatchName.FindFirst() Then;
-        exit(lBatchName."First Step of cheque");
+        If lBatchName.FindFirst() Then
+            IF lBatchName."First Step of cheque" or lBatchName."First Step of Traite" then
+                exit(true);
+        exit(false)
     end;
 
 
