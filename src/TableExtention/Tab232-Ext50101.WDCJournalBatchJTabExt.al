@@ -63,11 +63,7 @@ tableextension 50101 "WDC JournalBatchJTabExt" extends "Gen. Journal Batch" //23
             var
                 lBatchName: record 232;
             begin
-                lBatchName.Reset();
-                lBatchName.SetRange("Last Step of cheque", true);
-                if lBatchName.FindFirst() then
-                    if lBatchName.Name <> rec.Name then
-                        Error(Text0001);
+
             end;
         }
         field(50207; "Last Step of Traite"; Boolean)
@@ -78,11 +74,7 @@ tableextension 50101 "WDC JournalBatchJTabExt" extends "Gen. Journal Batch" //23
                 lBatchName: record 232;
 
             begin
-                lBatchName.Reset();
-                lBatchName.SetRange("First Step of traite", true);
-                if lBatchName.FindFirst() then
-                    if lBatchName.Name <> rec.Name then
-                        Error(Text0001);
+
             end;
         }
 
