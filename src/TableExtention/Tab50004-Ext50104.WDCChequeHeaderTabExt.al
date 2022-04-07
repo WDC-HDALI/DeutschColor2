@@ -30,9 +30,20 @@ tableextension 50104 "WDC ChequeHeaderTabExt" extends "Cheque Header" //50004
             DataClassification = ToBeClassified;
             Editable = False;
         }
+        field(50208; "Blocked"; Boolean)
+        {
 
+        }
 
     }
+
+    trigger OnModify()
+    var
+    begin
+        if Blocked = xRec.Blocked then
+            TestField(Blocked, false);
+    end;
+
     trigger OnDelete()
     var
         myInt: Integer;

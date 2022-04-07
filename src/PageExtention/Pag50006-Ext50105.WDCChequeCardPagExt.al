@@ -14,11 +14,13 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
             {
                 ApplicationArea = All;
             }
-
-
+            field(Blocked; Rec.Blocked)
+            {
+                ApplicationArea = all;
+            }
         }
-    }
 
+    }
     actions
     {
 
@@ -39,10 +41,13 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
                     ltext0004: label 'Please check the due date of cheque';
                     ltext0005: label 'Please check the starting date of cheque';
                     ltext0006: label 'Must input an invoice in cheque lines';
+                    ltext0007: label 'Cheque is blocked, you can not generate it';
                     lchequeLines: record "Cheque Line";
 
                 begin
                     Rec.TestField("Customer No.");
+                    if rec.Blocked then
+                        error(ltext0007);
                     If rec."Cheque Value" = 0 then
                         error(ltext0001);
                     If rec."Due Date" = 0D then
