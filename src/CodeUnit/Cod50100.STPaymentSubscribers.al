@@ -57,7 +57,29 @@ codeunit 50100 "ST PaymentSubscribers"
         end;
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnAfterRunWithCheck', '', FALSE, FALSE)]
+    local procedure OnAfterRunWithCheck(GenJnlLine: Record "Gen. Journal Line")
+    var
+        lChequeHeader: Record "Cheque Header";
+    begin
+        IF GenJnlLine."Cheque No." = '' then
+            exit;
+        if not lChequeHeader.Get(GenJnlLine."Cheque No.") then
+            exit;
+        lChequeHeader.TestField(Blocked, false);
+    end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnAfterRunWithoutCheck', '', FALSE, FALSE)]
+    local procedure OnAfterRunWithoutCheck(GenJnlLine: Record "Gen. Journal Line")
+    var
+        lChequeHeader: Record "Cheque Header";
+    begin
+        IF GenJnlLine."Cheque No." = '' then
+            exit;
+        if not lChequeHeader.Get(GenJnlLine."Cheque No.") then
+            exit;
+        lChequeHeader.TestField(Blocked, false);
+    end;
 
     [EventSubscriber(ObjectType::Page, Page::"Payment Journal", 'OnBeforeActionEvent', 'Post', FALSE, FALSE)]
     local procedure FilterChequeToPost(var Rec: Record "Gen. Journal Line")
