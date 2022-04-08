@@ -4,7 +4,7 @@ page 50101 "WDC Reversed Cheques"
     ApplicationArea = Basic, Suite;
     PageType = List;
     SourceTable = "Cheque Header";
-    SourceTableView = where("Cheque Canceled Wdc" = filter(true));
+    SourceTableView = where("Cheque Reversed" = filter(true));
     UsageCategory = Lists;
     layout
     {

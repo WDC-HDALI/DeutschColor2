@@ -18,6 +18,7 @@ codeunit 50101 "WDC Payment Aplly"
     Begin
         lDetCustLedger.Reset();
         lDetCustLedger.SetRange("Document Type", lDetCustLedger."Document Type"::Payment);
+        lDetCustLedger.SetRange("Entry Type", lDetCustLedger."Entry Type"::"Initial Entry"); //Hdali
         lDetCustLedger.SetRange("Document No.", pChequeNo);
         If lDetCustLedger.FindFirst then begin
             lApplyDetCustLedger.Init;
@@ -50,6 +51,7 @@ codeunit 50101 "WDC Payment Aplly"
     Begin
         lDetCustLedger.Reset();
         lDetCustLedger.SetRange("Document Type", lDetCustLedger."Document Type"::Invoice);
+        lDetCustLedger.SetRange("Entry Type", lDetCustLedger."Entry Type"::"Initial Entry"); //Hdali
         lDetCustLedger.SetRange("Document No.", pInvoiceNo);
         If lDetCustLedger.FindFirst then begin
             lApplyDetCustLedger.Init;
@@ -160,6 +162,7 @@ codeunit 50101 "WDC Payment Aplly"
         lChequeHeader.Get(pChequeNo);
         exit(lChequeHeader."Cheque Value");
     End;
+
 
 }
 

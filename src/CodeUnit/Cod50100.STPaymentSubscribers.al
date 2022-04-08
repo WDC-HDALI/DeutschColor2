@@ -112,9 +112,15 @@ codeunit 50100 "ST PaymentSubscribers"
         lCustLedgEntry: Record "Cust. Ledger Entry";
         lBatchName: record 232;
         Ltext001: Label 'The amount of this document must be equal or greater than the sum of the amounts LCY of the invoices';
-        Ltext002: Label 'you cannot post closed document';
+        Ltext002: Label 'You cannot post closed document';
         lChequeCard: Page "Cheque Card";
+        lChequeHeader: Record "Cheque Header";
+
     begin
+        IF lchequeHeader.Get(GenJournalLine."Cheque No.") then
+            IF lBatchName.Get(GenJournalLine."Journal Template Name", GenJournalLine."Journal Batch Name") then
+                IF (lChequeHeader."Cheque Reversed") and (lBatchName."First Step of cheque" or lBatchName."First Step of Traite") then
+                    exit;
         If (GenJournalLine."Cheque No." <> '') AND StepOfApply(GenJournalLine."Code Status") and
          (lChequeCard.GetAmountFromChequeLines(GenJournalLine."Cheque No.") > 0) then begin
             lCustLedgEntry.Reset();
@@ -147,7 +153,7 @@ codeunit 50100 "ST PaymentSubscribers"
         if GLEntry."Document Type" = GLEntry."Document Type"::Payment then
             If lChequeHeader.Get(GLEntry."Cheque No.") then begin
                 lChequeHeader."Code Status" := lChequeHeader."Previous Code Status";
-                lChequeHeader."Cheque Canceled Wdc" := true;
+                lChequeHeader."Cheque Reversed" := true;
                 lChequeHeader.Modify;
 
                 if LPaymentStatus.Get(lChequeHeader."Previous Code Status") Then;
@@ -190,7 +196,7 @@ codeunit 50100 "ST PaymentSubscribers"
     Var
         lChequeHeader: Record "Cheque Header";
         lGenJournalBatch: Record "Gen. Journal Batch";
-        Ltext001: Label 'You cannot Reverse a cheque with status %1';
+        Ltext001: Label 'You cannot reverse a %1 with status %2';
     begin
         if ReversalEntry."Document Type" = ReversalEntry."Document Type"::Payment then
             If lChequeHeader.Get(ReversalEntry."Document No.") then begin
@@ -199,14 +205,14 @@ codeunit 50100 "ST PaymentSubscribers"
                 lGenJournalBatch.SetRange("Code Status", lChequeHeader."Code Status");
                 If lGenJournalBatch.FindFirst() then
                     If lGenJournalBatch."Last Step of Cheque" or lGenJournalBatch."Last Step of Traite" THEN
-                        Error(Ltext001, lChequeHeader."Description Status");
+                        Error(Ltext001, lChequeHeader."Cheque/Traite", lChequeHeader."Description Status");
             end;
     end;
 
     [EventSubscriber(ObjectType::Table, database::"Cheque Line", 'OnAfterValidateEvent', 'Invoice No.', FALSE, FALSE)]
     Local procedure OnAftervalidateInvoiceTable(Rec: Record "Cheque Line")
     Var
-        ltext001: Label 'This Invoice is already inputted in this cheque(line %1)';
+        ltext001: Label 'This invoice is already inputted in this document';
         lChequelines: Record "Cheque Line";
     begin
         lChequelines.Reset();
@@ -266,7 +272,5 @@ codeunit 50100 "ST PaymentSubscribers"
                 lCustomerLedgEntry.Modify;
             until lCustomerLedgEntry.Next = 0;
     end;
-
-
 
 }
