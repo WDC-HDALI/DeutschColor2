@@ -20,7 +20,7 @@ tableextension 50104 "WDC ChequeHeaderTabExt" extends "Cheque Header" //50004
             Editable = False;
         }
 
-        field(50206; "Cheque Canceled Wdc"; Boolean)
+        field(50206; "Cheque Reversed"; Boolean)
         {
             Editable = False;
         }
