@@ -6,6 +6,7 @@ xmlport 50100 "WDC Update GL Account"
     FieldDelimiter = '"';
     FieldSeparator = ';';
     UseRequestPage = false;
+    Permissions = TableData "G/L Entry" = rimd, tabledata "G/L Account" = rimd;
     schema
     {
         textelement(Root)
@@ -56,11 +57,12 @@ xmlport 50100 "WDC Update GL Account"
         GLEntryUpdated: Record "G/L Entry";
         GLEntryChanged: Record "G/L Entry";
         GLAccount2: Record "G/L Account";
+        Text001: Label 'Import completed';
 
     trigger OnPostXmlPort()
 
     begin
-        Message('Import completed');
+        Message(Text001);
     end;
 
 
