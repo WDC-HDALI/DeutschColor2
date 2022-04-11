@@ -6,6 +6,7 @@ xmlport 50101 "WDC Update Posting Group"
     FieldDelimiter = '"';
     FieldSeparator = ';';
     UseRequestPage = false;
+    Permissions = TableData "Customer Posting Group" = rimd, tabledata "Sales Header" = rimd;
     schema
     {
         textelement(Root)
@@ -66,11 +67,12 @@ xmlport 50101 "WDC Update Posting Group"
         SalesShipHeader: Record "Sales Shipment Header";
         SalesShipHeaderUpdate: Record "Sales Shipment Header";
         CustPostingGroup2: Record "Customer Posting Group";
+        Text001: label 'Import completed';
 
     trigger OnPostXmlPort()
 
     begin
-        Message('Import completed');
+        Message(Text001);
     end;
 
 

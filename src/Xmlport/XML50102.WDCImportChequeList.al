@@ -6,6 +6,7 @@ xmlport 50102 "WDC Import Cheque List"
     FieldDelimiter = '"';
     FieldSeparator = ';';
     UseRequestPage = false;
+    Permissions = TableData "Cheque Header" = rimd, tabledata "Gen. Journal Line" = rimd;
     schema
     {
         textelement(Root)
@@ -49,13 +50,13 @@ xmlport 50102 "WDC Import Cheque List"
                         currXMLport.Skip();
 
                     If "Cheque Header"."Cheque Value" = 0 then
-                        error(ltext0001, "Cheque Header"."Cheque No.");
+                        error(Text0001, "Cheque Header"."Cheque No.");
                     If "Cheque Header"."Due Date" = 0D then
-                        Error(ltext0004, "Cheque Header"."Cheque No.");
+                        Error(Text0004, "Cheque Header"."Cheque No.");
                     If "Cheque Header"."Starting Date" = 0D then
-                        Error(ltext0005, "Cheque Header"."Cheque No.");
+                        Error(Text0005, "Cheque Header"."Cheque No.");
                     if not PaymentStatus.Get("Cheque Header"."Code Status") then
-                        Error(ltext0005, "Cheque Header"."Code Status");
+                        Error(Text0005, "Cheque Header"."Code Status");
 
                     lDocType := CopyStr("Cheque Header"."Code Status", 1, 3);
 
@@ -67,10 +68,10 @@ xmlport 50102 "WDC Import Cheque List"
                     ChequeHeaderImport.Validate("Customer No.", "Cheque Header"."Customer No.");
                     if lDocType = 'TRT' then begin
                         ChequeHeaderImport.validate("Cheque/Traite", ChequeHeaderImport."Cheque/Traite"::Traite);
-                        ChequeHeaderImport.Comment := 'Imported Traite';
+                        ChequeHeaderImport.Comment := Text008;
                     end else begin
                         ChequeHeaderImport.validate("Cheque/Traite", ChequeHeaderImport."Cheque/Traite"::Cheque);
-                        ChequeHeaderImport.Comment := 'Imported Cheque';
+                        ChequeHeaderImport.Comment := Text009;
                     end;
                     if ChequeHeaderImport.insert(true) then begin
                         //<<Insert first status
@@ -109,7 +110,6 @@ xmlport 50102 "WDC Import Cheque List"
                         If lGenjournalLine.Insert then begin
                             lGenjournalLine.Validate("Cheque No.", "Cheque Header"."Cheque No.");
                             lGenjournalLine.Validate("Amount (LCY)", -"Cheque Header"."Cheque Value");
-                            //lGenjournalLine."Invoices To Paid" := GetAllInvoiceToPaid(Rec."Cheque No.");
                             if lGenjournalLine.Modify then begin
                                 ChequeHeaderImport."Cheque Generated" := true;
                                 ChequeHeaderImport.Modify;
@@ -128,19 +128,20 @@ xmlport 50102 "WDC Import Cheque List"
         PaymentStatus: Record "WDC payment status";
         lGenjournalLine: record "Gen. Journal Line";
         lBatchName: record 232;
-        //lchequeHeader: record "Cheque Header";
-        //lchequeLines: Record "Cheque Line";
         ChequeCard: Page "Cheque Card";
         LastLineNo: Integer;
-        ltext0001: label 'Value cheque No. %1 must be not null ';
-        ltext0004: label 'Please check the due date of cheque No. %1';
-        ltext0005: label 'Please check the starting date of cheque No. %1';
-        ltext0006: label 'The code status %1 does not exist !';
+        Text0001: label 'Value cheque No. %1 must be not null ';
+        Text0004: label 'Please check the due date of cheque No. %1';
+        Text0005: label 'Please check the starting date of cheque No. %1';
+        Text0006: label 'The code status %1 does not exist !';
+        Text007: label 'Import completed';
+        Text008: Label 'Imported Traite';
+        Text009: Label 'Imported Cheque';
         lDocType: Code[10];
 
     trigger OnPostXmlPort()
 
     begin
-        Message('Import completed');
+        Message(Text007);
     end;
 }
