@@ -1,6 +1,5 @@
 pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
 {
-
     layout
     {
         addafter(Status)
@@ -18,9 +17,14 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
             {
                 ApplicationArea = all;
             }
+            field("Collection date"; Rec."Collection date")
+            {
+                ApplicationArea = all;
+            }
         }
 
     }
+
     actions
     {
 
@@ -64,6 +68,33 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
         }
 
     }
+    trigger OnAfterGetRecord()
+    begin
+        If Rec."Cheque Generated" Then
+            CurrPage.Editable := false
+        else
+            CurrPage.Editable := true;
+        CurrPage.Update(false);
+    end;
+
+    trigger OnOpenPage()
+    begin
+        If Rec."Cheque Generated" Then
+            CurrPage.Editable := false
+        else
+            CurrPage.Editable := true;
+        CurrPage.Update(false);
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        If Rec."Cheque Generated" Then
+            CurrPage.Editable := false
+        else
+            CurrPage.Editable := true;
+        CurrPage.Update(false);
+    end;
+
     procedure GenerateCheque()
     Var
         lGenjournalLine: record "Gen. Journal Line";
@@ -114,6 +145,7 @@ pageextension 50105 "WDCChequeCardPagExt" extends "Cheque Card" //50006
             end;
             Clear(lGenjournalLine);
             Message(ltext0001, lchequeHeader."Cheque/Traite");
+            CurrPage.Editable := false;
             CurrPage.Update();
         end;
     end;

@@ -44,13 +44,7 @@ tableextension 50100 "WDC GenJournalLineTabExt" extends "Gen. Journal Line" //81
                     "Invoices To Paid" := LChqCard.GetAllInvoiceToPaid("Cheque No.");
                     Rec.validate("Customer No.", lCHQHeader."Customer No.");
                     Rec.validate(Rec."Credit Amount", lCHQHeader."Cheque Value");
-                    If ("Account Type" = "Account Type"::Customer) or (rec."Source Type" = rec."Source Type"::Customer) then begin
-                        "Account No." := lCHQHeader."Customer No.";
-                    end;
-
                 end;
-
-
             end;
         }
         field(50204; "Customer No."; Code[20])
@@ -59,11 +53,24 @@ tableextension 50100 "WDC GenJournalLineTabExt" extends "Gen. Journal Line" //81
             DataClassification = ToBeClassified;
             trigger OnValidate()
             var
+                lCHQHeader: Record "Cheque Header";
                 lCustumer: Record Customer;
+                lText001: label 'The customer should be the same as the cheque customer';
             begin
+                IF lCHQHeader.Get(rec."Cheque No.") then
+                    IF lCHQHeader."Customer No." <> "Customer No." then
+                        Error(lText001);
                 Clear("Sales person No.");
-                IF lCustumer.GET("Customer No.") THEN
+                IF lCustumer.GET("Customer No.") THEN begin
                     "Sales person No." := lCustumer."Salesperson Code";
+                    If ("Account Type" = "Account Type"::Customer) or (rec."Source Type" = rec."Source Type"::Customer) then begin
+                        "Account No." := "Customer No.";
+                    end;
+                    If ("Bal. Account Type" = "Bal. Account Type"::Customer) then begin
+                        "Bal. Account No." := Rec."Customer No.";
+                    end;
+                end;
+
             end;
 
         }

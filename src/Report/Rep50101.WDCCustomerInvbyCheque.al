@@ -239,8 +239,14 @@ report 50101 "WDC Customer Inv. by Cheque"
                         ENd ELSE
                             If ("Cust. Ledger Entry".Open = TRUE) AND (("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::payment) AND ("Cust. Ledger Entry"."Cheque No." = '')) Then Begin
                                 Paymet_Type_Text := 'Payment';
+                                //<<SAT
+                                //Amount__LCY := ABS("Cust. Ledger Entry"."Amount (LCY)");
+                                //Remainning_Amount__LCY := ABS("Cust. Ledger Entry"."Remaining Amt. (LCY)");
+                                //TotalPaymennt += ABS("Cust. Ledger Entry"."Remaining Amt. (LCY)");
                                 Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
-                                TotalPaymennt += "Cust. Ledger Entry"."Amount (LCY)";
+                                Remainning_Amount__LCY := "Cust. Ledger Entry"."Remaining Amt. (LCY)";
+                                TotalPaymennt += "Cust. Ledger Entry"."Remaining Amt. (LCY)";
+                                //>>SAT
                                 DocumentNo := "Cust. Ledger Entry"."Cheque No.";
                                 DocDueDate := GetDueDateFromCheque("Cust. Ledger Entry"."Cheque No.");
                             End ELSE
@@ -256,16 +262,35 @@ report 50101 "WDC Customer Inv. by Cheque"
                                     If ("Cust. Ledger Entry".Open = TRUE) AND (("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::" ") AND ("Cust. Ledger Entry"."Posting Date" <> "Starting Date")) THEN Begin
                                         Paymet_Type_Text := '';
                                         DocumentNo := "Cust. Ledger Entry"."Document No.";
+                                        //<<SAT
+                                        //Amount__LCY := ABS("Cust. Ledger Entry"."Amount (LCY)");
+                                        //Remainning_Amount__LCY := Abs("Cust. Ledger Entry"."Remaining Amt. (LCY)");
+                                        //TotalEmptyDocuType += ABS("Cust. Ledger Entry"."Remaining Amt. (LCY)");
                                         Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
                                         Remainning_Amount__LCY := "Cust. Ledger Entry"."Remaining Amt. (LCY)";
                                         TotalEmptyDocuType += "Cust. Ledger Entry"."Remaining Amt. (LCY)";
+                                        //>>SAT
                                         DocDueDate := "Cust. Ledger Entry"."Due Date";
                                         DueDatePassed := GetDueDatePassed(DocumentNo);
                                     End else begin
-                                        If ("Cust. Ledger Entry"."Cheque No." <> '') and (Not lBatchName."Last Step of Cheque") and (Not lBatchName."Last Step of Traite") and
-                                        ("Cust. Ledger Entry"."Source Code" <> 'REVERSAL') AND ("Cust. Ledger Entry"."Code Status" <> '') then begin
-                                            Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
-                                            TotalCheque += "Cust. Ledger Entry"."Amount (LCY)";
+                                        //<<SAT
+                                        //If ("Cust. Ledger Entry"."Cheque No." <> '') AND (not (IsUnpaidStep("Cust. Ledger Entry"."Code Status"))) AND
+                                        //((Not lBatchName."Last Step of Cheque") AND (Not lBatchName."Last Step of Traite") OR ("Cust. Ledger Entry"."Remaining Amt. (LCY)" <> 0)) AND
+                                        //(("Cust. Ledger Entry".Reversed = FAlse) AND ("Cust. Ledger Entry".Open = True) And ("Cust. Ledger Entry"."Remaining Amt. (LCY)" <> 0)) AND ("Cust. Ledger Entry"."Code Status" <> '') then begin
+
+                                        If ("Cust. Ledger Entry"."Cheque No." <> '') AND ("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::Payment) AND (not (IsUnpaidStep("Cust. Ledger Entry"."Code Status", "Cust. Ledger Entry"."Cheque No.", "Cust. Ledger Entry"."Customer No."))) AND
+                                        ((Not lBatchName."Last Step of Cheque") AND (Not lBatchName."Last Step of Traite")) AND
+                                        not (("Cust. Ledger Entry".Reversed = TRUE) AND ("Cust. Ledger Entry".Open = FALSE) And ("Cust. Ledger Entry"."Remaining Amt. (LCY)" = 0)) then begin
+
+                                            Amount__LCY := ABS("Cust. Ledger Entry"."Amount (LCY)");
+                                            Remainning_Amount__LCY := Abs("Cust. Ledger Entry"."Remaining Amt. (LCY)");
+                                            if (STRPOS("Cust. Ledger Entry"."Code Status", 'CH-006') = 0) AND (STRPOS("Cust. Ledger Entry"."Code Status", 'TRT-006') = 0) AND
+                                                (STRPOS("Cust. Ledger Entry"."Code Status", 'CH-007') = 0) AND (STRPOS("Cust. Ledger Entry"."Code Status", 'TRT-007') = 0) then
+                                                TotalCheque += Amount__LCY - Remainning_Amount__LCY
+                                            else
+                                                TotalCheque += Remainning_Amount__LCY;
+                                            //TotalCheque += Amount__LCY - Remainning_Amount__LCY;
+                                            //>>SAT  
                                             Paymet_Type_Text := 'Cheque/Traite';
                                             DocumentNo := "Cust. Ledger Entry"."Cheque No.";
                                             DocDueDate := GetDueDateFromCheque("Cust. Ledger Entry"."Cheque No.");
@@ -515,5 +540,29 @@ report 50101 "WDC Customer Inv. by Cheque"
 
         exit(FullMonths);
     end;
+
+    procedure IsUnpaidStep(pCodeStatus: Code[20]; pChequeNo: Code[20]; pCustNo: Code[20]): Boolean;
+    var
+        lPaymentStatus: Record "WDC payment status";
+        lBatChName: Record 236;
+        lCustLedgEnt: Record 21;
+    begin
+        //<<SAT
+        //IF lPaymentStatus.Get(pCodeStatus) then
+        //    exit(lPaymentStatus."Unpaid Step");
+        if (STRPOS(format(pCodeStatus), 'CH-006') = 0) AND (STRPOS(format(pCodeStatus), 'TRT-006') = 0) AND
+        (STRPOS(format(pCodeStatus), 'CH-007') = 0) AND (STRPOS(format(pCodeStatus), 'TRT-007') = 0) then
+            exit(false);
+        lCustLedgEnt.Reset();
+        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::" ");
+        lCustLedgEnt.SetRange("Customer No.", pCustNo);
+        lCustLedgEnt.SetRange("Cheque No.", pChequeNo);
+        if lCustLedgEnt.Count = 0 then
+            exit(false)
+        else
+            exit(true);
+        //>>SAT
+    end;
+
 }
 
