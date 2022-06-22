@@ -331,6 +331,9 @@ report 50104 "WDC Payments Applications"
                     TotalBycustomer += TotalCHQ_TRT + TotalPayment;
                 End;
 
+                if "Cust. Ledger Entry 2"."Document Type" = "Cust. Ledger Entry 2"."Document Type"::Payment THEN
+                    GetInvoicesOfImpaidCheque("Cust. Ledger Entry 2"."Document No.")
+
             End;
 
 
@@ -413,9 +416,36 @@ report 50104 "WDC Payments Applications"
         Exit(lsalesinvoiceLine."Item Category Code");
     end;
 
+    procedure GetInvoicesOfImpaidCheque(pDocumentNo: Code[20]): Text[500]
+    var
+        lCustLedgEntry: Record 21;
+        lDetCustLedgEntry: Record 379;
+        lDetCustLedgInvoice: Record 379;
+        linvoicesNo: Text[500];
+
+    begin
+        lDetCustLedgEntry.Reset();
+        lDetCustLedgEntry.SetRange("Document No.", pDocumentNo);
+        lDetCustLedgEntry.SetRange("Initial Document Type", lDetCustLedgEntry."Initial Document Type"::Payment);
+        lDetCustLedgEntry.SetRange("Entry Type", lDetCustLedgEntry."Entry Type"::Application);
+        if lDetCustLedgEntry.FindFirst() then begin
+            lCustLedgEntry.Reset();
+            lCustLedgEntry.SetRange("Entry No.", lDetCustLedgEntry."Applied Cust. Ledger Entry No.");
+            if lCustLedgEntry.FindFirst() Then begin
+                lDetCustLedgInvoice.Reset();
+                lDetCustLedgInvoice.SetRange("Initial Document Type", lDetCustLedgInvoice."Initial Document Type"::Invoice);
+                lDetCustLedgInvoice.SetRange("Entry Type", lDetCustLedgInvoice."Entry Type"::Application);
+                If lDetCustLedgInvoice.Find() then
+                    repeat
+
+                    until lDetCustLedgInvoice.Next = 0;
+            end;
+        end;
+    end;
 
     var
         GLFilter: Text;
+        InvoiceNo3: Text[500];
         CompanyInfo: Record "Company Information";
         Customer: Record Customer;
         Customer2: Record Customer;
