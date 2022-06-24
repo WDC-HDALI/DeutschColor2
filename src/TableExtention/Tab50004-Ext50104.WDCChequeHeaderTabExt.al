@@ -56,8 +56,9 @@ tableextension 50104 "WDC ChequeHeaderTabExt" extends "Cheque Header" //50004
     begin
         if Blocked = xRec.Blocked then
             TestField(Blocked, false);
-        if "Cheque Generated" = xRec."Cheque Generated" then
+        if ("Cheque Generated" = xRec."Cheque Generated") and (Blocked = xRec.Blocked) then
             TestField("Cheque Generated", false);
+
     end;
 
     trigger OnDelete()

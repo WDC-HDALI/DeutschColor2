@@ -181,6 +181,10 @@ report 50104 "WDC Payments Applications"
                 {
 
                 }
+                column(InvoiceNo3; InvoiceNo3)
+                {
+
+                }
 
                 dataitem(DetCustLedgEntry2; "Detailed Cust. Ledg. Entry")
                 {
@@ -248,6 +252,7 @@ report 50104 "WDC Payments Applications"
                 var
                     lCustLedgEntPayment: Record "Cust. Ledger Entry";
                 begin
+                    InvoiceNo3 := '';
                     salesPersonPayment2 := '';
                     If "Cust. Ledger Entry 2"."Document Type" = "Cust. Ledger Entry 2"."Document Type"::" " Then BEGIN
                         If (SalesPersonManFilter <> "Cust. Ledger Entry 2"."Salesperson Code") and (SalesPersonManFilter <> '') Then
@@ -282,6 +287,9 @@ report 50104 "WDC Payments Applications"
                             END Else
                                 PaymentAmount2 += lCustLedgEntPayment."Amount (LCY)";
                         until lCustLedgEntPayment.Next = 0;
+                    InvoiceNo3 := '';
+                    if "Cust. Ledger Entry 2"."Document Type" = "Cust. Ledger Entry 2"."Document Type"::Payment THEN
+                        InvoiceNo3 := GetInvoicesOfImpaidCheque("Cust. Ledger Entry 2"."Document No.");
                 end;
             }
 
@@ -330,19 +338,9 @@ report 50104 "WDC Payments Applications"
                     TotalCHQ_TRT := lGLEntry.Amount * (-1);
                     TotalBycustomer += TotalCHQ_TRT + TotalPayment;
                 End;
-
-                if "Cust. Ledger Entry 2"."Document Type" = "Cust. Ledger Entry 2"."Document Type"::Payment THEN
-                    GetInvoicesOfImpaidCheque("Cust. Ledger Entry 2"."Document No.")
-
             End;
 
-
         }
-
-
-
-
-
     }
 
     requestpage
@@ -416,36 +414,44 @@ report 50104 "WDC Payments Applications"
         Exit(lsalesinvoiceLine."Item Category Code");
     end;
 
-    procedure GetInvoicesOfImpaidCheque(pDocumentNo: Code[20]): Text[500]
+    procedure GetInvoicesOfImpaidCheque(pDocumentNo: Code[20]): Text
     var
         lCustLedgEntry: Record 21;
         lDetCustLedgEntry: Record 379;
         lDetCustLedgInvoice: Record 379;
-        linvoicesNo: Text[500];
+        lCustLedgInvoice: Record 21;
+        lInvoicesNo: Text;
 
     begin
         lDetCustLedgEntry.Reset();
         lDetCustLedgEntry.SetRange("Document No.", pDocumentNo);
-        lDetCustLedgEntry.SetRange("Initial Document Type", lDetCustLedgEntry."Initial Document Type"::Payment);
+        lDetCustLedgEntry.SetRange("Initial Document Type", lDetCustLedgEntry."Initial Document Type"::" ");
         lDetCustLedgEntry.SetRange("Entry Type", lDetCustLedgEntry."Entry Type"::Application);
         if lDetCustLedgEntry.FindFirst() then begin
             lCustLedgEntry.Reset();
-            lCustLedgEntry.SetRange("Entry No.", lDetCustLedgEntry."Applied Cust. Ledger Entry No.");
-            if lCustLedgEntry.FindFirst() Then begin
+            lCustLedgEntry.SetRange("Entry No.", lDetCustLedgEntry."Cust. Ledger Entry No.");
+            lCustLedgEntry.SetFilter("Cheque No.", '<>%1', '');
+            lCustLedgEntry.SetFilter("Code Status", '%1|%2|%3|%4', 'CH-006*', 'TRT-006*', 'CH-007*', 'TRT-007*');
+            if lCustLedgEntry.FindFirst() Then BEGIN
+                lInvoicesNo := '';
                 lDetCustLedgInvoice.Reset();
+                lDetCustLedgInvoice.SetRange("Document No.", lCustLedgEntry."Document No.");
                 lDetCustLedgInvoice.SetRange("Initial Document Type", lDetCustLedgInvoice."Initial Document Type"::Invoice);
                 lDetCustLedgInvoice.SetRange("Entry Type", lDetCustLedgInvoice."Entry Type"::Application);
-                If lDetCustLedgInvoice.Find() then
+                If lDetCustLedgInvoice.FindFirst() then
                     repeat
-
+                        IF lCustLedgInvoice.Get(lDetCustLedgInvoice."Cust. Ledger Entry No.") then begin
+                            lInvoicesNo := lInvoicesNo + lCustLedgInvoice."Document No." + ' - ';
+                        end;
                     until lDetCustLedgInvoice.Next = 0;
-            end;
+            END;
         end;
+        exit(lInvoicesNo);
     end;
 
     var
         GLFilter: Text;
-        InvoiceNo3: Text[500];
+        InvoiceNo3: Text;
         CompanyInfo: Record "Company Information";
         Customer: Record Customer;
         Customer2: Record Customer;
