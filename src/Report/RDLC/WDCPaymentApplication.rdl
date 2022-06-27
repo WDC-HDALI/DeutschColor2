@@ -2190,6 +2190,9 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
                           </TablixMembers>
                         </TablixMember>
                       </TablixMembers>
+                      <Visibility>
+                        <Hidden>=(Fields!PaymentAmountLCY_CustLedg.Value= 0) AND (Fields!PaymentAmount2.Value=0)</Hidden>
+                      </Visibility>
                     </TablixMember>
                     <TablixMember>
                       <TablixHeader>
