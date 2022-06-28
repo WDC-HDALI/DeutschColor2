@@ -2828,6 +2828,12 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
         <Field Name="InvoiceNo3">
           <DataField>InvoiceNo3</DataField>
         </Field>
+        <Field Name="InvoicesTotal3">
+          <DataField>InvoicesTotal3</DataField>
+        </Field>
+        <Field Name="InvoicesTotal3Format">
+          <DataField>InvoicesTotal3Format</DataField>
+        </Field>
         <Field Name="InvoiceNo2">
           <DataField>InvoiceNo2</DataField>
         </Field>
