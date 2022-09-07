@@ -291,7 +291,7 @@ report 50102 "WDC Total by Sales Person"
                                             Paymet_Type_Text := 'Cheque/Traite';
                                             DocumentNo := "Cust. Ledger Entry"."Cheque No.";
                                             DocDueDate := GetDueDateFromCheque("Cust. Ledger Entry"."Cheque No.");
-                                            TotalCustomer += "Cust. Ledger Entry"."Amount (LCY)";
+                                            TotalCustomer += "Cust. Ledger Entry"."Amount (LCY)"; //abs hd
                                         end else
                                             CurrReport.Skip();
                                     end;

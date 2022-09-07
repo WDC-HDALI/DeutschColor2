@@ -239,14 +239,9 @@ report 50101 "WDC Customer Inv. by Cheque"
                         ENd ELSE
                             If ("Cust. Ledger Entry".Open = TRUE) AND (("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::payment) AND ("Cust. Ledger Entry"."Cheque No." = '')) Then Begin
                                 Paymet_Type_Text := 'Payment';
-                                //<<SAT
-                                //Amount__LCY := ABS("Cust. Ledger Entry"."Amount (LCY)");
-                                //Remainning_Amount__LCY := ABS("Cust. Ledger Entry"."Remaining Amt. (LCY)");
-                                //TotalPaymennt += ABS("Cust. Ledger Entry"."Remaining Amt. (LCY)");
                                 Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
                                 Remainning_Amount__LCY := "Cust. Ledger Entry"."Remaining Amt. (LCY)";
                                 TotalPaymennt += "Cust. Ledger Entry"."Remaining Amt. (LCY)";
-                                //>>SAT
                                 DocumentNo := "Cust. Ledger Entry"."Cheque No.";
                                 DocDueDate := GetDueDateFromCheque("Cust. Ledger Entry"."Cheque No.");
                             End ELSE
@@ -262,14 +257,9 @@ report 50101 "WDC Customer Inv. by Cheque"
                                     If ("Cust. Ledger Entry".Open = TRUE) AND (("Cust. Ledger Entry"."Document Type" = "Cust. Ledger Entry"."Document Type"::" ") AND ("Cust. Ledger Entry"."Posting Date" <> "Starting Date")) THEN Begin
                                         Paymet_Type_Text := '';
                                         DocumentNo := "Cust. Ledger Entry"."Document No.";
-                                        //<<SAT
-                                        //Amount__LCY := ABS("Cust. Ledger Entry"."Amount (LCY)");
-                                        //Remainning_Amount__LCY := Abs("Cust. Ledger Entry"."Remaining Amt. (LCY)");
-                                        //TotalEmptyDocuType += ABS("Cust. Ledger Entry"."Remaining Amt. (LCY)");
                                         Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
                                         Remainning_Amount__LCY := "Cust. Ledger Entry"."Remaining Amt. (LCY)";
                                         TotalEmptyDocuType += "Cust. Ledger Entry"."Remaining Amt. (LCY)";
-                                        //>>SAT
                                         DocDueDate := "Cust. Ledger Entry"."Due Date";
                                         DueDatePassed := GetDueDatePassed(DocumentNo);
                                     End else begin
