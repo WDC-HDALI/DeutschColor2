@@ -12,10 +12,13 @@ report 50105 "WDC Analitic Overdue Invoices"
     {
         dataitem("Cust. Ledger Entry"; "Cust. Ledger Entry")
         {
-
+            RequestFilterFields = "Sell-to Customer No.", "Posting Date";
             DataItemTableView = SORTING("Customer No.", "Posting Date", "Currency Code") order(ascending)
-                                           where("Document Type" = filter(2 | 3));
-
+                                           where("Document Type" = filter(2 | 3),
+                                           "Sell-to Customer No." = filter('C*'));
+            column(GLFilter; GLFilter)
+            {
+            }
             column(CustNo; "Cust. Ledger Entry"."Customer No.")
             {
             }
@@ -99,23 +102,6 @@ report 50105 "WDC Analitic Overdue Invoices"
         CompanyInfo: Record "Company Information";
         Customer: Record Customer;
         InvoiceHeader: Record "Sales Invoice Header";
-    // Customer2: Record Customer;
-    // StartDateFilter: Date;
-    // EndtDateFilter: Date;
-    // SalespersonInvoice: code[20];
-    // SalespersonInvoice2: code[20];
-    // salesPersonPayment2: Code[20];
-    // CustomerFilter: Code[20];
-    // SalesPersonManFilter: Code[20];
-    // SalesPersonCodeFilter: Code[20];
-    // InvoiceNo: Code[20];
-    // InvoiceNo2: Code[20];
-    // CustToAppear: Boolean;
-    // TotalPayment: Decimal;
-    // TotalCHQ_TRT: Decimal;
-    // TotalBycustomer: Decimal;
-    // PaymentAmount2: Decimal;
-    // InvoicesTotal3: Decimal;
 
 }
 
