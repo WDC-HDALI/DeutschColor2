@@ -19,6 +19,15 @@ report 50105 "WDC Analitic Overdue Invoices"
             column(GLFilter; GLFilter)
             {
             }
+            column(CompanyInfoName; CompanyInfo.Name)
+            {
+            }
+            column(FromDate; FromDate)
+            {
+            }
+            column(ToDate; ToDate)
+            {
+            }
             column(CustNo; "Cust. Ledger Entry"."Customer No.")
             {
             }
@@ -65,8 +74,11 @@ report 50105 "WDC Analitic Overdue Invoices"
 
             trigger OnPreDataItem()
             begin
+                CompanyInfo.get;
                 GLFilter := "Cust. Ledger Entry".GetFilters;
                 LineNo := 0;
+                FromDate := "Cust. Ledger Entry".GetRangeMin("Posting Date");
+                ToDate := "Cust. Ledger Entry".GetRangeMax("Posting Date");
             end;
 
             trigger OnAfterGetRecord()
@@ -89,6 +101,8 @@ report 50105 "WDC Analitic Overdue Invoices"
         Customer: Record Customer;
         InvoiceHeader: Record "Sales Invoice Header";
         LineNo: Integer;
+        FromDate: Date;
+        ToDate: Date;
 
 }
 
