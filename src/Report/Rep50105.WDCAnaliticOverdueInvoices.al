@@ -23,11 +23,11 @@ report 50105 "WDC Analitic Overdue Invoices"
             {
             }
 
-            column(CustName; "Cust. Ledger Entry"."Customer Name")
+            column(CustName; customer.Name)
             {
             }
 
-            column(SalespersonInv; "Cust. Ledger Entry"."Sales person No.")
+            column(SalespersonInv; InvoiceHeader."Salesperson Code")
             {
 
             }
@@ -58,37 +58,24 @@ report 50105 "WDC Analitic Overdue Invoices"
             {
 
             }
-            // dataitem(DetCustLedgEntry; "Detailed Cust. Ledg. Entry")
-            // {
-            //     DataItemLink = "Applied Cust. Ledger Entry No." = FIELD("Entry No.");
-            //     DataItemTableView = Sorting("Cust. Ledger Entry No.", "Posting Date") where("Document Type" = filter(1),
-            //                                  "Entry Type" = filter('Application'),
-            //                                  Unapplied = const(false));
+            column(LineNo; LineNo)
+            {
 
+            }
 
-            //     column(PaymentNo; DetCustLedgEntry."Document No.")
-            //     {
-            //     }
-
-
-            //     column(AmountLCY; DetCustLedgEntry."Amount (LCY)")
-            //     {
-            //     }
-
-
-            // }
             trigger OnPreDataItem()
             begin
                 GLFilter := "Cust. Ledger Entry".GetFilters;
+                LineNo := 0;
             end;
 
             trigger OnAfterGetRecord()
             begin
+                "Cust. Ledger Entry".CalcFields("Remaining Amt. (LCY)");
+                LineNo += 1;
                 if Customer.GET("Cust. Ledger Entry"."Sell-to Customer No.") then;
                 if InvoiceHeader.GET("Cust. Ledger Entry"."Document No.") then;
             end;
-
-
 
         }
     }
@@ -102,6 +89,7 @@ report 50105 "WDC Analitic Overdue Invoices"
         CompanyInfo: Record "Company Information";
         Customer: Record Customer;
         InvoiceHeader: Record "Sales Invoice Header";
+        LineNo: Integer;
 
 }
 
