@@ -10,12 +10,9 @@ report 50106 "WDC Customer Debit Progress"
     Description = 'Customer Debit Progress';
     dataset
     {
-        dataitem("Cust. Ledger Entry"; "Cust. Ledger Entry")
+        dataitem(Customer; Customer)
         {
-            RequestFilterFields = "Sell-to Customer No.", "Salesperson Code", "Posting Date", "Due Date";
-            DataItemTableView = SORTING("Customer No.", "Posting Date", "Currency Code") order(ascending)
-                                           where("Document Type" = filter(2 | 3),
-                                           "Sell-to Customer No." = filter('C*'));
+            DataItemTableView = sorting("No.") where("No." = filter('C*'));
             column(GLFilter; GLFilter)
             {
             }
@@ -28,42 +25,63 @@ report 50106 "WDC Customer Debit Progress"
             column(ToDate; ToDate)
             {
             }
-            column(CustNo; "Cust. Ledger Entry"."Customer No.")
+            column(CustNo; Customer."No.")
             {
             }
 
-            column(CustName; customer.Name)
+            column(CustName; Customer.Name)
             {
             }
 
-            column(SalespersonInv; "Cust. Ledger Entry"."Salesperson Code")
+            column(SalespersonInv; Customer."Salesperson Code")
             {
 
             }
             column(PaymentTermeCustomer; customer."Payment Terms Code")
             {
             }
-            column(PaymentTermeCode; InvoiceHeader."Payment Terms Code")
+            column(Credit_Limit_LCY_Blocked_; "Credit Limit LCY(Blocked)")
+            {
+            }
+            column(Credit_Limit__LCY_; "Credit Limit (LCY)")
             {
             }
 
-            column(PostingDate; "Cust. Ledger Entry"."Posting Date")
+            column(PrviousBalance; GetPrviousBalance(FromDate))
             {
             }
 
-            column(DocumentNo; "Cust. Ledger Entry"."Document No.")
+            column(InvoiceAndCrdMemo; GetInvoiceAndCrdMemo(FromDate, ToDate))
             {
 
             }
-            column(AmntIncVatInv; "Cust. Ledger Entry"."Original Amt. (LCY)")
+            column(ShippedNotInvoiced; GetShippedNotInvoiced(FromDate, ToDate))
             {
 
             }
-            column(RemainingAmtInv; "Cust. Ledger Entry"."Remaining Amt. (LCY)")
+            column(ReturnedNotInvoiced; GetReturnedNotInvoiced(FromDate, ToDate))
             {
 
             }
-            column(DueDateInv; "Cust. Ledger Entry"."Due Date")
+            column(Payment; GetPayment(FromDate, ToDate))
+            {
+
+            }
+            column(GetImpaid; GetImpaid(FromDate, ToDate))
+            {
+
+            }
+
+            column(TotalChqAndTrtWithManager; GetTotalChqAndTrtByManager(FromDate, ToDate))
+            {
+
+            }
+
+            column(CashByManager; GetCashByManager(FromDate, ToDate))
+            {
+
+            }
+            column(GetChqAndTrtWaitToEncaise; GetChqAndTrtWaitToEncaise(FromDate, ToDate))
             {
 
             }
@@ -75,34 +93,128 @@ report 50106 "WDC Customer Debit Progress"
             trigger OnPreDataItem()
             begin
                 CompanyInfo.get;
-                GLFilter := "Cust. Ledger Entry".GetFilters;
+                Customer.SetRange("No.", CustomerFilter);
+                GLFilter := Customer.GetFilters;
                 LineNo := 0;
-                FromDate := "Cust. Ledger Entry".GetRangeMin("Posting Date");
-                ToDate := "Cust. Ledger Entry".GetRangeMax("Posting Date");
             end;
 
             trigger OnAfterGetRecord()
             begin
-                "Cust. Ledger Entry".CalcFields("Remaining Amt. (LCY)");
                 LineNo += 1;
-                if Customer.GET("Cust. Ledger Entry"."Sell-to Customer No.") then;
-                if InvoiceHeader.GET("Cust. Ledger Entry"."Document No.") then;
             end;
 
+
+
+        }
+
+    }
+    requestpage
+    {
+        SaveValues = true;
+
+        layout
+        {
+            area(content)
+            {
+                group(Filters)
+                {
+                    Caption = 'Filter';
+                    field(StartDateFilter; FromDate)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Start Date';
+                    }
+                    field(EndtDateFilter; ToDate)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'End Date';
+                    }
+                    field(CustomerFilter; CustomerFilter)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Customer';
+                        TableRelation = Customer where("No." = filter('C*'));
+                    }
+                    field(SalesPersonManFilter; SalesPersonManFilter)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Sales Person Manager';
+                        TableRelation = "Salesperson/Purchaser";
+                    }
+
+                }
+            }
         }
     }
 
+    trigger OnPreReport()
+    var
+        ltext001: Label 'You should put the both filter date ';
+        ltext002: Label 'Starting Date filter should be inferior then the Ending Date';
+    begin
 
+        If (FromDate = 0D) Or (ToDate = 0D) then
+            Error(ltext001);
+        IF (FromDate > ToDate) and (ToDate <> 0D) then
+            Error(ltext002);
 
+    end;
+
+    procedure GetPrviousBalance(pDateLimit: Date): Decimal
+    begin
+
+    end;
+
+    procedure GetInvoiceAndCrdMemo(pStartDate: Date; pEndDate: Date): Decimal
+    begin
+
+    end;
+
+    procedure GetShippedNotInvoiced(pStartDate: Date; pEndDate: Date): Decimal
+    begin
+
+    end;
+
+    procedure GetReturnedNotInvoiced(pStartDate: Date; pEndDate: Date): Decimal
+    begin
+
+    end;
+
+    procedure GetPayment(pStartDate: Date; pEndDate: Date): Decimal
+    begin
+
+    end;
+
+    procedure GetImpaid(pStartDate: Date; pEndDate: Date): Decimal
+    begin
+
+    end;
+
+    procedure GetTotalChqAndTrtByManager(pStartDate: Date; pEndDate: Date): Decimal
+    begin
+
+    end;
+
+    procedure GetCashByManager(pStartDate: Date; pEndDate: Date): Decimal
+    begin
+
+    end;
+
+    procedure GetChqAndTrtWaitToEncaise(pStartDate: Date; pEndDate: Date): Decimal
+    begin
+
+    end;
 
     var
         GLFilter: Text;
         CompanyInfo: Record "Company Information";
-        Customer: Record Customer;
         InvoiceHeader: Record "Sales Invoice Header";
         LineNo: Integer;
         FromDate: Date;
         ToDate: Date;
+        CustomerFilter: Code[20];
+        SalesPersonManFilter: Code[20];
+
 
 }
 
