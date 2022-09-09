@@ -177,7 +177,7 @@ report 50106 "WDC Customer Debit Progress"
         lDetCustLedgEntry: record "Detailed Cust. Ledg. Entry";
     begin
         lDetCustLedgEntry.Reset();
-        lDetCustLedgEntry.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
+        lDetCustLedgEntry.SetCurrentKey("Customer No.", "Entry Type", "Posting Date", "Initial Document Type");
         lDetCustLedgEntry.SetRange("Customer No.", pCustNo);
         lDetCustLedgEntry.Setrange("Entry Type", lDetCustLedgEntry."Entry Type"::"Initial Entry");
         lDetCustLedgEntry.SetFilter("Document Type", '%1|%2', lDetCustLedgEntry."Document Type"::"Credit Memo", lDetCustLedgEntry."Document Type"::Invoice);
@@ -188,13 +188,35 @@ report 50106 "WDC Customer Debit Progress"
     end;
 
     procedure GetShippedNotInvoiced(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lSalesLines: record "Sales Line";
     begin
-
+        lSalesLines.Reset();
+        lSalesLines.SetCurrentKey("Document Type", "Bill-to Customer No.", "Currency Code", "Document No.");
+        lSalesLines.SetRange("Sell-to Customer No.", pCustNo);
+        lSalesLines.SetRange("Document Type", lSalesLines."Document Type"::Order);
+        lSalesLines.SetRange("Posting Date", pStartDate, pEndDate);
+        lSalesLines.SetFilter(type, '<>%1', lSalesLines.Type::"Charge (Item)");
+        lSalesLines.SetFilter("Shipped Not Invoiced (LCY)", '<>%1', 0);
+        if lSalesLines.FindSet() then
+            lSalesLines.CalcSums("Shipped Not Invoiced (LCY)");
+        exit(lSalesLines."Shipped Not Invoiced (LCY)");
     end;
 
     procedure GetReturnedNotInvoiced(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lSalesLines: record "Sales Line";
     begin
-
+        lSalesLines.Reset();
+        lSalesLines.SetCurrentKey("Document Type", "Bill-to Customer No.", "Currency Code", "Document No.");
+        lSalesLines.SetRange("Sell-to Customer No.", pCustNo);
+        lSalesLines.SetRange("Document Type", lSalesLines."Document Type"::"Return Order");
+        lSalesLines.SetRange("Posting Date", pStartDate, pEndDate);
+        lSalesLines.SetFilter(type, '<>%1', lSalesLines.Type::"Charge (Item)");
+        lSalesLines.SetFilter("Return Rcd. Not Invd. (LCY)", '<>%1', 0);
+        if lSalesLines.FindSet() then
+            lSalesLines.CalcSums("Return Rcd. Not Invd. (LCY)");
+        exit(lSalesLines."Return Rcd. Not Invd. (LCY)");
     end;
 
     procedure GetPayment(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
