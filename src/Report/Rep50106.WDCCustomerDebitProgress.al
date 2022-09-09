@@ -174,10 +174,17 @@ report 50106 "WDC Customer Debit Progress"
 
     procedure GetInvoiceAndCrdMemo(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     var
-        lCustLedgEnt: record 21;
+        lDetCustLedgEntry: record "Detailed Cust. Ledg. Entry";
     begin
-        lCustLedgEnt.Reset();
-        lCustLedgEnt.SetFilter("Document Type", '%1|%2', lCustLedgEnt."Document Type"::"Credit Memo", lCustLedgEnt."Document Type"::Invoice);
+        lDetCustLedgEntry.Reset();
+        lDetCustLedgEntry.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
+        lDetCustLedgEntry.SetRange("Customer No.", pCustNo);
+        lDetCustLedgEntry.Setrange("Entry Type", lDetCustLedgEntry."Entry Type"::"Initial Entry");
+        lDetCustLedgEntry.SetFilter("Document Type", '%1|%2', lDetCustLedgEntry."Document Type"::"Credit Memo", lDetCustLedgEntry."Document Type"::Invoice);
+        lDetCustLedgEntry.SetRange("Posting Date", pStartDate, pEndDate);
+        if lDetCustLedgEntry.Findset() Then
+            lDetCustLedgEntry.CalcSums("Amount (LCY)");
+        exit(lDetCustLedgEntry."Amount (LCY)");
     end;
 
     procedure GetShippedNotInvoiced(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
