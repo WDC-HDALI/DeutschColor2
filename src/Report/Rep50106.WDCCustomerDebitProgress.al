@@ -220,8 +220,18 @@ report 50106 "WDC Customer Debit Progress"
     end;
 
     procedure GetPayment(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lDetCustLedgEntry: record "Detailed Cust. Ledg. Entry";
     begin
-
+        lDetCustLedgEntry.Reset();
+        lDetCustLedgEntry.SetCurrentKey("Customer No.", "Entry Type", "Posting Date", "Initial Document Type");
+        lDetCustLedgEntry.SetRange("Customer No.", pCustNo);
+        lDetCustLedgEntry.Setrange("Entry Type", lDetCustLedgEntry."Entry Type"::"Initial Entry");
+        lDetCustLedgEntry.SetFilter("Document Type", '%1|%2', lDetCustLedgEntry."Document Type"::Payment, lDetCustLedgEntry."Document Type"::" ");
+        lDetCustLedgEntry.SetRange("Posting Date", pStartDate, pEndDate);
+        if lDetCustLedgEntry.Findset() Then
+            lDetCustLedgEntry.CalcSums("Amount (LCY)");
+        exit(lDetCustLedgEntry."Amount (LCY)");
     end;
 
     procedure GetImpaid(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
