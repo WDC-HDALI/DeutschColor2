@@ -235,7 +235,23 @@ report 50106 "WDC Customer Debit Progress"
     end;
 
     procedure GetImpaid(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lCustLedgEnt: Record 21;
+        lTotImpaid: Decimal;
     begin
+        lCustLedgEnt.Reset;
+        lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
+        lCustLedgEnt.SetRange("Customer No.", pCustNo);
+        lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
+        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        lCustLedgEnt.SetRange(Reversed, false);
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-006*', 'CHQ-006');
+        if lCustLedgEnt.FindFirst() Then
+            repeat
+                lCustLedgEnt.CalcFields("Amount (LCY)");
+                lTotImpaid += lCustLedgEnt."Amount (LCY)";
+            until lCustLedgEnt.Next() = 0;
+
 
     end;
 
