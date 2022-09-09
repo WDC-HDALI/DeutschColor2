@@ -47,41 +47,41 @@ report 50106 "WDC Customer Debit Progress"
             {
             }
 
-            column(PrviousBalance; GetPrviousBalance(FromDate))
+            column(PrviousBalance; GetPrviousBalance(customer."No.", FromDate))
             {
             }
 
-            column(InvoiceAndCrdMemo; GetInvoiceAndCrdMemo(FromDate, ToDate))
+            column(InvoiceAndCrdMemo; GetInvoiceAndCrdMemo(customer."No.", FromDate, ToDate))
             {
 
             }
-            column(ShippedNotInvoiced; GetShippedNotInvoiced(FromDate, ToDate))
+            column(ShippedNotInvoiced; GetShippedNotInvoiced(customer."No.", FromDate, ToDate))
             {
 
             }
-            column(ReturnedNotInvoiced; GetReturnedNotInvoiced(FromDate, ToDate))
+            column(ReturnedNotInvoiced; GetReturnedNotInvoiced(customer."No.", FromDate, ToDate))
             {
 
             }
-            column(Payment; GetPayment(FromDate, ToDate))
+            column(Payment; GetPayment(customer."No.", FromDate, ToDate))
             {
 
             }
-            column(GetImpaid; GetImpaid(FromDate, ToDate))
-            {
-
-            }
-
-            column(TotalChqAndTrtWithManager; GetTotalChqAndTrtByManager(FromDate, ToDate))
+            column(Impaid; GetImpaid(customer."No.", FromDate, ToDate))
             {
 
             }
 
-            column(CashByManager; GetCashByManager(FromDate, ToDate))
+            column(TotalChqAndTrtByManager; GetTotalChqAndTrtByManager(customer."No.", FromDate, ToDate))
             {
 
             }
-            column(GetChqAndTrtWaitToEncaise; GetChqAndTrtWaitToEncaise(FromDate, ToDate))
+
+            column(CashByManager; GetCashByManager(customer."No.", FromDate, ToDate))
+            {
+
+            }
+            column(ChqAndTrtWaitToEncaise; GetChqAndTrtWaitToEncaise(customer."No.", FromDate, ToDate))
             {
 
             }
@@ -160,47 +160,57 @@ report 50106 "WDC Customer Debit Progress"
 
     end;
 
-    procedure GetPrviousBalance(pDateLimit: Date): Decimal
+    procedure GetPrviousBalance(pCustNo: code[20]; pDateLimit: Date): Decimal
+    var
+        lDetCustLedgEntry: Record "Detailed Cust. Ledg. Entry";
+    begin
+        lDetCustLedgEntry.Reset();
+        lDetCustLedgEntry.SetCurrentKey("Customer No.", "Entry Type", "Posting Date", "Initial Document Type");
+        lDetCustLedgEntry.SetRange("Customer No.", pCustNo);
+        If lDetCustLedgEntry.FindFirst() Then
+            lDetCustLedgEntry.CalcSums("Amount (LCY)");
+        exit(lDetCustLedgEntry."Amount (LCY)");
+    end;
+
+    procedure GetInvoiceAndCrdMemo(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lCustLedgEnt: record 21;
+    begin
+        lCustLedgEnt.Reset();
+        lCustLedgEnt.SetFilter("Document Type", '%1|%2', lCustLedgEnt."Document Type"::"Credit Memo", lCustLedgEnt."Document Type"::Invoice);
+    end;
+
+    procedure GetShippedNotInvoiced(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     begin
 
     end;
 
-    procedure GetInvoiceAndCrdMemo(pStartDate: Date; pEndDate: Date): Decimal
+    procedure GetReturnedNotInvoiced(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     begin
 
     end;
 
-    procedure GetShippedNotInvoiced(pStartDate: Date; pEndDate: Date): Decimal
+    procedure GetPayment(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     begin
 
     end;
 
-    procedure GetReturnedNotInvoiced(pStartDate: Date; pEndDate: Date): Decimal
+    procedure GetImpaid(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     begin
 
     end;
 
-    procedure GetPayment(pStartDate: Date; pEndDate: Date): Decimal
+    procedure GetTotalChqAndTrtByManager(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     begin
 
     end;
 
-    procedure GetImpaid(pStartDate: Date; pEndDate: Date): Decimal
+    procedure GetCashByManager(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     begin
 
     end;
 
-    procedure GetTotalChqAndTrtByManager(pStartDate: Date; pEndDate: Date): Decimal
-    begin
-
-    end;
-
-    procedure GetCashByManager(pStartDate: Date; pEndDate: Date): Decimal
-    begin
-
-    end;
-
-    procedure GetChqAndTrtWaitToEncaise(pStartDate: Date; pEndDate: Date): Decimal
+    procedure GetChqAndTrtWaitToEncaise(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     begin
 
     end;
