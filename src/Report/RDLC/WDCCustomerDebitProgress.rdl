@@ -11,6 +11,109 @@
       <rd:DataSourceID>03f49786-81bc-43de-bda3-97e9a971bfba</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="GLFilter">
+          <DataField>GLFilter</DataField>
+        </Field>
+        <Field Name="CompanyInfoName">
+          <DataField>CompanyInfoName</DataField>
+        </Field>
+        <Field Name="FromDate">
+          <DataField>FromDate</DataField>
+        </Field>
+        <Field Name="ToDate">
+          <DataField>ToDate</DataField>
+        </Field>
+        <Field Name="CustNo">
+          <DataField>CustNo</DataField>
+        </Field>
+        <Field Name="CustName">
+          <DataField>CustName</DataField>
+        </Field>
+        <Field Name="SalespersonInv">
+          <DataField>SalespersonInv</DataField>
+        </Field>
+        <Field Name="PaymentTermeCustomer">
+          <DataField>PaymentTermeCustomer</DataField>
+        </Field>
+        <Field Name="Credit_Limit_LCY_Blocked_">
+          <DataField>Credit_Limit_LCY_Blocked_</DataField>
+        </Field>
+        <Field Name="Credit_Limit_LCY_Blocked_Format">
+          <DataField>Credit_Limit_LCY_Blocked_Format</DataField>
+        </Field>
+        <Field Name="Credit_Limit__LCY_">
+          <DataField>Credit_Limit__LCY_</DataField>
+        </Field>
+        <Field Name="Credit_Limit__LCY_Format">
+          <DataField>Credit_Limit__LCY_Format</DataField>
+        </Field>
+        <Field Name="PrviousBalance">
+          <DataField>PrviousBalance</DataField>
+        </Field>
+        <Field Name="PrviousBalanceFormat">
+          <DataField>PrviousBalanceFormat</DataField>
+        </Field>
+        <Field Name="InvoiceAndCrdMemo">
+          <DataField>InvoiceAndCrdMemo</DataField>
+        </Field>
+        <Field Name="InvoiceAndCrdMemoFormat">
+          <DataField>InvoiceAndCrdMemoFormat</DataField>
+        </Field>
+        <Field Name="ShippedNotInvoiced">
+          <DataField>ShippedNotInvoiced</DataField>
+        </Field>
+        <Field Name="ShippedNotInvoicedFormat">
+          <DataField>ShippedNotInvoicedFormat</DataField>
+        </Field>
+        <Field Name="ReturnedNotInvoiced">
+          <DataField>ReturnedNotInvoiced</DataField>
+        </Field>
+        <Field Name="ReturnedNotInvoicedFormat">
+          <DataField>ReturnedNotInvoicedFormat</DataField>
+        </Field>
+        <Field Name="Payment">
+          <DataField>Payment</DataField>
+        </Field>
+        <Field Name="PaymentFormat">
+          <DataField>PaymentFormat</DataField>
+        </Field>
+        <Field Name="Impaid">
+          <DataField>Impaid</DataField>
+        </Field>
+        <Field Name="ImpaidFormat">
+          <DataField>ImpaidFormat</DataField>
+        </Field>
+        <Field Name="TotalChqAndTrtByManager">
+          <DataField>TotalChqAndTrtByManager</DataField>
+        </Field>
+        <Field Name="TotalChqAndTrtByManagerFormat">
+          <DataField>TotalChqAndTrtByManagerFormat</DataField>
+        </Field>
+        <Field Name="CashByManager">
+          <DataField>CashByManager</DataField>
+        </Field>
+        <Field Name="CashByManagerFormat">
+          <DataField>CashByManagerFormat</DataField>
+        </Field>
+        <Field Name="ChqAndTrtWaitToEncaise">
+          <DataField>ChqAndTrtWaitToEncaise</DataField>
+        </Field>
+        <Field Name="ChqAndTrtWaitToEncaiseFormat">
+          <DataField>ChqAndTrtWaitToEncaiseFormat</DataField>
+        </Field>
+        <Field Name="LineNo">
+          <DataField>LineNo</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1275,7 +1378,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value+Fields!Payment.Value+Fields!Impaid.Value</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -1399,7 +1502,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value+Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -1809,7 +1912,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value+Fields!Payment.Value+Fields!Impaid.Value</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -1937,7 +2040,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value+Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -3312,7 +3415,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Analitic Overdue Sales Invoices</Value>
+                      <Value>Customer Debit Progress</Value>
                       <Style>
                         <FontFamily>Segoe</FontFamily>
                         <FontSize>12pt</FontSize>
@@ -3334,7 +3437,7 @@
               <Value>téléchargement</Value>
               <Sizing>FitProportional</Sizing>
               <Top>0.13511cm</Top>
-              <Left>22.80308cm</Left>
+              <Left>37.72558cm</Left>
               <Height>0.60439cm</Height>
               <Width>4.90367cm</Width>
               <ZIndex>1</ZIndex>
@@ -3363,7 +3466,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>1.33889cm</Top>
-              <Left>24.55675cm</Left>
+              <Left>39.47925cm</Left>
               <Height>0.423cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>2</ZIndex>
@@ -3391,7 +3494,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.91589cm</Top>
-              <Left>24.55675cm</Left>
+              <Left>39.47925cm</Left>
               <Height>0.423cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>3</ZIndex>
@@ -3419,7 +3522,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>1.76189cm</Top>
-              <Left>24.55675cm</Left>
+              <Left>39.47925cm</Left>
               <Height>0.423cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>4</ZIndex>
@@ -3560,6 +3663,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -3617,107 +3726,4 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>047c20f4-3bb7-404b-af51-297fa770694c</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="GLFilter">
-          <DataField>GLFilter</DataField>
-        </Field>
-        <Field Name="CompanyInfoName">
-          <DataField>CompanyInfoName</DataField>
-        </Field>
-        <Field Name="FromDate">
-          <DataField>FromDate</DataField>
-        </Field>
-        <Field Name="ToDate">
-          <DataField>ToDate</DataField>
-        </Field>
-        <Field Name="CustNo">
-          <DataField>CustNo</DataField>
-        </Field>
-        <Field Name="CustName">
-          <DataField>CustName</DataField>
-        </Field>
-        <Field Name="SalespersonInv">
-          <DataField>SalespersonInv</DataField>
-        </Field>
-        <Field Name="PaymentTermeCustomer">
-          <DataField>PaymentTermeCustomer</DataField>
-        </Field>
-        <Field Name="Credit_Limit_LCY_Blocked_">
-          <DataField>Credit_Limit_LCY_Blocked_</DataField>
-        </Field>
-        <Field Name="Credit_Limit_LCY_Blocked_Format">
-          <DataField>Credit_Limit_LCY_Blocked_Format</DataField>
-        </Field>
-        <Field Name="Credit_Limit__LCY_">
-          <DataField>Credit_Limit__LCY_</DataField>
-        </Field>
-        <Field Name="Credit_Limit__LCY_Format">
-          <DataField>Credit_Limit__LCY_Format</DataField>
-        </Field>
-        <Field Name="PrviousBalance">
-          <DataField>PrviousBalance</DataField>
-        </Field>
-        <Field Name="PrviousBalanceFormat">
-          <DataField>PrviousBalanceFormat</DataField>
-        </Field>
-        <Field Name="InvoiceAndCrdMemo">
-          <DataField>InvoiceAndCrdMemo</DataField>
-        </Field>
-        <Field Name="InvoiceAndCrdMemoFormat">
-          <DataField>InvoiceAndCrdMemoFormat</DataField>
-        </Field>
-        <Field Name="ShippedNotInvoiced">
-          <DataField>ShippedNotInvoiced</DataField>
-        </Field>
-        <Field Name="ShippedNotInvoicedFormat">
-          <DataField>ShippedNotInvoicedFormat</DataField>
-        </Field>
-        <Field Name="ReturnedNotInvoiced">
-          <DataField>ReturnedNotInvoiced</DataField>
-        </Field>
-        <Field Name="ReturnedNotInvoicedFormat">
-          <DataField>ReturnedNotInvoicedFormat</DataField>
-        </Field>
-        <Field Name="Payment">
-          <DataField>Payment</DataField>
-        </Field>
-        <Field Name="PaymentFormat">
-          <DataField>PaymentFormat</DataField>
-        </Field>
-        <Field Name="Impaid">
-          <DataField>Impaid</DataField>
-        </Field>
-        <Field Name="ImpaidFormat">
-          <DataField>ImpaidFormat</DataField>
-        </Field>
-        <Field Name="TotalChqAndTrtByManager">
-          <DataField>TotalChqAndTrtByManager</DataField>
-        </Field>
-        <Field Name="TotalChqAndTrtByManagerFormat">
-          <DataField>TotalChqAndTrtByManagerFormat</DataField>
-        </Field>
-        <Field Name="CashByManager">
-          <DataField>CashByManager</DataField>
-        </Field>
-        <Field Name="CashByManagerFormat">
-          <DataField>CashByManagerFormat</DataField>
-        </Field>
-        <Field Name="ChqAndTrtWaitToEncaise">
-          <DataField>ChqAndTrtWaitToEncaise</DataField>
-        </Field>
-        <Field Name="ChqAndTrtWaitToEncaiseFormat">
-          <DataField>ChqAndTrtWaitToEncaiseFormat</DataField>
-        </Field>
-        <Field Name="LineNo">
-          <DataField>LineNo</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>

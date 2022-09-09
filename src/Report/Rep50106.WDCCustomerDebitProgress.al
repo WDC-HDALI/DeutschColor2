@@ -93,7 +93,7 @@ report 50106 "WDC Customer Debit Progress"
             trigger OnPreDataItem()
             begin
                 CompanyInfo.get;
-                Customer.SetRange("No.", CustomerFilter);
+                Customer.setfilter("No.", CustomerFilter);
                 GLFilter := Customer.GetFilters;
                 LineNo := 0;
             end;
@@ -244,8 +244,8 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
         lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
-        lCustLedgEnt.SetRange(Reversed, false);
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-006*', 'CHQ-006');
+        lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-006*', 'CH-006');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
@@ -255,18 +255,69 @@ report 50106 "WDC Customer Debit Progress"
     end;
 
     procedure GetTotalChqAndTrtByManager(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lCustLedgEnt: Record 21;
+        lTotal: Decimal;
     begin
-
+        lCustLedgEnt.Reset;
+        lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
+        lCustLedgEnt.SetRange("Customer No.", pCustNo);
+        lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
+        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
+        lCustLedgEnt.SetRange(Reversed, false);
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-001*', 'CH-001');
+        if lCustLedgEnt.FindFirst() Then
+            repeat
+                lCustLedgEnt.CalcFields("Amount (LCY)");
+                lTotal += lCustLedgEnt."Amount (LCY)";
+            until lCustLedgEnt.Next() = 0;
+        exit(lTotal);
     end;
+
 
     procedure GetCashByManager(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lCustLedgEnt: Record 21;
+        lTotal: Decimal;
     begin
-
+        lCustLedgEnt.Reset;
+        lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
+        lCustLedgEnt.SetRange("Customer No.", pCustNo);
+        lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
+        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
+        lCustLedgEnt.SetRange(Reversed, false);
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-004*', 'CH-004');
+        if lCustLedgEnt.FindFirst() Then
+            repeat
+                lCustLedgEnt.CalcFields("Amount (LCY)");
+                lTotal += lCustLedgEnt."Amount (LCY)";
+            until lCustLedgEnt.Next() = 0;
+        exit(lTotal);
     end;
 
-    procedure GetChqAndTrtWaitToEncaise(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
-    begin
 
+
+    procedure GetChqAndTrtWaitToEncaise(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lCustLedgEnt: Record 21;
+        lTotal: Decimal;
+    begin
+        lCustLedgEnt.Reset;
+        lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
+        lCustLedgEnt.SetRange("Customer No.", pCustNo);
+        lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
+        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
+        lCustLedgEnt.SetRange(Reversed, false);
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-003*', 'CH-003');
+        if lCustLedgEnt.FindFirst() Then
+            repeat
+                lCustLedgEnt.CalcFields("Amount (LCY)");
+                lTotal += lCustLedgEnt."Amount (LCY)";
+            until lCustLedgEnt.Next() = 0;
+        exit(lTotal);
     end;
 
     var
