@@ -166,6 +166,7 @@ report 50106 "WDC Customer Debit Progress"
     begin
         lDetCustLedgEntry.Reset();
         lDetCustLedgEntry.SetCurrentKey("Customer No.", "Entry Type", "Posting Date", "Initial Document Type");
+        lDetCustLedgEntry.SetFilter("Posting Date", '..%1', pDateLimit);
         lDetCustLedgEntry.SetRange("Customer No.", pCustNo);
         If lDetCustLedgEntry.FindFirst() Then
             lDetCustLedgEntry.CalcSums("Amount (LCY)");
