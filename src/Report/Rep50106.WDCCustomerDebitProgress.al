@@ -247,7 +247,7 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        //lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-004*', 'CH-004');
         if lCustLedgEnt.FindFirst() Then
             repeat
@@ -266,7 +266,7 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        // lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
         lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-006*', 'CH-006', 'TRT-007*', 'CH-007');
         if lCustLedgEnt.FindFirst() Then
@@ -286,7 +286,7 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        //lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
         lCustLedgEnt.SetRange(Reversed, false);
         lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-001*', 'CH-001');
@@ -308,9 +308,8 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        // lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         //lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
-        lCustLedgEnt.SetRange(Reversed, false);
         lCustLedgEnt.SetFilter("Code Status", '%1', 'CASH-SP');
         if lCustLedgEnt.FindFirst() Then
             repeat
@@ -331,9 +330,8 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        //lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
-        lCustLedgEnt.SetRange(Reversed, false);
         lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-002*', 'CH-002', 'TRT-003*', 'CH-003');
         if lCustLedgEnt.FindFirst() Then
             repeat

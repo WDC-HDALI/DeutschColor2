@@ -2866,7 +2866,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="From Date : "</Value>
+                      <Value>="From Date : " &amp; First(Fields!FromDate.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -2878,8 +2878,8 @@
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
               <Top>2.19614cm</Top>
-              <Height>0.38833cm</Height>
-              <Width>3.25354cm</Width>
+              <Height>0.37775cm</Height>
+              <Width>9.95279cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -2898,7 +2898,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="To Date     : "</Value>
+                      <Value>="To Date     : " &amp; First(Fields!ToDate.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -2911,7 +2911,7 @@
               <rd:DefaultName>Textbox14</rd:DefaultName>
               <Top>2.64445cm</Top>
               <Height>0.35306cm</Height>
-              <Width>3.25354cm</Width>
+              <Width>9.95279cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -2956,7 +2956,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="Customer No. Filter : "</Value>
+                      <Value>="Customer No. Filter : " &amp; First(Fields!CustomerFilter.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -2970,7 +2970,7 @@
               <Top>3.07714cm</Top>
               <Left>0.00986cm</Left>
               <Height>0.38833cm</Height>
-              <Width>3.25354cm</Width>
+              <Width>9.95279cm</Width>
               <ZIndex>8</ZIndex>
               <Style>
                 <Border>
@@ -2989,7 +2989,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="Salesperson Filter : "</Value>
+                      <Value>="Salesperson Filter : " &amp; First(Fields!SalesPersonManFilter.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -3003,146 +3003,8 @@
               <Top>3.52545cm</Top>
               <Left>0.00986cm</Left>
               <Height>0.35306cm</Height>
-              <Width>3.25354cm</Width>
+              <Width>9.95279cm</Width>
               <ZIndex>9</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox25">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!ToDate.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                        <Format>dd/MM/yyyy</Format>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>2.64045cm</Top>
-              <Left>3.33868cm</Left>
-              <Height>0.35306cm</Height>
-              <Width>3.95204cm</Width>
-              <ZIndex>10</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox26">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!FromDate.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                        <Format>dd/MM/yyyy</Format>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>2.19214cm</Top>
-              <Left>3.33868cm</Left>
-              <Height>0.38833cm</Height>
-              <Width>3.95204cm</Width>
-              <ZIndex>11</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox27">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>= First(Fields!CustomerFilter.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>3.07314cm</Top>
-              <Left>3.34854cm</Left>
-              <Height>0.38833cm</Height>
-              <Width>3.95204cm</Width>
-              <ZIndex>12</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox29">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!SalesPersonManFilter.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>3.52145cm</Top>
-              <Left>3.34854cm</Left>
-              <Height>0.35306cm</Height>
-              <Width>3.95204cm</Width>
-              <ZIndex>13</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
