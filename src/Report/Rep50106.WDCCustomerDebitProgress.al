@@ -25,6 +25,14 @@ report 50106 "WDC Customer Debit Progress"
             column(ToDate; ToDate)
             {
             }
+            column(SalesPersonManFilter; SalesPersonManFilter)
+            {
+
+            }
+            column(CustomerFilter; CustomerFilter)
+            {
+
+            }
             column(CustNo; Customer."No.")
             {
             }
@@ -47,7 +55,7 @@ report 50106 "WDC Customer Debit Progress"
             {
             }
 
-            column(PrviousBalance; GetPrviousBalance(customer."No.", FromDate))
+            column(PrviousBalance; GetPrviousBalance(customer."No.", FromDate - 1))
             {
             }
 
@@ -90,10 +98,12 @@ report 50106 "WDC Customer Debit Progress"
 
             }
 
+
             trigger OnPreDataItem()
             begin
                 CompanyInfo.get;
-                Customer.setfilter("No.", CustomerFilter);
+                Customer.SetFilter("No.", CustomerFilter);
+                Customer.SetFilter("Salesperson Code", SalesPersonManFilter);
                 GLFilter := Customer.GetFilters;
                 LineNo := 0;
             end;
@@ -163,19 +173,22 @@ report 50106 "WDC Customer Debit Progress"
     procedure GetPrviousBalance(pCustNo: code[20]; pDateLimit: Date): Decimal
     var
         lDetCustLedgEntry: Record "Detailed Cust. Ledg. Entry";
+        lTotal: Decimal;
     begin
         lDetCustLedgEntry.Reset();
         lDetCustLedgEntry.SetCurrentKey("Customer No.", "Entry Type", "Posting Date", "Initial Document Type");
         lDetCustLedgEntry.SetFilter("Posting Date", '..%1', pDateLimit);
         lDetCustLedgEntry.SetRange("Customer No.", pCustNo);
-        If lDetCustLedgEntry.FindFirst() Then
+        If lDetCustLedgEntry.FindSet() Then
             lDetCustLedgEntry.CalcSums("Amount (LCY)");
-        exit(lDetCustLedgEntry."Amount (LCY)");
+        lTotal := lDetCustLedgEntry."Amount (LCY)";
+        exit(lTotal);
     end;
 
     procedure GetInvoiceAndCrdMemo(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     var
         lDetCustLedgEntry: record "Detailed Cust. Ledg. Entry";
+        lTotal: Decimal;
     begin
         lDetCustLedgEntry.Reset();
         lDetCustLedgEntry.SetCurrentKey("Customer No.", "Entry Type", "Posting Date", "Initial Document Type");
@@ -185,12 +198,14 @@ report 50106 "WDC Customer Debit Progress"
         lDetCustLedgEntry.SetRange("Posting Date", pStartDate, pEndDate);
         if lDetCustLedgEntry.Findset() Then
             lDetCustLedgEntry.CalcSums("Amount (LCY)");
-        exit(lDetCustLedgEntry."Amount (LCY)");
+        lTotal := lDetCustLedgEntry."Amount (LCY)";
+        exit(lTotal);
     end;
 
     procedure GetShippedNotInvoiced(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     var
         lSalesLines: record "Sales Line";
+        lTotal: Decimal;
     begin
         lSalesLines.Reset();
         lSalesLines.SetCurrentKey("Document Type", "Bill-to Customer No.", "Currency Code", "Document No.");
@@ -201,12 +216,14 @@ report 50106 "WDC Customer Debit Progress"
         lSalesLines.SetFilter("Shipped Not Invoiced (LCY)", '<>%1', 0);
         if lSalesLines.FindSet() then
             lSalesLines.CalcSums("Shipped Not Invoiced (LCY)");
-        exit(lSalesLines."Shipped Not Invoiced (LCY)");
+        lTotal := lSalesLines."Shipped Not Invoiced (LCY)";
+        exit(lTotal);
     end;
 
     procedure GetReturnedNotInvoiced(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     var
         lSalesLines: record "Sales Line";
+        lTotal: Decimal;
     begin
         lSalesLines.Reset();
         lSalesLines.SetCurrentKey("Document Type", "Bill-to Customer No.", "Currency Code", "Document No.");
@@ -217,22 +234,27 @@ report 50106 "WDC Customer Debit Progress"
         lSalesLines.SetFilter("Return Rcd. Not Invd. (LCY)", '<>%1', 0);
         if lSalesLines.FindSet() then
             lSalesLines.CalcSums("Return Rcd. Not Invd. (LCY)");
-        exit(lSalesLines."Return Rcd. Not Invd. (LCY)");
+        lTotal := lSalesLines."Return Rcd. Not Invd. (LCY)";
+        exit(lTotal);
     end;
 
     procedure GetPayment(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     var
-        lDetCustLedgEntry: record "Detailed Cust. Ledg. Entry";
+        lCustLedgEnt: Record 21;
+        lTotalPayment: Decimal;
     begin
-        lDetCustLedgEntry.Reset();
-        lDetCustLedgEntry.SetCurrentKey("Customer No.", "Entry Type", "Posting Date", "Initial Document Type");
-        lDetCustLedgEntry.SetRange("Customer No.", pCustNo);
-        lDetCustLedgEntry.Setrange("Entry Type", lDetCustLedgEntry."Entry Type"::"Initial Entry");
-        lDetCustLedgEntry.SetFilter("Document Type", '%1|%2', lDetCustLedgEntry."Document Type"::Payment, lDetCustLedgEntry."Document Type"::" ");
-        lDetCustLedgEntry.SetRange("Posting Date", pStartDate, pEndDate);
-        if lDetCustLedgEntry.Findset() Then
-            lDetCustLedgEntry.CalcSums("Amount (LCY)");
-        exit(lDetCustLedgEntry."Amount (LCY)");
+        lCustLedgEnt.Reset;
+        lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
+        lCustLedgEnt.SetRange("Customer No.", pCustNo);
+        lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
+        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-004*', 'CH-004');
+        if lCustLedgEnt.FindFirst() Then
+            repeat
+                lCustLedgEnt.CalcFields("Amount (LCY)");
+                lTotalPayment += lCustLedgEnt."Amount (LCY)";
+            until lCustLedgEnt.Next() = 0;
+        exit(lTotalPayment * -1);
     end;
 
     procedure GetImpaid(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
@@ -246,13 +268,13 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
         lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-006*', 'CH-006');
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-006*', 'CH-006', 'TRT-007*', 'CH-007');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
                 lTotImpaid += lCustLedgEnt."Amount (LCY)";
             until lCustLedgEnt.Next() = 0;
-        exit(lTotImpaid);
+        exit(lTotImpaid * -1);
     end;
 
     procedure GetTotalChqAndTrtByManager(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
@@ -273,7 +295,7 @@ report 50106 "WDC Customer Debit Progress"
                 lCustLedgEnt.CalcFields("Amount (LCY)");
                 lTotal += lCustLedgEnt."Amount (LCY)";
             until lCustLedgEnt.Next() = 0;
-        exit(lTotal);
+        exit(lTotal * -1);
     end;
 
 
@@ -287,15 +309,15 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
         lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
-        lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
+        //lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
         lCustLedgEnt.SetRange(Reversed, false);
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-004*', 'CH-004');
+        lCustLedgEnt.SetFilter("Code Status", '%1', 'CASH-SP');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
                 lTotal += lCustLedgEnt."Amount (LCY)";
             until lCustLedgEnt.Next() = 0;
-        exit(lTotal);
+        exit(lTotal * -1);
     end;
 
 
@@ -312,13 +334,13 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
         lCustLedgEnt.SetRange(Reversed, false);
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-003*', 'CH-003');
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-002*', 'CH-002', 'TRT-003*', 'CH-003');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
                 lTotal += lCustLedgEnt."Amount (LCY)";
             until lCustLedgEnt.Next() = 0;
-        exit(lTotal);
+        exit(lTotal * -1);
     end;
 
     var
