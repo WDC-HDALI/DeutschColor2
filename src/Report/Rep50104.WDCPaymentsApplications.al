@@ -278,19 +278,19 @@ report 50104 "WDC Payments Applications"
                     lCustLedgEntPayment.SetRange("Cheque No.", '');
                     lCustLedgEntPayment.SetRange("Code Status", '');
                     If lCustLedgEntPayment.FindFirst() THEN
-                            repeat
-                                lCustLedgEntPayment.CalcFields("Amount (LCY)");
-                                if SalesPersonManFilter <> '' Then BEGIN
-                                    If "Cust. Ledger Entry 2"."Document Type" = "Cust. Ledger Entry 2"."Document Type"::" " then BEGIN
-                                        If "Salesperson Code" = SalesPersonManFilter then
-                                            PaymentAmount2 += lCustLedgEntPayment."Amount (LCY)";
-                                    End Else BEGIN
-                                        If "Sales person No." = SalesPersonManFilter then
-                                            PaymentAmount2 += lCustLedgEntPayment."Amount (LCY)";
-                                    END;
-                                END Else
-                                    PaymentAmount2 += lCustLedgEntPayment."Amount (LCY)";
-                            until lCustLedgEntPayment.Next = 0;
+                        repeat
+                            lCustLedgEntPayment.CalcFields("Amount (LCY)");
+                            if SalesPersonManFilter <> '' Then BEGIN
+                                If "Cust. Ledger Entry 2"."Document Type" = "Cust. Ledger Entry 2"."Document Type"::" " then BEGIN
+                                    If "Salesperson Code" = SalesPersonManFilter then
+                                        PaymentAmount2 += lCustLedgEntPayment."Amount (LCY)";
+                                End Else BEGIN
+                                    If "Sales person No." = SalesPersonManFilter then
+                                        PaymentAmount2 += lCustLedgEntPayment."Amount (LCY)";
+                                END;
+                            END Else
+                                PaymentAmount2 += lCustLedgEntPayment."Amount (LCY)";
+                        until lCustLedgEntPayment.Next = 0;
                     InvoiceNo3 := '';
                     if "Cust. Ledger Entry 2"."Document Type" = "Cust. Ledger Entry 2"."Document Type"::Payment THEN
                         InvoiceNo3 := GetInvoicesOfImpaidCheque("Cust. Ledger Entry 2"."Document No.");
@@ -334,10 +334,10 @@ report 50104 "WDC Payments Applications"
                 If (Not (lGLEntry.FindFirst)) And (Not (lCustLedgEntry.FindFirst)) then
                     CurrReport.Skip()
                 Else Begin
-                         repeat
-                             lCustLedgEntry.CalcFields("Amount (LCY)");
-                             TotalPayment += lCustLedgEntry."Amount (LCY)" * (-1);
-                         until lCustLedgEntry.Next = 0;
+                    repeat
+                        lCustLedgEntry.CalcFields("Amount (LCY)");
+                        TotalPayment += lCustLedgEntry."Amount (LCY)" * (-1);
+                    until lCustLedgEntry.Next = 0;
                     lGLEntry.CalcSums(lGLEntry.Amount);
                     TotalCHQ_TRT := lGLEntry.Amount * (-1);
                     TotalBycustomer += TotalCHQ_TRT + TotalPayment;
@@ -445,12 +445,12 @@ report 50104 "WDC Payments Applications"
                 lDetCustLedgInvoice.SetRange("Initial Document Type", lDetCustLedgInvoice."Initial Document Type"::Invoice);
                 lDetCustLedgInvoice.SetRange("Entry Type", lDetCustLedgInvoice."Entry Type"::Application);
                 If lDetCustLedgInvoice.FindFirst() then begin
-                                                            repeat
-                                                                IF lCustLedgInvoice.Get(lDetCustLedgInvoice."Cust. Ledger Entry No.") then begin
-                                                                    lInvoicesNo := lInvoicesNo + lCustLedgInvoice."Document No." + '-';
-                                                                    InvoicesTotal3 += lDetCustLedgInvoice."Amount (LCY)" * (-1);
-                                                                end;
-                                                            until lDetCustLedgInvoice.Next = 0;
+                    repeat
+                        IF lCustLedgInvoice.Get(lDetCustLedgInvoice."Cust. Ledger Entry No.") then begin
+                            lInvoicesNo := lInvoicesNo + lCustLedgInvoice."Document No." + '-';
+                            InvoicesTotal3 += lDetCustLedgInvoice."Amount (LCY)" * (-1);
+                        end;
+                    until lDetCustLedgInvoice.Next = 0;
 
                     lInvoicesNo := CopyStr(lInvoicesNo, 1, StrLen(lInvoicesNo) - 1) + StrSubstNo(lText001, Round(InvoicesTotal3, 0.001, '>'), lDetCustLedgEntry."Currency Code");
 
