@@ -11,6 +11,115 @@
       <rd:DataSourceID>03f49786-81bc-43de-bda3-97e9a971bfba</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="GLFilter">
+          <DataField>GLFilter</DataField>
+        </Field>
+        <Field Name="CompanyInfoName">
+          <DataField>CompanyInfoName</DataField>
+        </Field>
+        <Field Name="FromDate">
+          <DataField>FromDate</DataField>
+        </Field>
+        <Field Name="ToDate">
+          <DataField>ToDate</DataField>
+        </Field>
+        <Field Name="SalesPersonManFilter">
+          <DataField>SalesPersonManFilter</DataField>
+        </Field>
+        <Field Name="CustomerFilter">
+          <DataField>CustomerFilter</DataField>
+        </Field>
+        <Field Name="CustNo">
+          <DataField>CustNo</DataField>
+        </Field>
+        <Field Name="CustName">
+          <DataField>CustName</DataField>
+        </Field>
+        <Field Name="SalespersonInv">
+          <DataField>SalespersonInv</DataField>
+        </Field>
+        <Field Name="PaymentTermeCustomer">
+          <DataField>PaymentTermeCustomer</DataField>
+        </Field>
+        <Field Name="Credit_Limit_LCY_Blocked_">
+          <DataField>Credit_Limit_LCY_Blocked_</DataField>
+        </Field>
+        <Field Name="Credit_Limit_LCY_Blocked_Format">
+          <DataField>Credit_Limit_LCY_Blocked_Format</DataField>
+        </Field>
+        <Field Name="Credit_Limit__LCY_">
+          <DataField>Credit_Limit__LCY_</DataField>
+        </Field>
+        <Field Name="Credit_Limit__LCY_Format">
+          <DataField>Credit_Limit__LCY_Format</DataField>
+        </Field>
+        <Field Name="PrviousBalance">
+          <DataField>PrviousBalance</DataField>
+        </Field>
+        <Field Name="PrviousBalanceFormat">
+          <DataField>PrviousBalanceFormat</DataField>
+        </Field>
+        <Field Name="InvoiceAndCrdMemo">
+          <DataField>InvoiceAndCrdMemo</DataField>
+        </Field>
+        <Field Name="InvoiceAndCrdMemoFormat">
+          <DataField>InvoiceAndCrdMemoFormat</DataField>
+        </Field>
+        <Field Name="ShippedNotInvoiced">
+          <DataField>ShippedNotInvoiced</DataField>
+        </Field>
+        <Field Name="ShippedNotInvoicedFormat">
+          <DataField>ShippedNotInvoicedFormat</DataField>
+        </Field>
+        <Field Name="ReturnedNotInvoiced">
+          <DataField>ReturnedNotInvoiced</DataField>
+        </Field>
+        <Field Name="ReturnedNotInvoicedFormat">
+          <DataField>ReturnedNotInvoicedFormat</DataField>
+        </Field>
+        <Field Name="Payment">
+          <DataField>Payment</DataField>
+        </Field>
+        <Field Name="PaymentFormat">
+          <DataField>PaymentFormat</DataField>
+        </Field>
+        <Field Name="Impaid">
+          <DataField>Impaid</DataField>
+        </Field>
+        <Field Name="ImpaidFormat">
+          <DataField>ImpaidFormat</DataField>
+        </Field>
+        <Field Name="TotalChqAndTrtByManager">
+          <DataField>TotalChqAndTrtByManager</DataField>
+        </Field>
+        <Field Name="TotalChqAndTrtByManagerFormat">
+          <DataField>TotalChqAndTrtByManagerFormat</DataField>
+        </Field>
+        <Field Name="CashByManager">
+          <DataField>CashByManager</DataField>
+        </Field>
+        <Field Name="CashByManagerFormat">
+          <DataField>CashByManagerFormat</DataField>
+        </Field>
+        <Field Name="ChqAndTrtWaitToEncaise">
+          <DataField>ChqAndTrtWaitToEncaise</DataField>
+        </Field>
+        <Field Name="ChqAndTrtWaitToEncaiseFormat">
+          <DataField>ChqAndTrtWaitToEncaiseFormat</DataField>
+        </Field>
+        <Field Name="LineNo">
+          <DataField>LineNo</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -3048,7 +3157,7 @@
       <Width>42.62925cm</Width>
       <Page>
         <PageHeader>
-          <Height>3.87851cm</Height>
+          <Height>2.86251cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -3069,8 +3178,8 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <Top>1.27cm</Top>
-              <Height>0.846cm</Height>
+              <Top>0.41275cm</Top>
+              <Height>0.48146cm</Height>
               <Width>10.9925cm</Width>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
@@ -3080,7 +3189,6 @@
               <Source>Embedded</Source>
               <Value>téléchargement</Value>
               <Sizing>FitProportional</Sizing>
-              <Top>0.13511cm</Top>
               <Left>37.72558cm</Left>
               <Height>0.60439cm</Height>
               <Width>4.90367cm</Width>
@@ -3109,9 +3217,9 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.33889cm</Top>
+              <Top>0.9332cm</Top>
               <Left>39.47925cm</Left>
-              <Height>0.423cm</Height>
+              <Height>0.28189cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
@@ -3137,9 +3245,9 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.91589cm</Top>
+              <Top>0.59839cm</Top>
               <Left>39.47925cm</Left>
-              <Height>0.423cm</Height>
+              <Height>0.31717cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
@@ -3165,9 +3273,9 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.76189cm</Top>
+              <Top>1.23272cm</Top>
               <Left>39.47925cm</Left>
-              <Height>0.423cm</Height>
+              <Height>0.27254cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
@@ -3192,9 +3300,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>2.19614cm</Top>
+              <Top>0.92614cm</Top>
               <Height>0.37775cm</Height>
-              <Width>10.90529cm</Width>
+              <Width>10.98264cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -3224,9 +3332,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>2.64445cm</Top>
+              <Top>1.3427cm</Top>
               <Height>0.35306cm</Height>
-              <Width>10.90529cm</Width>
+              <Width>10.98264cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -3256,8 +3364,8 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <Top>0.31817cm</Top>
-              <Height>0.846cm</Height>
+              <Top>0.00067cm</Top>
+              <Height>0.37563cm</Height>
               <Width>10.9925cm</Width>
               <ZIndex>7</ZIndex>
               <Style>
@@ -3282,10 +3390,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>3.07714cm</Top>
+              <Top>1.73104cm</Top>
               <Left>0.00986cm</Left>
-              <Height>0.38833cm</Height>
-              <Width>10.90529cm</Width>
+              <Height>0.36918cm</Height>
+              <Width>10.98264cm</Width>
               <ZIndex>8</ZIndex>
               <Style>
                 <Border>
@@ -3315,10 +3423,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>3.52545cm</Top>
-              <Left>0.00986cm</Left>
+              <Top>2.12845cm</Top>
+              <Left>0cm</Left>
               <Height>0.35306cm</Height>
-              <Width>10.90529cm</Width>
+              <Width>10.98264cm</Width>
               <ZIndex>9</ZIndex>
               <Style>
                 <Border>
@@ -3344,6 +3452,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -3401,113 +3515,4 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>047c20f4-3bb7-404b-af51-297fa770694c</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="GLFilter">
-          <DataField>GLFilter</DataField>
-        </Field>
-        <Field Name="CompanyInfoName">
-          <DataField>CompanyInfoName</DataField>
-        </Field>
-        <Field Name="FromDate">
-          <DataField>FromDate</DataField>
-        </Field>
-        <Field Name="ToDate">
-          <DataField>ToDate</DataField>
-        </Field>
-        <Field Name="SalesPersonManFilter">
-          <DataField>SalesPersonManFilter</DataField>
-        </Field>
-        <Field Name="CustomerFilter">
-          <DataField>CustomerFilter</DataField>
-        </Field>
-        <Field Name="CustNo">
-          <DataField>CustNo</DataField>
-        </Field>
-        <Field Name="CustName">
-          <DataField>CustName</DataField>
-        </Field>
-        <Field Name="SalespersonInv">
-          <DataField>SalespersonInv</DataField>
-        </Field>
-        <Field Name="PaymentTermeCustomer">
-          <DataField>PaymentTermeCustomer</DataField>
-        </Field>
-        <Field Name="Credit_Limit_LCY_Blocked_">
-          <DataField>Credit_Limit_LCY_Blocked_</DataField>
-        </Field>
-        <Field Name="Credit_Limit_LCY_Blocked_Format">
-          <DataField>Credit_Limit_LCY_Blocked_Format</DataField>
-        </Field>
-        <Field Name="Credit_Limit__LCY_">
-          <DataField>Credit_Limit__LCY_</DataField>
-        </Field>
-        <Field Name="Credit_Limit__LCY_Format">
-          <DataField>Credit_Limit__LCY_Format</DataField>
-        </Field>
-        <Field Name="PrviousBalance">
-          <DataField>PrviousBalance</DataField>
-        </Field>
-        <Field Name="PrviousBalanceFormat">
-          <DataField>PrviousBalanceFormat</DataField>
-        </Field>
-        <Field Name="InvoiceAndCrdMemo">
-          <DataField>InvoiceAndCrdMemo</DataField>
-        </Field>
-        <Field Name="InvoiceAndCrdMemoFormat">
-          <DataField>InvoiceAndCrdMemoFormat</DataField>
-        </Field>
-        <Field Name="ShippedNotInvoiced">
-          <DataField>ShippedNotInvoiced</DataField>
-        </Field>
-        <Field Name="ShippedNotInvoicedFormat">
-          <DataField>ShippedNotInvoicedFormat</DataField>
-        </Field>
-        <Field Name="ReturnedNotInvoiced">
-          <DataField>ReturnedNotInvoiced</DataField>
-        </Field>
-        <Field Name="ReturnedNotInvoicedFormat">
-          <DataField>ReturnedNotInvoicedFormat</DataField>
-        </Field>
-        <Field Name="Payment">
-          <DataField>Payment</DataField>
-        </Field>
-        <Field Name="PaymentFormat">
-          <DataField>PaymentFormat</DataField>
-        </Field>
-        <Field Name="Impaid">
-          <DataField>Impaid</DataField>
-        </Field>
-        <Field Name="ImpaidFormat">
-          <DataField>ImpaidFormat</DataField>
-        </Field>
-        <Field Name="TotalChqAndTrtByManager">
-          <DataField>TotalChqAndTrtByManager</DataField>
-        </Field>
-        <Field Name="TotalChqAndTrtByManagerFormat">
-          <DataField>TotalChqAndTrtByManagerFormat</DataField>
-        </Field>
-        <Field Name="CashByManager">
-          <DataField>CashByManager</DataField>
-        </Field>
-        <Field Name="CashByManagerFormat">
-          <DataField>CashByManagerFormat</DataField>
-        </Field>
-        <Field Name="ChqAndTrtWaitToEncaise">
-          <DataField>ChqAndTrtWaitToEncaise</DataField>
-        </Field>
-        <Field Name="ChqAndTrtWaitToEncaiseFormat">
-          <DataField>ChqAndTrtWaitToEncaiseFormat</DataField>
-        </Field>
-        <Field Name="LineNo">
-          <DataField>LineNo</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>
