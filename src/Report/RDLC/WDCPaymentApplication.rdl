@@ -11,6 +11,121 @@
       <rd:DataSourceID>03f49786-81bc-43de-bda3-97e9a971bfba</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="CustomerNo">
+          <DataField>CustomerNo</DataField>
+        </Field>
+        <Field Name="CustName">
+          <DataField>CustName</DataField>
+        </Field>
+        <Field Name="TotalCHQ_TRT">
+          <DataField>TotalCHQ_TRT</DataField>
+        </Field>
+        <Field Name="TotalCHQ_TRTFormat">
+          <DataField>TotalCHQ_TRTFormat</DataField>
+        </Field>
+        <Field Name="TotalPayment">
+          <DataField>TotalPayment</DataField>
+        </Field>
+        <Field Name="TotalPaymentFormat">
+          <DataField>TotalPaymentFormat</DataField>
+        </Field>
+        <Field Name="TotalBycustomer">
+          <DataField>TotalBycustomer</DataField>
+        </Field>
+        <Field Name="TotalBycustomerFormat">
+          <DataField>TotalBycustomerFormat</DataField>
+        </Field>
+        <Field Name="GLFilter">
+          <DataField>GLFilter</DataField>
+        </Field>
+        <Field Name="Posting_Date_GLEntry">
+          <DataField>Posting_Date_GLEntry</DataField>
+        </Field>
+        <Field Name="SalesPersonPayment">
+          <DataField>SalesPersonPayment</DataField>
+        </Field>
+        <Field Name="Payment_Type_GLEnty">
+          <DataField>Payment_Type_GLEnty</DataField>
+        </Field>
+        <Field Name="ChequeNo_CustLedg">
+          <DataField>ChequeNo_CustLedg</DataField>
+        </Field>
+        <Field Name="PaymentAmountLCY_CustLedg">
+          <DataField>PaymentAmountLCY_CustLedg</DataField>
+        </Field>
+        <Field Name="PaymentAmountLCY_CustLedgFormat">
+          <DataField>PaymentAmountLCY_CustLedgFormat</DataField>
+        </Field>
+        <Field Name="InvoiceNo">
+          <DataField>InvoiceNo</DataField>
+        </Field>
+        <Field Name="InvoiceAmountLCY_DetCust">
+          <DataField>InvoiceAmountLCY_DetCust</DataField>
+        </Field>
+        <Field Name="InvoiceAmountLCY_DetCustFormat">
+          <DataField>InvoiceAmountLCY_DetCustFormat</DataField>
+        </Field>
+        <Field Name="GetItemCategory">
+          <DataField>GetItemCategory</DataField>
+        </Field>
+        <Field Name="SalespersonInvoice">
+          <DataField>SalespersonInvoice</DataField>
+        </Field>
+        <Field Name="PostingDate2">
+          <DataField>PostingDate2</DataField>
+        </Field>
+        <Field Name="SalespersonPayment1">
+          <DataField>SalespersonPayment1</DataField>
+        </Field>
+        <Field Name="PaymentAmount2">
+          <DataField>PaymentAmount2</DataField>
+        </Field>
+        <Field Name="PaymentAmount2Format">
+          <DataField>PaymentAmount2Format</DataField>
+        </Field>
+        <Field Name="DocumentType_CustLedg2">
+          <DataField>DocumentType_CustLedg2</DataField>
+        </Field>
+        <Field Name="DocumentNo_CustLedg2">
+          <DataField>DocumentNo_CustLedg2</DataField>
+        </Field>
+        <Field Name="salesPersonPayment2">
+          <DataField>salesPersonPayment2</DataField>
+        </Field>
+        <Field Name="InvoiceNo3">
+          <DataField>InvoiceNo3</DataField>
+        </Field>
+        <Field Name="InvoicesTotal3">
+          <DataField>InvoicesTotal3</DataField>
+        </Field>
+        <Field Name="InvoicesTotal3Format">
+          <DataField>InvoicesTotal3Format</DataField>
+        </Field>
+        <Field Name="InvoiceNo2">
+          <DataField>InvoiceNo2</DataField>
+        </Field>
+        <Field Name="GetItemCategory2">
+          <DataField>GetItemCategory2</DataField>
+        </Field>
+        <Field Name="InvoiceAmountLCY2">
+          <DataField>InvoiceAmountLCY2</DataField>
+        </Field>
+        <Field Name="InvoiceAmountLCY2Format">
+          <DataField>InvoiceAmountLCY2Format</DataField>
+        </Field>
+        <Field Name="SalespersonInvoice2">
+          <DataField>SalespersonInvoice2</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1320,145 +1435,12 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <ColSpan>4</ColSpan>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox56">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=(Sum(Fields!InvoiceAmountLCY_DetCust.Value ) + Sum( Fields!InvoiceAmountLCY2.Value) )*(-1)</Value>
-                                  <Style>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox49</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox15">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox15</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox16">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox16</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox40">
@@ -2310,7 +2292,7 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
                                             <TablixMember />
                                           </TablixMembers>
                                           <Visibility>
-                                            <Hidden>true</Hidden>
+                                            <Hidden>=(Format(Fields!PostingDate2.Value)="") And  (Format(Fields!Posting_Date_GLEntry.Value)="")</Hidden>
                                           </Visibility>
                                           <KeepWithGroup>Before</KeepWithGroup>
                                         </TablixMember>
@@ -2482,15 +2464,12 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
                           </TablixMembers>
                         </TablixMember>
                       </TablixMembers>
-                      <Visibility>
-                        <Hidden>true</Hidden>
-                      </Visibility>
                     </TablixMember>
                   </TablixMembers>
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.1825cm</Size>
+                    <Size>7.64111cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox51">
                         <CanGrow>true</CanGrow>
@@ -2499,7 +2478,7 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Total:</Value>
+                                <Value>Total Customers</Value>
                                 <Style>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
@@ -2527,27 +2506,26 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>2.48236cm</Size>
+                        <Size>3.03389cm</Size>
                         <CellContents>
-                          <Textbox Name="Textbox2">
+                          <Textbox Name="Textbox55">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value />
+                                    <Value>=Last(Fields!TotalBycustomer.Value, "DataSet_Result")</Value>
                                     <Style>
                                       <FontWeight>Bold</FontWeight>
+                                      <Format>#,0.000;-#,0.000;''</Format>
                                     </Style>
                                   </TextRun>
                                 </TextRuns>
-                                <Style>
-                                  <TextAlign>Left</TextAlign>
-                                </Style>
+                                <Style />
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>Textbox2</rd:DefaultName>
+                            <rd:DefaultName>Textbox55</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>Solid</Style>
@@ -2564,9 +2542,9 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>2.97625cm</Size>
+                            <Size>4.2298cm</Size>
                             <CellContents>
-                              <Textbox Name="Textbox19">
+                              <Textbox Name="Textbox71">
                                 <CanGrow>true</CanGrow>
                                 <KeepTogether>true</KeepTogether>
                                 <Paragraphs>
@@ -2576,16 +2554,13 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
                                         <Value />
                                         <Style>
                                           <FontWeight>Bold</FontWeight>
-                                          <Color>Blue</Color>
                                         </Style>
                                       </TextRun>
                                     </TextRuns>
-                                    <Style>
-                                      <TextAlign>Left</TextAlign>
-                                    </Style>
+                                    <Style />
                                   </Paragraph>
                                 </Paragraphs>
-                                <rd:DefaultName>Textbox19</rd:DefaultName>
+                                <rd:DefaultName>Textbox71</rd:DefaultName>
                                 <Style>
                                   <Border>
                                     <Style>Solid</Style>
@@ -2600,90 +2575,15 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
                             </CellContents>
                           </TablixHeader>
                           <TablixMembers>
-                            <TablixMember>
-                              <TablixHeader>
-                                <Size>3.03389cm</Size>
-                                <CellContents>
-                                  <Textbox Name="Textbox22">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value>=Sum(Fields!TotalPayment.Value) + Sum(Fields!TotalCHQ_TRT.Value)</Value>
-                                            <Style>
-                                              <FontWeight>Bold</FontWeight>
-                                              <Format>#,0.000;-#,0.000;''</Format>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style>
-                                          <TextAlign>Right</TextAlign>
-                                        </Style>
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Style>Solid</Style>
-                                      </Border>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                  <rd:Selected>true</rd:Selected>
-                                </CellContents>
-                              </TablixHeader>
-                              <TablixMembers>
-                                <TablixMember>
-                                  <TablixHeader>
-                                    <Size>4.2298cm</Size>
-                                    <CellContents>
-                                      <Textbox Name="Textbox71">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value />
-                                                <Style>
-                                                  <FontWeight>Bold</FontWeight>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style />
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>Textbox71</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>Solid</Style>
-                                          </Border>
-                                          <VerticalAlign>Middle</VerticalAlign>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixHeader>
-                                  <TablixMembers>
-                                    <TablixMember />
-                                  </TablixMembers>
-                                </TablixMember>
-                              </TablixMembers>
-                            </TablixMember>
+                            <TablixMember />
                           </TablixMembers>
                         </TablixMember>
                       </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
+                  <Visibility>
+                    <Hidden>true</Hidden>
+                  </Visibility>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
@@ -2899,6 +2799,12 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -2956,119 +2862,4 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>047c20f4-3bb7-404b-af51-297fa770694c</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="CustomerNo">
-          <DataField>CustomerNo</DataField>
-        </Field>
-        <Field Name="CustName">
-          <DataField>CustName</DataField>
-        </Field>
-        <Field Name="TotalCHQ_TRT">
-          <DataField>TotalCHQ_TRT</DataField>
-        </Field>
-        <Field Name="TotalCHQ_TRTFormat">
-          <DataField>TotalCHQ_TRTFormat</DataField>
-        </Field>
-        <Field Name="TotalPayment">
-          <DataField>TotalPayment</DataField>
-        </Field>
-        <Field Name="TotalPaymentFormat">
-          <DataField>TotalPaymentFormat</DataField>
-        </Field>
-        <Field Name="TotalBycustomer">
-          <DataField>TotalBycustomer</DataField>
-        </Field>
-        <Field Name="TotalBycustomerFormat">
-          <DataField>TotalBycustomerFormat</DataField>
-        </Field>
-        <Field Name="GLFilter">
-          <DataField>GLFilter</DataField>
-        </Field>
-        <Field Name="Posting_Date_GLEntry">
-          <DataField>Posting_Date_GLEntry</DataField>
-        </Field>
-        <Field Name="SalesPersonPayment">
-          <DataField>SalesPersonPayment</DataField>
-        </Field>
-        <Field Name="Payment_Type_GLEnty">
-          <DataField>Payment_Type_GLEnty</DataField>
-        </Field>
-        <Field Name="ChequeNo_CustLedg">
-          <DataField>ChequeNo_CustLedg</DataField>
-        </Field>
-        <Field Name="PaymentAmountLCY_CustLedg">
-          <DataField>PaymentAmountLCY_CustLedg</DataField>
-        </Field>
-        <Field Name="PaymentAmountLCY_CustLedgFormat">
-          <DataField>PaymentAmountLCY_CustLedgFormat</DataField>
-        </Field>
-        <Field Name="InvoiceNo">
-          <DataField>InvoiceNo</DataField>
-        </Field>
-        <Field Name="InvoiceAmountLCY_DetCust">
-          <DataField>InvoiceAmountLCY_DetCust</DataField>
-        </Field>
-        <Field Name="InvoiceAmountLCY_DetCustFormat">
-          <DataField>InvoiceAmountLCY_DetCustFormat</DataField>
-        </Field>
-        <Field Name="GetItemCategory">
-          <DataField>GetItemCategory</DataField>
-        </Field>
-        <Field Name="SalespersonInvoice">
-          <DataField>SalespersonInvoice</DataField>
-        </Field>
-        <Field Name="PostingDate2">
-          <DataField>PostingDate2</DataField>
-        </Field>
-        <Field Name="SalespersonPayment1">
-          <DataField>SalespersonPayment1</DataField>
-        </Field>
-        <Field Name="PaymentAmount2">
-          <DataField>PaymentAmount2</DataField>
-        </Field>
-        <Field Name="PaymentAmount2Format">
-          <DataField>PaymentAmount2Format</DataField>
-        </Field>
-        <Field Name="DocumentType_CustLedg2">
-          <DataField>DocumentType_CustLedg2</DataField>
-        </Field>
-        <Field Name="DocumentNo_CustLedg2">
-          <DataField>DocumentNo_CustLedg2</DataField>
-        </Field>
-        <Field Name="salesPersonPayment2">
-          <DataField>salesPersonPayment2</DataField>
-        </Field>
-        <Field Name="InvoiceNo3">
-          <DataField>InvoiceNo3</DataField>
-        </Field>
-        <Field Name="InvoicesTotal3">
-          <DataField>InvoicesTotal3</DataField>
-        </Field>
-        <Field Name="InvoicesTotal3Format">
-          <DataField>InvoicesTotal3Format</DataField>
-        </Field>
-        <Field Name="InvoiceNo2">
-          <DataField>InvoiceNo2</DataField>
-        </Field>
-        <Field Name="GetItemCategory2">
-          <DataField>GetItemCategory2</DataField>
-        </Field>
-        <Field Name="InvoiceAmountLCY2">
-          <DataField>InvoiceAmountLCY2</DataField>
-        </Field>
-        <Field Name="InvoiceAmountLCY2Format">
-          <DataField>InvoiceAmountLCY2Format</DataField>
-        </Field>
-        <Field Name="SalespersonInvoice2">
-          <DataField>SalespersonInvoice2</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>
