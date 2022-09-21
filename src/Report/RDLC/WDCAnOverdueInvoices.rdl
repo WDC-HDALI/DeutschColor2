@@ -2644,7 +2644,7 @@
       <Width>27.70675cm</Width>
       <Page>
         <PageHeader>
-          <Height>2.60589cm</Height>
+          <Height>1.21217cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2665,8 +2665,8 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <Top>0.5715cm</Top>
-              <Height>0.49189cm</Height>
+              <Top>0.41275cm</Top>
+              <Height>0.46753cm</Height>
               <Width>10.9925cm</Width>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
@@ -2677,7 +2677,7 @@
               <Value>téléchargement</Value>
               <Sizing>FitProportional</Sizing>
               <Left>22.80308cm</Left>
-              <Height>0.60439cm</Height>
+              <Height>0.76033cm</Height>
               <Width>4.90367cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
@@ -2686,33 +2686,6 @@
                 </Border>
               </Style>
             </Image>
-            <Textbox Name="CurrReport_PAGENOCaption1">
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="Page :  " &amp;Globals!PageNumber &amp; "/" &amp; Globals!TotalPages</Value>
-                      <Style>
-                        <FontFamily>Segoe</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <Top>1.02139cm</Top>
-              <Left>24.55675cm</Left>
-              <Height>0.423cm</Height>
-              <Width>3.15cm</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
             <Textbox Name="ExecutionTimeTextBox">
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -2732,72 +2705,13 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.59839cm</Top>
+              <Top>0.93672cm</Top>
               <Left>24.55675cm</Left>
-              <Height>0.423cm</Height>
+              <Height>0.27545cm</Height>
               <Width>3.15cm</Width>
-              <ZIndex>3</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
-            <Textbox Name="UserIdTextBox">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=User!UserID</Value>
-                      <Style>
-                        <FontFamily>Segoe</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <Top>1.44439cm</Top>
-              <Left>24.55675cm</Left>
-              <Height>0.423cm</Height>
-              <Width>3.15cm</Width>
-              <ZIndex>4</ZIndex>
-              <Style>
-                <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox14">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="Filter : " &amp; First(Fields!GLFilter.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>2.18965cm</Top>
-              <Height>0.41624cm</Height>
-              <Width>15.64662cm</Width>
-              <ZIndex>5</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
             <Textbox Name="Textbox17">
@@ -2807,7 +2721,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="From Date : " &amp; First(Fields!FromDate.Value, "DataSet_Result")</Value>
+                      <Value>="From Date : " &amp; First(Fields!FromDate.Value, "DataSet_Result") &amp; "   " &amp; "To Date     : " &amp; First(Fields!ToDate.Value, "DataSet_Result") &amp; "    " &amp; "Filters : " &amp; First(Fields!GLFilter.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                       </Style>
@@ -2817,41 +2731,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>1.18014cm</Top>
-              <Height>0.38833cm</Height>
-              <Width>3.95204cm</Width>
-              <ZIndex>6</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox18">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="To Date     : " &amp; First(Fields!ToDate.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>1.6602cm</Top>
-              <Height>0.35306cm</Height>
-              <Width>3.95204cm</Width>
-              <ZIndex>7</ZIndex>
+              <Top>0.93672cm</Top>
+              <Height>0.27545cm</Height>
+              <Width>20.64662cm</Width>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2883,7 +2766,7 @@
               <Top>0.00067cm</Top>
               <Height>0.42133cm</Height>
               <Width>10.9925cm</Width>
-              <ZIndex>8</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
               </Style>

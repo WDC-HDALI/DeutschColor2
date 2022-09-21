@@ -11,115 +11,6 @@
       <rd:DataSourceID>03f49786-81bc-43de-bda3-97e9a971bfba</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="GLFilter">
-          <DataField>GLFilter</DataField>
-        </Field>
-        <Field Name="CompanyInfoName">
-          <DataField>CompanyInfoName</DataField>
-        </Field>
-        <Field Name="FromDate">
-          <DataField>FromDate</DataField>
-        </Field>
-        <Field Name="ToDate">
-          <DataField>ToDate</DataField>
-        </Field>
-        <Field Name="SalesPersonManFilter">
-          <DataField>SalesPersonManFilter</DataField>
-        </Field>
-        <Field Name="CustomerFilter">
-          <DataField>CustomerFilter</DataField>
-        </Field>
-        <Field Name="CustNo">
-          <DataField>CustNo</DataField>
-        </Field>
-        <Field Name="CustName">
-          <DataField>CustName</DataField>
-        </Field>
-        <Field Name="SalespersonInv">
-          <DataField>SalespersonInv</DataField>
-        </Field>
-        <Field Name="PaymentTermeCustomer">
-          <DataField>PaymentTermeCustomer</DataField>
-        </Field>
-        <Field Name="Credit_Limit_LCY_Blocked_">
-          <DataField>Credit_Limit_LCY_Blocked_</DataField>
-        </Field>
-        <Field Name="Credit_Limit_LCY_Blocked_Format">
-          <DataField>Credit_Limit_LCY_Blocked_Format</DataField>
-        </Field>
-        <Field Name="Credit_Limit__LCY_">
-          <DataField>Credit_Limit__LCY_</DataField>
-        </Field>
-        <Field Name="Credit_Limit__LCY_Format">
-          <DataField>Credit_Limit__LCY_Format</DataField>
-        </Field>
-        <Field Name="PrviousBalance">
-          <DataField>PrviousBalance</DataField>
-        </Field>
-        <Field Name="PrviousBalanceFormat">
-          <DataField>PrviousBalanceFormat</DataField>
-        </Field>
-        <Field Name="InvoiceAndCrdMemo">
-          <DataField>InvoiceAndCrdMemo</DataField>
-        </Field>
-        <Field Name="InvoiceAndCrdMemoFormat">
-          <DataField>InvoiceAndCrdMemoFormat</DataField>
-        </Field>
-        <Field Name="ShippedNotInvoiced">
-          <DataField>ShippedNotInvoiced</DataField>
-        </Field>
-        <Field Name="ShippedNotInvoicedFormat">
-          <DataField>ShippedNotInvoicedFormat</DataField>
-        </Field>
-        <Field Name="ReturnedNotInvoiced">
-          <DataField>ReturnedNotInvoiced</DataField>
-        </Field>
-        <Field Name="ReturnedNotInvoicedFormat">
-          <DataField>ReturnedNotInvoicedFormat</DataField>
-        </Field>
-        <Field Name="Payment">
-          <DataField>Payment</DataField>
-        </Field>
-        <Field Name="PaymentFormat">
-          <DataField>PaymentFormat</DataField>
-        </Field>
-        <Field Name="Impaid">
-          <DataField>Impaid</DataField>
-        </Field>
-        <Field Name="ImpaidFormat">
-          <DataField>ImpaidFormat</DataField>
-        </Field>
-        <Field Name="TotalChqAndTrtByManager">
-          <DataField>TotalChqAndTrtByManager</DataField>
-        </Field>
-        <Field Name="TotalChqAndTrtByManagerFormat">
-          <DataField>TotalChqAndTrtByManagerFormat</DataField>
-        </Field>
-        <Field Name="CashByManager">
-          <DataField>CashByManager</DataField>
-        </Field>
-        <Field Name="CashByManagerFormat">
-          <DataField>CashByManagerFormat</DataField>
-        </Field>
-        <Field Name="ChqAndTrtWaitToEncaise">
-          <DataField>ChqAndTrtWaitToEncaise</DataField>
-        </Field>
-        <Field Name="ChqAndTrtWaitToEncaiseFormat">
-          <DataField>ChqAndTrtWaitToEncaiseFormat</DataField>
-        </Field>
-        <Field Name="LineNo">
-          <DataField>LineNo</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -3157,7 +3048,7 @@
       <Width>42.62925cm</Width>
       <Page>
         <PageHeader>
-          <Height>2.86251cm</Height>
+          <Height>1.50526cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -3289,7 +3180,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="From Date : " &amp; First(Fields!FromDate.Value, "DataSet_Result")</Value>
+                      <Value>="From Date : " &amp; First(Fields!FromDate.Value, "DataSet_Result") &amp; "  " &amp; "To Date     : " &amp; First(Fields!ToDate.Value, "DataSet_Result") &amp; "   " &amp; "Customer No. Filter : " &amp; First(Fields!CustomerFilter.Value, "DataSet_Result") &amp; "   " &amp; "Salesperson Filter : " &amp; First(Fields!SalesPersonManFilter.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -3301,41 +3192,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
               <Top>0.92614cm</Top>
-              <Height>0.37775cm</Height>
-              <Width>10.98264cm</Width>
+              <Height>0.4095cm</Height>
+              <Width>23.61208cm</Width>
               <ZIndex>5</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox18">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="To Date     : " &amp; First(Fields!ToDate.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>1.3427cm</Top>
-              <Height>0.35306cm</Height>
-              <Width>10.98264cm</Width>
-              <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -3367,75 +3226,9 @@
               <Top>0.00067cm</Top>
               <Height>0.37563cm</Height>
               <Width>10.9925cm</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>6</ZIndex>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox20">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="Customer No. Filter : " &amp; First(Fields!CustomerFilter.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>1.73104cm</Top>
-              <Left>0.00986cm</Left>
-              <Height>0.36918cm</Height>
-              <Width>10.98264cm</Width>
-              <ZIndex>8</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox22">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="Salesperson Filter : " &amp; First(Fields!SalesPersonManFilter.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>2.12845cm</Top>
-              <Left>0cm</Left>
-              <Height>0.35306cm</Height>
-              <Width>10.98264cm</Width>
-              <ZIndex>9</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
           </ReportItems>
@@ -3452,12 +3245,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -3515,4 +3302,113 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>047c20f4-3bb7-404b-af51-297fa770694c</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="GLFilter">
+          <DataField>GLFilter</DataField>
+        </Field>
+        <Field Name="CompanyInfoName">
+          <DataField>CompanyInfoName</DataField>
+        </Field>
+        <Field Name="FromDate">
+          <DataField>FromDate</DataField>
+        </Field>
+        <Field Name="ToDate">
+          <DataField>ToDate</DataField>
+        </Field>
+        <Field Name="SalesPersonManFilter">
+          <DataField>SalesPersonManFilter</DataField>
+        </Field>
+        <Field Name="CustomerFilter">
+          <DataField>CustomerFilter</DataField>
+        </Field>
+        <Field Name="CustNo">
+          <DataField>CustNo</DataField>
+        </Field>
+        <Field Name="CustName">
+          <DataField>CustName</DataField>
+        </Field>
+        <Field Name="SalespersonInv">
+          <DataField>SalespersonInv</DataField>
+        </Field>
+        <Field Name="PaymentTermeCustomer">
+          <DataField>PaymentTermeCustomer</DataField>
+        </Field>
+        <Field Name="Credit_Limit_LCY_Blocked_">
+          <DataField>Credit_Limit_LCY_Blocked_</DataField>
+        </Field>
+        <Field Name="Credit_Limit_LCY_Blocked_Format">
+          <DataField>Credit_Limit_LCY_Blocked_Format</DataField>
+        </Field>
+        <Field Name="Credit_Limit__LCY_">
+          <DataField>Credit_Limit__LCY_</DataField>
+        </Field>
+        <Field Name="Credit_Limit__LCY_Format">
+          <DataField>Credit_Limit__LCY_Format</DataField>
+        </Field>
+        <Field Name="PrviousBalance">
+          <DataField>PrviousBalance</DataField>
+        </Field>
+        <Field Name="PrviousBalanceFormat">
+          <DataField>PrviousBalanceFormat</DataField>
+        </Field>
+        <Field Name="InvoiceAndCrdMemo">
+          <DataField>InvoiceAndCrdMemo</DataField>
+        </Field>
+        <Field Name="InvoiceAndCrdMemoFormat">
+          <DataField>InvoiceAndCrdMemoFormat</DataField>
+        </Field>
+        <Field Name="ShippedNotInvoiced">
+          <DataField>ShippedNotInvoiced</DataField>
+        </Field>
+        <Field Name="ShippedNotInvoicedFormat">
+          <DataField>ShippedNotInvoicedFormat</DataField>
+        </Field>
+        <Field Name="ReturnedNotInvoiced">
+          <DataField>ReturnedNotInvoiced</DataField>
+        </Field>
+        <Field Name="ReturnedNotInvoicedFormat">
+          <DataField>ReturnedNotInvoicedFormat</DataField>
+        </Field>
+        <Field Name="Payment">
+          <DataField>Payment</DataField>
+        </Field>
+        <Field Name="PaymentFormat">
+          <DataField>PaymentFormat</DataField>
+        </Field>
+        <Field Name="Impaid">
+          <DataField>Impaid</DataField>
+        </Field>
+        <Field Name="ImpaidFormat">
+          <DataField>ImpaidFormat</DataField>
+        </Field>
+        <Field Name="TotalChqAndTrtByManager">
+          <DataField>TotalChqAndTrtByManager</DataField>
+        </Field>
+        <Field Name="TotalChqAndTrtByManagerFormat">
+          <DataField>TotalChqAndTrtByManagerFormat</DataField>
+        </Field>
+        <Field Name="CashByManager">
+          <DataField>CashByManager</DataField>
+        </Field>
+        <Field Name="CashByManagerFormat">
+          <DataField>CashByManagerFormat</DataField>
+        </Field>
+        <Field Name="ChqAndTrtWaitToEncaise">
+          <DataField>ChqAndTrtWaitToEncaise</DataField>
+        </Field>
+        <Field Name="ChqAndTrtWaitToEncaiseFormat">
+          <DataField>ChqAndTrtWaitToEncaiseFormat</DataField>
+        </Field>
+        <Field Name="LineNo">
+          <DataField>LineNo</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
