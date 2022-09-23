@@ -1489,7 +1489,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value+Fields!Payment.Value+Fields!Impaid.Value</Value>
+                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value -Fields!Payment.Value+Fields!Impaid.Value</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -1613,7 +1613,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value+Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
+                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -3048,7 +3048,7 @@
       <Width>42.62925cm</Width>
       <Page>
         <PageHeader>
-          <Height>1.50526cm</Height>
+          <Height>1.33564cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -3108,9 +3108,9 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.9332cm</Top>
+              <Top>0.86264cm</Top>
               <Left>39.47925cm</Left>
-              <Height>0.28189cm</Height>
+              <Height>0.20136cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
@@ -3138,37 +3138,9 @@
               </Paragraphs>
               <Top>0.59839cm</Top>
               <Left>39.47925cm</Left>
-              <Height>0.31717cm</Height>
+              <Height>0.22898cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>3</ZIndex>
-              <Style>
-                <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
-            <Textbox Name="UserIdTextBox">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=User!UserID</Value>
-                      <Style>
-                        <FontFamily>Segoe</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <Top>1.23272cm</Top>
-              <Left>39.47925cm</Left>
-              <Height>0.27254cm</Height>
-              <Width>3.15cm</Width>
-              <ZIndex>4</ZIndex>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
               </Style>
@@ -3194,7 +3166,7 @@
               <Top>0.92614cm</Top>
               <Height>0.4095cm</Height>
               <Width>23.61208cm</Width>
-              <ZIndex>5</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -3226,7 +3198,7 @@
               <Top>0.00067cm</Top>
               <Height>0.37563cm</Height>
               <Width>10.9925cm</Width>
-              <ZIndex>6</ZIndex>
+              <ZIndex>5</ZIndex>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
               </Style>

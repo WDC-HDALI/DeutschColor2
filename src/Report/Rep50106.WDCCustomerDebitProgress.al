@@ -271,8 +271,8 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-006*', 'CH-006', 'TRT-007*', 'CH-007');
         if lCustLedgEnt.FindFirst() Then
             repeat
-                lCustLedgEnt.CalcFields("Amount (LCY)");
-                lTotImpaid += lCustLedgEnt."Amount (LCY)";
+                lCustLedgEnt.CalcFields("Remaining Amt. (LCY)");
+                lTotImpaid += lCustLedgEnt."Remaining Amt. (LCY)";
             until lCustLedgEnt.Next() = 0;
         exit(lTotImpaid * -1);
     end;

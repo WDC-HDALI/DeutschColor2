@@ -11,121 +11,6 @@
       <rd:DataSourceID>03f49786-81bc-43de-bda3-97e9a971bfba</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CustomerNo">
-          <DataField>CustomerNo</DataField>
-        </Field>
-        <Field Name="CustName">
-          <DataField>CustName</DataField>
-        </Field>
-        <Field Name="TotalCHQ_TRT">
-          <DataField>TotalCHQ_TRT</DataField>
-        </Field>
-        <Field Name="TotalCHQ_TRTFormat">
-          <DataField>TotalCHQ_TRTFormat</DataField>
-        </Field>
-        <Field Name="TotalPayment">
-          <DataField>TotalPayment</DataField>
-        </Field>
-        <Field Name="TotalPaymentFormat">
-          <DataField>TotalPaymentFormat</DataField>
-        </Field>
-        <Field Name="TotalBycustomer">
-          <DataField>TotalBycustomer</DataField>
-        </Field>
-        <Field Name="TotalBycustomerFormat">
-          <DataField>TotalBycustomerFormat</DataField>
-        </Field>
-        <Field Name="GLFilter">
-          <DataField>GLFilter</DataField>
-        </Field>
-        <Field Name="Posting_Date_GLEntry">
-          <DataField>Posting_Date_GLEntry</DataField>
-        </Field>
-        <Field Name="SalesPersonPayment">
-          <DataField>SalesPersonPayment</DataField>
-        </Field>
-        <Field Name="Payment_Type_GLEnty">
-          <DataField>Payment_Type_GLEnty</DataField>
-        </Field>
-        <Field Name="ChequeNo_CustLedg">
-          <DataField>ChequeNo_CustLedg</DataField>
-        </Field>
-        <Field Name="PaymentAmountLCY_CustLedg">
-          <DataField>PaymentAmountLCY_CustLedg</DataField>
-        </Field>
-        <Field Name="PaymentAmountLCY_CustLedgFormat">
-          <DataField>PaymentAmountLCY_CustLedgFormat</DataField>
-        </Field>
-        <Field Name="InvoiceNo">
-          <DataField>InvoiceNo</DataField>
-        </Field>
-        <Field Name="InvoiceAmountLCY_DetCust">
-          <DataField>InvoiceAmountLCY_DetCust</DataField>
-        </Field>
-        <Field Name="InvoiceAmountLCY_DetCustFormat">
-          <DataField>InvoiceAmountLCY_DetCustFormat</DataField>
-        </Field>
-        <Field Name="GetItemCategory">
-          <DataField>GetItemCategory</DataField>
-        </Field>
-        <Field Name="SalespersonInvoice">
-          <DataField>SalespersonInvoice</DataField>
-        </Field>
-        <Field Name="PostingDate2">
-          <DataField>PostingDate2</DataField>
-        </Field>
-        <Field Name="SalespersonPayment1">
-          <DataField>SalespersonPayment1</DataField>
-        </Field>
-        <Field Name="PaymentAmount2">
-          <DataField>PaymentAmount2</DataField>
-        </Field>
-        <Field Name="PaymentAmount2Format">
-          <DataField>PaymentAmount2Format</DataField>
-        </Field>
-        <Field Name="DocumentType_CustLedg2">
-          <DataField>DocumentType_CustLedg2</DataField>
-        </Field>
-        <Field Name="DocumentNo_CustLedg2">
-          <DataField>DocumentNo_CustLedg2</DataField>
-        </Field>
-        <Field Name="salesPersonPayment2">
-          <DataField>salesPersonPayment2</DataField>
-        </Field>
-        <Field Name="InvoiceNo3">
-          <DataField>InvoiceNo3</DataField>
-        </Field>
-        <Field Name="InvoicesTotal3">
-          <DataField>InvoicesTotal3</DataField>
-        </Field>
-        <Field Name="InvoicesTotal3Format">
-          <DataField>InvoicesTotal3Format</DataField>
-        </Field>
-        <Field Name="InvoiceNo2">
-          <DataField>InvoiceNo2</DataField>
-        </Field>
-        <Field Name="GetItemCategory2">
-          <DataField>GetItemCategory2</DataField>
-        </Field>
-        <Field Name="InvoiceAmountLCY2">
-          <DataField>InvoiceAmountLCY2</DataField>
-        </Field>
-        <Field Name="InvoiceAmountLCY2Format">
-          <DataField>InvoiceAmountLCY2Format</DataField>
-        </Field>
-        <Field Name="SalespersonInvoice2">
-          <DataField>SalespersonInvoice2</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -2799,12 +2684,6 @@ IIF(Fields!DocumentType_CustLedg2.Value&lt;&gt; " " ,Fields!SalespersonPayment1.
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -2862,4 +2741,119 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>047c20f4-3bb7-404b-af51-297fa770694c</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CustomerNo">
+          <DataField>CustomerNo</DataField>
+        </Field>
+        <Field Name="CustName">
+          <DataField>CustName</DataField>
+        </Field>
+        <Field Name="TotalCHQ_TRT">
+          <DataField>TotalCHQ_TRT</DataField>
+        </Field>
+        <Field Name="TotalCHQ_TRTFormat">
+          <DataField>TotalCHQ_TRTFormat</DataField>
+        </Field>
+        <Field Name="TotalPayment">
+          <DataField>TotalPayment</DataField>
+        </Field>
+        <Field Name="TotalPaymentFormat">
+          <DataField>TotalPaymentFormat</DataField>
+        </Field>
+        <Field Name="TotalBycustomer">
+          <DataField>TotalBycustomer</DataField>
+        </Field>
+        <Field Name="TotalBycustomerFormat">
+          <DataField>TotalBycustomerFormat</DataField>
+        </Field>
+        <Field Name="GLFilter">
+          <DataField>GLFilter</DataField>
+        </Field>
+        <Field Name="Posting_Date_GLEntry">
+          <DataField>Posting_Date_GLEntry</DataField>
+        </Field>
+        <Field Name="SalesPersonPayment">
+          <DataField>SalesPersonPayment</DataField>
+        </Field>
+        <Field Name="Payment_Type_GLEnty">
+          <DataField>Payment_Type_GLEnty</DataField>
+        </Field>
+        <Field Name="ChequeNo_CustLedg">
+          <DataField>ChequeNo_CustLedg</DataField>
+        </Field>
+        <Field Name="PaymentAmountLCY_CustLedg">
+          <DataField>PaymentAmountLCY_CustLedg</DataField>
+        </Field>
+        <Field Name="PaymentAmountLCY_CustLedgFormat">
+          <DataField>PaymentAmountLCY_CustLedgFormat</DataField>
+        </Field>
+        <Field Name="InvoiceNo">
+          <DataField>InvoiceNo</DataField>
+        </Field>
+        <Field Name="InvoiceAmountLCY_DetCust">
+          <DataField>InvoiceAmountLCY_DetCust</DataField>
+        </Field>
+        <Field Name="InvoiceAmountLCY_DetCustFormat">
+          <DataField>InvoiceAmountLCY_DetCustFormat</DataField>
+        </Field>
+        <Field Name="GetItemCategory">
+          <DataField>GetItemCategory</DataField>
+        </Field>
+        <Field Name="SalespersonInvoice">
+          <DataField>SalespersonInvoice</DataField>
+        </Field>
+        <Field Name="PostingDate2">
+          <DataField>PostingDate2</DataField>
+        </Field>
+        <Field Name="SalespersonPayment1">
+          <DataField>SalespersonPayment1</DataField>
+        </Field>
+        <Field Name="PaymentAmount2">
+          <DataField>PaymentAmount2</DataField>
+        </Field>
+        <Field Name="PaymentAmount2Format">
+          <DataField>PaymentAmount2Format</DataField>
+        </Field>
+        <Field Name="DocumentType_CustLedg2">
+          <DataField>DocumentType_CustLedg2</DataField>
+        </Field>
+        <Field Name="DocumentNo_CustLedg2">
+          <DataField>DocumentNo_CustLedg2</DataField>
+        </Field>
+        <Field Name="salesPersonPayment2">
+          <DataField>salesPersonPayment2</DataField>
+        </Field>
+        <Field Name="InvoiceNo3">
+          <DataField>InvoiceNo3</DataField>
+        </Field>
+        <Field Name="InvoicesTotal3">
+          <DataField>InvoicesTotal3</DataField>
+        </Field>
+        <Field Name="InvoicesTotal3Format">
+          <DataField>InvoicesTotal3Format</DataField>
+        </Field>
+        <Field Name="InvoiceNo2">
+          <DataField>InvoiceNo2</DataField>
+        </Field>
+        <Field Name="GetItemCategory2">
+          <DataField>GetItemCategory2</DataField>
+        </Field>
+        <Field Name="InvoiceAmountLCY2">
+          <DataField>InvoiceAmountLCY2</DataField>
+        </Field>
+        <Field Name="InvoiceAmountLCY2Format">
+          <DataField>InvoiceAmountLCY2Format</DataField>
+        </Field>
+        <Field Name="SalespersonInvoice2">
+          <DataField>SalespersonInvoice2</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
