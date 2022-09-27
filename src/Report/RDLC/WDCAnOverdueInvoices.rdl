@@ -1473,7 +1473,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!CollectionDate.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>dd/MM/yyyy</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -2122,7 +2124,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!CollectionDate.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -2165,6 +2169,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>#dce6f1</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2196,6 +2201,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>#dce6f1</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2227,6 +2233,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>#dce6f1</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2258,6 +2265,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>#dce6f1</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2289,6 +2297,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>#dce6f1</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2819,23 +2828,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox30">
+                        <Textbox Name="RemainingAmtInv14">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!OnTime.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox30</rd:DefaultName>
+                          <rd:DefaultName>RemainingAmtInv</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -2857,9 +2867,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!Sup30days.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2881,23 +2892,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox51">
+                        <Textbox Name="RemainingAmtInv24">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!Sup60days.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox51</rd:DefaultName>
+                          <rd:DefaultName>RemainingAmtInv</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -2912,23 +2924,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox62">
+                        <Textbox Name="RemainingAmtInv25">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!Sup90days.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox62</rd:DefaultName>
+                          <rd:DefaultName>RemainingAmtInv</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -2943,23 +2956,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox57">
+                        <Textbox Name="RemainingAmtInv26">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!Sup120days.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox57</rd:DefaultName>
+                          <rd:DefaultName>RemainingAmtInv</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -3484,23 +3498,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox34">
+                        <Textbox Name="RemainingAmtInv31">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!OnTime.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox34</rd:DefaultName>
+                          <rd:DefaultName>RemainingAmtInv</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -3515,23 +3530,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox47">
+                        <Textbox Name="Textbox91">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!Sup30days.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox47</rd:DefaultName>
+                          <rd:DefaultName>Textbox46</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -3546,23 +3562,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox52">
+                        <Textbox Name="RemainingAmtInv32">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!Sup60days.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox52</rd:DefaultName>
+                          <rd:DefaultName>RemainingAmtInv</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -3577,23 +3594,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox63">
+                        <Textbox Name="RemainingAmtInv33">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!Sup90days.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox63</rd:DefaultName>
+                          <rd:DefaultName>RemainingAmtInv</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -3608,23 +3626,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox58">
+                        <Textbox Name="RemainingAmtInv34">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!Sup120days.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox58</rd:DefaultName>
+                          <rd:DefaultName>RemainingAmtInv</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -3771,7 +3790,7 @@
               <Source>Embedded</Source>
               <Value>téléchargement</Value>
               <Sizing>FitProportional</Sizing>
-              <Left>22.80308cm</Left>
+              <Left>31.37558cm</Left>
               <Height>0.76033cm</Height>
               <Width>4.90367cm</Width>
               <ZIndex>1</ZIndex>
@@ -3801,7 +3820,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.93672cm</Top>
-              <Left>24.55675cm</Left>
+              <Left>33.12925cm</Left>
               <Height>0.27545cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>2</ZIndex>

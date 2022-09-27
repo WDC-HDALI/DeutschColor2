@@ -115,6 +115,10 @@ report 50105 "WDC Analitic Overdue Invoices"
                 if InvoiceHeader.GET("Cust. Ledger Entry"."Document No.") then
                     if "Cust. Ledger Entry"."Remaining Amt. (LCY)" <> "Cust. Ledger Entry"."Amount (LCY)" then
                         GetOverdueDay(InvoiceHeader."No.", InvoiceHeader."Due Date", "Cust. Ledger Entry"."Entry No.");
+                OnTime := 0;
+                Sup30days := 0;
+                Sup90days := 0;
+                Sup120days := 0;
             end;
 
         }
@@ -128,26 +132,30 @@ report 50105 "WDC Analitic Overdue Invoices"
         NbOverDueDays: Integer;
     begin
         lDetCustLedg.Reset();
+        lDetCustLedg.SetCurrentKey("Cust. Ledger Entry No.", "Posting Date");
         lDetCustLedg.SetRange("Cust. Ledger Entry No.", pCustLedgEntryNo);
         lDetCustLedg.SetRange("Document Type", lDetCustLedg."Document Type"::Payment);
         lDetCustLedg.SetRange("Entry Type", lDetCustLedg."Entry Type"::Application);
         If lDetCustLedg.FindFirst() then
             repeat
-                NbOverDueDays := CalcOverDueDay(pDueInvDate, lDetCustLedg."Document No.");
-                if NbOverDueDays <= 0 Then
-                    OnTime += lDetCustLedg."Amount (LCY)"
-                else
-                    if (0 < NbOverDueDays) and (NbOverDueDays <= 30) then
-                        Sup30days += lDetCustLedg."Amount (LCY)"
+                If (lDetCustLedg."Amount (LCY)" * -1) >= 1 THen Begin
+                    NbOverDueDays := CalcOverDueDay(pDueInvDate, lDetCustLedg."Document No.");
+                    if NbOverDueDays <= 0 Then
+                        OnTime += (lDetCustLedg."Amount (LCY)" * -1)
                     else
-                        if (30 < NbOverDueDays) and (NbOverDueDays <= 60) then
-                            Sup60days += lDetCustLedg."Amount (LCY)"
+                        if (0 < NbOverDueDays) and (NbOverDueDays <= 30) then
+                            Sup30days += (lDetCustLedg."Amount (LCY)" * -1)
                         else
-                            if (60 < NbOverDueDays) and (NbOverDueDays <= 90) then
-                                Sup90days += lDetCustLedg."Amount (LCY)"
+                            if (30 < NbOverDueDays) and (NbOverDueDays <= 60) then
+                                Sup60days += (lDetCustLedg."Amount (LCY)" * -1)
                             else
-                                if (NbOverDueDays <= 120) then
-                                    Sup120days += lDetCustLedg."Amount (LCY)";
+                                if (60 < NbOverDueDays) and (NbOverDueDays <= 90) then
+                                    Sup90days += (lDetCustLedg."Amount (LCY)" * -1)
+                                else
+                                    if (NbOverDueDays <= 120) then
+                                        Sup120days += (lDetCustLedg."Amount (LCY)" * -1)
+                End;
+
             until lDetCustLedg.Next() = 0;
 
     end;
@@ -165,10 +173,10 @@ report 50105 "WDC Analitic Overdue Invoices"
                 If lCHQHeader.Get(lCustLedgEnt."Cheque No.") then begin
                     lCHQHeader.CalcFields("Collection date");
                     CollectionDate := lCHQHeader."Collection date";
-                    if pInvDueDate <> 0D Then
+                    if (pInvDueDate <> 0D) and (CollectionDate <> 0D) Then
                         exit(pInvDueDate - CollectionDate);
                 end else begin
-                    if pInvDueDate <> 0D Then
+                    if (pInvDueDate <> 0D) and (lCustLedgEnt."Posting Date" <> 0D) Then
                         exit(pInvDueDate - lCustLedgEnt."Posting Date");
                 end;
         end;
