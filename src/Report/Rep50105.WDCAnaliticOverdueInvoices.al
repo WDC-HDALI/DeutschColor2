@@ -131,15 +131,17 @@ report 50105 "WDC Analitic Overdue Invoices"
                 if NbOverDueDays <= 0 Then
                     OnTime += lDetCustLedg."Amount (LCY)"
                 else
-                    if (0 < NbOverDueDays) and (NbOverDueDays < 30) then
-                        Sup30days += lDetCustLedg."Amount (LCY)";
-                else
-                if (0 < NbOverDueDays) and (NbOverDueDays < 30) then
-                    Sup30days += lDetCustLedg."Amount (LCY)";
-                else
-                if (0 < NbOverDueDays) and (NbOverDueDays < 30) then
-                    Sup30days += lDetCustLedg."Amount (LCY)";
-
+                    if (0 < NbOverDueDays) and (NbOverDueDays <= 30) then
+                        Sup30days += lDetCustLedg."Amount (LCY)"
+                    else
+                        if (30 < NbOverDueDays) and (NbOverDueDays <= 60) then
+                            Sup60days += lDetCustLedg."Amount (LCY)"
+                        else
+                            if (60 < NbOverDueDays) and (NbOverDueDays <= 90) then
+                                Sup90days += lDetCustLedg."Amount (LCY)"
+                            Else
+                                if (NbOverDueDays <= 120) then
+                                    Sup120days += lDetCustLedg."Amount (LCY)";
             until lDetCustLedg.Next() = 0;
 
     end;
