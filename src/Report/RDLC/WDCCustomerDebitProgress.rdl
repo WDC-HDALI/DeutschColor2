@@ -11,115 +11,6 @@
       <rd:DataSourceID>03f49786-81bc-43de-bda3-97e9a971bfba</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="GLFilter">
-          <DataField>GLFilter</DataField>
-        </Field>
-        <Field Name="CompanyInfoName">
-          <DataField>CompanyInfoName</DataField>
-        </Field>
-        <Field Name="FromDate">
-          <DataField>FromDate</DataField>
-        </Field>
-        <Field Name="ToDate">
-          <DataField>ToDate</DataField>
-        </Field>
-        <Field Name="SalesPersonManFilter">
-          <DataField>SalesPersonManFilter</DataField>
-        </Field>
-        <Field Name="CustomerFilter">
-          <DataField>CustomerFilter</DataField>
-        </Field>
-        <Field Name="CustNo">
-          <DataField>CustNo</DataField>
-        </Field>
-        <Field Name="CustName">
-          <DataField>CustName</DataField>
-        </Field>
-        <Field Name="SalespersonInv">
-          <DataField>SalespersonInv</DataField>
-        </Field>
-        <Field Name="PaymentTermeCustomer">
-          <DataField>PaymentTermeCustomer</DataField>
-        </Field>
-        <Field Name="Credit_Limit_LCY_Blocked_">
-          <DataField>Credit_Limit_LCY_Blocked_</DataField>
-        </Field>
-        <Field Name="Credit_Limit_LCY_Blocked_Format">
-          <DataField>Credit_Limit_LCY_Blocked_Format</DataField>
-        </Field>
-        <Field Name="Credit_Limit__LCY_">
-          <DataField>Credit_Limit__LCY_</DataField>
-        </Field>
-        <Field Name="Credit_Limit__LCY_Format">
-          <DataField>Credit_Limit__LCY_Format</DataField>
-        </Field>
-        <Field Name="PrviousBalance">
-          <DataField>PrviousBalance</DataField>
-        </Field>
-        <Field Name="PrviousBalanceFormat">
-          <DataField>PrviousBalanceFormat</DataField>
-        </Field>
-        <Field Name="InvoiceAndCrdMemo">
-          <DataField>InvoiceAndCrdMemo</DataField>
-        </Field>
-        <Field Name="InvoiceAndCrdMemoFormat">
-          <DataField>InvoiceAndCrdMemoFormat</DataField>
-        </Field>
-        <Field Name="ShippedNotInvoiced">
-          <DataField>ShippedNotInvoiced</DataField>
-        </Field>
-        <Field Name="ShippedNotInvoicedFormat">
-          <DataField>ShippedNotInvoicedFormat</DataField>
-        </Field>
-        <Field Name="ReturnedNotInvoiced">
-          <DataField>ReturnedNotInvoiced</DataField>
-        </Field>
-        <Field Name="ReturnedNotInvoicedFormat">
-          <DataField>ReturnedNotInvoicedFormat</DataField>
-        </Field>
-        <Field Name="Payment">
-          <DataField>Payment</DataField>
-        </Field>
-        <Field Name="PaymentFormat">
-          <DataField>PaymentFormat</DataField>
-        </Field>
-        <Field Name="Impaid">
-          <DataField>Impaid</DataField>
-        </Field>
-        <Field Name="ImpaidFormat">
-          <DataField>ImpaidFormat</DataField>
-        </Field>
-        <Field Name="TotalChqAndTrtByManager">
-          <DataField>TotalChqAndTrtByManager</DataField>
-        </Field>
-        <Field Name="TotalChqAndTrtByManagerFormat">
-          <DataField>TotalChqAndTrtByManagerFormat</DataField>
-        </Field>
-        <Field Name="CashByManager">
-          <DataField>CashByManager</DataField>
-        </Field>
-        <Field Name="CashByManagerFormat">
-          <DataField>CashByManagerFormat</DataField>
-        </Field>
-        <Field Name="ChqAndTrtWaitToEncaise">
-          <DataField>ChqAndTrtWaitToEncaise</DataField>
-        </Field>
-        <Field Name="ChqAndTrtWaitToEncaiseFormat">
-          <DataField>ChqAndTrtWaitToEncaiseFormat</DataField>
-        </Field>
-        <Field Name="LineNo">
-          <DataField>LineNo</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -132,6 +23,15 @@
                 </TablixColumn>
                 <TablixColumn>
                   <Width>3.82741cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.23542cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.16509cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.93556cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.97477cm</Width>
@@ -260,6 +160,171 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox30</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>1st Group</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>2nd Group</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox18">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>3rd Group</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox18</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1227,6 +1292,153 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Group1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Group1.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Group1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Group2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Group2.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Group2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Group3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Group3.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Group3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Textbox39">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1598,7 +1810,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value +Fields!Payment.Value+Fields!Impaid.Value</Value>
+                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value -Fields!Payment.Value+Fields!Impaid.Value</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -1722,7 +1934,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value+Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
+                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -1816,6 +2028,156 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>CustName2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>#dce6f1</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Group11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Group1.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Group11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>#dce6f1</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Group21">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Group2.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Group21</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>#dce6f1</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Group31">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Group3.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Group31</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -2232,7 +2594,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value+Fields!Payment.Value+Fields!Impaid.Value</Value>
+                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -2360,7 +2722,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value+Fields!ReturnedNotInvoiced.Value+Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
+                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -2456,6 +2818,153 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox123</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox16">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox16</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox25">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox25</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -2905,7 +3414,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )+ Sum(Fields!ReturnedNotInvoiced.Value) + Sum(Fields!Payment.Value) +Sum( Fields!Impaid.Value)</Value>
+                                  <Value>=Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )- Sum(Fields!ReturnedNotInvoiced.Value) - Sum(Fields!Payment.Value) +Sum( Fields!Impaid.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.000;-#,0.000;''</Format>
@@ -3033,7 +3542,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )+ Sum(Fields!ReturnedNotInvoiced.Value) +Sum( Fields!Payment.Value + Fields!Impaid.Value) )- (Sum(Fields!TotalChqAndTrtByManager.Value )-Sum( Fields!CashByManager.Value )- Sum(Fields!ChqAndTrtWaitToEncaise.Value))</Value>
+                                  <Value>=(Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )- Sum(Fields!ReturnedNotInvoiced.Value) -Sum( Fields!Payment.Value + Fields!Impaid.Value) )- (Sum(Fields!TotalChqAndTrtByManager.Value )-Sum( Fields!CashByManager.Value )- Sum(Fields!ChqAndTrtWaitToEncaise.Value))</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.000;-#,0.000;''</Format>
@@ -3062,6 +3571,9 @@
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -3119,7 +3631,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.38778cm</Top>
             <Height>2.75278cm</Height>
-            <Width>42.62925cm</Width>
+            <Width>48.96531cm</Width>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -3154,7 +3666,7 @@
           </Border>
         </Style>
       </Body>
-      <Width>42.62925cm</Width>
+      <Width>48.97925cm</Width>
       <Page>
         <PageHeader>
           <Height>1.33564cm</Height>
@@ -3189,7 +3701,7 @@
               <Source>Embedded</Source>
               <Value>téléchargement</Value>
               <Sizing>FitProportional</Sizing>
-              <Left>37.72558cm</Left>
+              <Left>44.07558cm</Left>
               <Height>0.60439cm</Height>
               <Width>4.90367cm</Width>
               <ZIndex>1</ZIndex>
@@ -3218,7 +3730,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.86264cm</Top>
-              <Left>39.47925cm</Left>
+              <Left>45.82925cm</Left>
               <Height>0.20136cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>2</ZIndex>
@@ -3246,7 +3758,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.59839cm</Top>
-              <Left>39.47925cm</Left>
+              <Left>45.82925cm</Left>
               <Height>0.22898cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>3</ZIndex>
@@ -3326,12 +3838,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -3389,4 +3895,122 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>047c20f4-3bb7-404b-af51-297fa770694c</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="GLFilter">
+          <DataField>GLFilter</DataField>
+        </Field>
+        <Field Name="CompanyInfoName">
+          <DataField>CompanyInfoName</DataField>
+        </Field>
+        <Field Name="FromDate">
+          <DataField>FromDate</DataField>
+        </Field>
+        <Field Name="ToDate">
+          <DataField>ToDate</DataField>
+        </Field>
+        <Field Name="SalesPersonManFilter">
+          <DataField>SalesPersonManFilter</DataField>
+        </Field>
+        <Field Name="CustomerFilter">
+          <DataField>CustomerFilter</DataField>
+        </Field>
+        <Field Name="CustNo">
+          <DataField>CustNo</DataField>
+        </Field>
+        <Field Name="CustName">
+          <DataField>CustName</DataField>
+        </Field>
+        <Field Name="Group1">
+          <DataField>Group1</DataField>
+        </Field>
+        <Field Name="Group2">
+          <DataField>Group2</DataField>
+        </Field>
+        <Field Name="Group3">
+          <DataField>Group3</DataField>
+        </Field>
+        <Field Name="SalespersonInv">
+          <DataField>SalespersonInv</DataField>
+        </Field>
+        <Field Name="PaymentTermeCustomer">
+          <DataField>PaymentTermeCustomer</DataField>
+        </Field>
+        <Field Name="Credit_Limit_LCY_Blocked_">
+          <DataField>Credit_Limit_LCY_Blocked_</DataField>
+        </Field>
+        <Field Name="Credit_Limit_LCY_Blocked_Format">
+          <DataField>Credit_Limit_LCY_Blocked_Format</DataField>
+        </Field>
+        <Field Name="Credit_Limit__LCY_">
+          <DataField>Credit_Limit__LCY_</DataField>
+        </Field>
+        <Field Name="Credit_Limit__LCY_Format">
+          <DataField>Credit_Limit__LCY_Format</DataField>
+        </Field>
+        <Field Name="PrviousBalance">
+          <DataField>PrviousBalance</DataField>
+        </Field>
+        <Field Name="PrviousBalanceFormat">
+          <DataField>PrviousBalanceFormat</DataField>
+        </Field>
+        <Field Name="InvoiceAndCrdMemo">
+          <DataField>InvoiceAndCrdMemo</DataField>
+        </Field>
+        <Field Name="InvoiceAndCrdMemoFormat">
+          <DataField>InvoiceAndCrdMemoFormat</DataField>
+        </Field>
+        <Field Name="ShippedNotInvoiced">
+          <DataField>ShippedNotInvoiced</DataField>
+        </Field>
+        <Field Name="ShippedNotInvoicedFormat">
+          <DataField>ShippedNotInvoicedFormat</DataField>
+        </Field>
+        <Field Name="ReturnedNotInvoiced">
+          <DataField>ReturnedNotInvoiced</DataField>
+        </Field>
+        <Field Name="ReturnedNotInvoicedFormat">
+          <DataField>ReturnedNotInvoicedFormat</DataField>
+        </Field>
+        <Field Name="Payment">
+          <DataField>Payment</DataField>
+        </Field>
+        <Field Name="PaymentFormat">
+          <DataField>PaymentFormat</DataField>
+        </Field>
+        <Field Name="Impaid">
+          <DataField>Impaid</DataField>
+        </Field>
+        <Field Name="ImpaidFormat">
+          <DataField>ImpaidFormat</DataField>
+        </Field>
+        <Field Name="TotalChqAndTrtByManager">
+          <DataField>TotalChqAndTrtByManager</DataField>
+        </Field>
+        <Field Name="TotalChqAndTrtByManagerFormat">
+          <DataField>TotalChqAndTrtByManagerFormat</DataField>
+        </Field>
+        <Field Name="CashByManager">
+          <DataField>CashByManager</DataField>
+        </Field>
+        <Field Name="CashByManagerFormat">
+          <DataField>CashByManagerFormat</DataField>
+        </Field>
+        <Field Name="ChqAndTrtWaitToEncaise">
+          <DataField>ChqAndTrtWaitToEncaise</DataField>
+        </Field>
+        <Field Name="ChqAndTrtWaitToEncaiseFormat">
+          <DataField>ChqAndTrtWaitToEncaiseFormat</DataField>
+        </Field>
+        <Field Name="LineNo">
+          <DataField>LineNo</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

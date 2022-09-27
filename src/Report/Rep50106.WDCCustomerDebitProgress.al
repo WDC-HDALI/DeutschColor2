@@ -40,6 +40,18 @@ report 50106 "WDC Customer Debit Progress"
             column(CustName; Customer.Name)
             {
             }
+            column(Group1; "1st Group")
+            {
+
+            }
+            column(Group2; "2nd Group")
+            {
+
+            }
+            column(Group3; "3rd Group")
+            {
+
+            }
 
             column(SalespersonInv; Customer."Salesperson Code")
             {
@@ -93,6 +105,7 @@ report 50106 "WDC Customer Debit Progress"
             {
 
             }
+
             column(LineNo; LineNo)
             {
 
@@ -104,6 +117,10 @@ report 50106 "WDC Customer Debit Progress"
                 CompanyInfo.get;
                 Customer.SetFilter("No.", CustomerFilter);
                 Customer.SetFilter("Salesperson Code", SalesPersonManFilter);
+                Customer.SetFilter("1st Group", Group1Filetr);
+                Customer.SetFilter("2nd Group", Group2Filetr);
+                Customer.SetFilter("3rd Group", Group3Filetr);
+                Customer.SetFilter("4th Group", Group4Filetr);
                 GLFilter := Customer.GetFilters;
                 LineNo := 0;
             end;
@@ -150,6 +167,30 @@ report 50106 "WDC Customer Debit Progress"
                         ApplicationArea = all;
                         Caption = 'Sales Person Manager';
                         TableRelation = "Salesperson/Purchaser";
+                    }
+                    field(Group1Filetr; Group1Filetr)
+                    {
+                        ApplicationArea = all;
+                        Caption = '1st Group';
+                        TableRelation = "Customer Groups" where(Type = filter('1st Group'));
+                    }
+                    field(Group2Filetr; Group2Filetr)
+                    {
+                        ApplicationArea = all;
+                        Caption = '2nd Group';
+                        TableRelation = "Customer Groups" where(Type = filter('2nd Group'));
+                    }
+                    field(Group3Filetr; Group3Filetr)
+                    {
+                        ApplicationArea = all;
+                        Caption = '3rd Group';
+                        TableRelation = "Customer Groups" where(Type = filter('3rd Group'));
+                    }
+                    field(Group4Filetr; Group4Filetr)
+                    {
+                        ApplicationArea = all;
+                        Caption = '4th Group';
+                        TableRelation = "Customer Groups" where(Type = filter('4th Group'));
                     }
 
                 }
@@ -254,7 +295,7 @@ report 50106 "WDC Customer Debit Progress"
                 lCustLedgEnt.CalcFields("Amount (LCY)");
                 lTotalPayment += lCustLedgEnt."Amount (LCY)";
             until lCustLedgEnt.Next() = 0;
-        exit(lTotalPayment * -1);
+        exit(lTotalPayment * (-1));
     end;
 
     procedure GetImpaid(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
@@ -350,6 +391,10 @@ report 50106 "WDC Customer Debit Progress"
         ToDate: Date;
         CustomerFilter: Code[20];
         SalesPersonManFilter: Code[20];
+        Group1Filetr: Code[20];
+        Group2Filetr: Code[20];
+        Group3Filetr: Code[20];
+        Group4Filetr: Code[20];
 
 
 }
