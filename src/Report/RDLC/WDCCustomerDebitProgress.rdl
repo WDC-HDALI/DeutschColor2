@@ -1934,7 +1934,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
+                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value - Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -2722,7 +2722,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value) - (Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
+                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value- Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -3542,7 +3542,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )- Sum(Fields!ReturnedNotInvoiced.Value) -Sum( Fields!Payment.Value + Fields!Impaid.Value) )- (Sum(Fields!TotalChqAndTrtByManager.Value )-Sum( Fields!CashByManager.Value )- Sum(Fields!ChqAndTrtWaitToEncaise.Value))</Value>
+                                  <Value>=(Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )- Sum(Fields!ReturnedNotInvoiced.Value) -Sum( Fields!Payment.Value + Fields!Impaid.Value) - Sum(Fields!TotalChqAndTrtByManager.Value )-Sum( Fields!CashByManager.Value )- Sum(Fields!ChqAndTrtWaitToEncaise.Value))</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.000;-#,0.000;''</Format>
@@ -3631,7 +3631,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.38778cm</Top>
             <Height>2.75278cm</Height>
-            <Width>48.96531cm</Width>
+            <Width>48.96532cm</Width>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -3773,7 +3773,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="From Date : " &amp; First(Fields!FromDate.Value, "DataSet_Result") &amp; "  " &amp; "To Date     : " &amp; First(Fields!ToDate.Value, "DataSet_Result") &amp; "   " &amp; "Customer No. Filter : " &amp; First(Fields!CustomerFilter.Value, "DataSet_Result") &amp; "   " &amp; "Salesperson Filter : " &amp; First(Fields!SalesPersonManFilter.Value, "DataSet_Result")</Value>
+                      <Value>="From Date : " &amp; First(Fields!FromDate.Value, "DataSet_Result") &amp; "  " &amp; "To Date     : " &amp; First(Fields!ToDate.Value, "DataSet_Result") &amp; "   " &amp; First(Fields!GLFilter.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -3909,12 +3909,6 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
         </Field>
         <Field Name="ToDate">
           <DataField>ToDate</DataField>
-        </Field>
-        <Field Name="SalesPersonManFilter">
-          <DataField>SalesPersonManFilter</DataField>
-        </Field>
-        <Field Name="CustomerFilter">
-          <DataField>CustomerFilter</DataField>
         </Field>
         <Field Name="CustNo">
           <DataField>CustNo</DataField>

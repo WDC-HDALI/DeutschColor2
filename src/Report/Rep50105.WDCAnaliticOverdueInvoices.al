@@ -71,6 +71,26 @@ report 50105 "WDC Analitic Overdue Invoices"
             {
 
             }
+            column(OnTime; OnTime)
+            {
+
+            }
+            column(Sup30days; Sup30days)
+            {
+
+            }
+            column(Sup60days; Sup60days)
+            {
+
+            }
+            column(Sup90days; Sup90days)
+            {
+
+            }
+            column(Sup120days; Sup120days)
+            {
+
+            }
 
             trigger OnPreDataItem()
             begin
@@ -86,14 +106,48 @@ report 50105 "WDC Analitic Overdue Invoices"
                 "Cust. Ledger Entry".CalcFields("Remaining Amt. (LCY)");
                 LineNo += 1;
                 if Customer.GET("Cust. Ledger Entry"."Sell-to Customer No.") then;
-                if InvoiceHeader.GET("Cust. Ledger Entry"."Document No.") then;
+                if InvoiceHeader.GET("Cust. Ledger Entry"."Document No.") then
+                    if "Cust. Ledger Entry"."Remaining Amt. (LCY)" <> "Cust. Ledger Entry"."Amount (LCY)" then
+                        GetOverdueDay(InvoiceHeader."No.", InvoiceHeader."Due Date", "Cust. Ledger Entry"."Entry No.");
             end;
 
         }
     }
 
 
+    procedure GetOverdueDay(pInvoiceNo: code[20]; pDueInvDate: Date; pCustLedgEntryNo: Integer)
+    var
+        lDetCustLedg: Record "Detailed Cust. Ledg. Entry";
+        lTotalAmt: Decimal;
+        NbOverDueDays: Integer;
+    begin
+        lDetCustLedg.Reset();
+        lDetCustLedg.SetRange("Cust. Ledger Entry No.", pCustLedgEntryNo);
+        lDetCustLedg.SetRange("Document Type", lDetCustLedg."Document Type"::Payment);
+        lDetCustLedg.SetRange("Entry Type", lDetCustLedg."Entry Type"::Application);
+        If lDetCustLedg.FindFirst() then
+            repeat
+                NbOverDueDays := CalcOverDueDay(pDueInvDate, lDetCustLedg."Document No.");
+                if NbOverDueDays <= 0 Then
+                    OnTime += lDetCustLedg."Amount (LCY)"
+                else
+                    if (0 < NbOverDueDays) and (NbOverDueDays < 30) then
+                        Sup30days += lDetCustLedg."Amount (LCY)";
+                else
+                if (0 < NbOverDueDays) and (NbOverDueDays < 30) then
+                    Sup30days += lDetCustLedg."Amount (LCY)";
+                else
+                if (0 < NbOverDueDays) and (NbOverDueDays < 30) then
+                    Sup30days += lDetCustLedg."Amount (LCY)";
 
+            until lDetCustLedg.Next() = 0;
+
+    end;
+
+    procedure CalcOverDueDay(pInvDueDate: Date; pPaymentNo: code[20]): Integer
+    begin
+        exit(pInvDueDate - pPaymentRefDate)
+    end;
 
     var
         GLFilter: Text;
@@ -103,6 +157,11 @@ report 50105 "WDC Analitic Overdue Invoices"
         LineNo: Integer;
         FromDate: Date;
         ToDate: Date;
+        OnTime: Decimal;
+        Sup30days: Decimal;
+        Sup60days: Decimal;
+        Sup90days: Decimal;
+        Sup120days: Decimal;
 
 }
 

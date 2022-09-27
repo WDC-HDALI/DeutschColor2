@@ -12,7 +12,8 @@ report 50106 "WDC Customer Debit Progress"
     {
         dataitem(Customer; Customer)
         {
-            DataItemTableView = sorting("No.") where("No." = filter('C*'));
+            RequestFilterFields = "No.", "Salesperson Code", "1st Group", "2nd Group", "3rd Group", "4th Group";
+            DataItemTableView = where("No." = filter('C*'));
             column(GLFilter; GLFilter)
             {
             }
@@ -25,14 +26,7 @@ report 50106 "WDC Customer Debit Progress"
             column(ToDate; ToDate)
             {
             }
-            column(SalesPersonManFilter; SalesPersonManFilter)
-            {
 
-            }
-            column(CustomerFilter; CustomerFilter)
-            {
-
-            }
             column(CustNo; Customer."No.")
             {
             }
@@ -115,12 +109,6 @@ report 50106 "WDC Customer Debit Progress"
             trigger OnPreDataItem()
             begin
                 CompanyInfo.get;
-                Customer.SetFilter("No.", CustomerFilter);
-                Customer.SetFilter("Salesperson Code", SalesPersonManFilter);
-                Customer.SetFilter("1st Group", Group1Filetr);
-                Customer.SetFilter("2nd Group", Group2Filetr);
-                Customer.SetFilter("3rd Group", Group3Filetr);
-                Customer.SetFilter("4th Group", Group4Filetr);
                 GLFilter := Customer.GetFilters;
                 LineNo := 0;
             end;
@@ -155,42 +143,6 @@ report 50106 "WDC Customer Debit Progress"
                     {
                         ApplicationArea = all;
                         Caption = 'End Date';
-                    }
-                    field(CustomerFilter; CustomerFilter)
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Customer';
-                        TableRelation = Customer where("No." = filter('C*'));
-                    }
-                    field(SalesPersonManFilter; SalesPersonManFilter)
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Sales Person Manager';
-                        TableRelation = "Salesperson/Purchaser";
-                    }
-                    field(Group1Filetr; Group1Filetr)
-                    {
-                        ApplicationArea = all;
-                        Caption = '1st Group';
-                        TableRelation = "Customer Groups" where(Type = filter('1st Group'));
-                    }
-                    field(Group2Filetr; Group2Filetr)
-                    {
-                        ApplicationArea = all;
-                        Caption = '2nd Group';
-                        TableRelation = "Customer Groups" where(Type = filter('2nd Group'));
-                    }
-                    field(Group3Filetr; Group3Filetr)
-                    {
-                        ApplicationArea = all;
-                        Caption = '3rd Group';
-                        TableRelation = "Customer Groups" where(Type = filter('3rd Group'));
-                    }
-                    field(Group4Filetr; Group4Filetr)
-                    {
-                        ApplicationArea = all;
-                        Caption = '4th Group';
-                        TableRelation = "Customer Groups" where(Type = filter('4th Group'));
                     }
 
                 }
@@ -389,13 +341,6 @@ report 50106 "WDC Customer Debit Progress"
         LineNo: Integer;
         FromDate: Date;
         ToDate: Date;
-        CustomerFilter: Code[20];
-        SalesPersonManFilter: Code[20];
-        Group1Filetr: Code[20];
-        Group2Filetr: Code[20];
-        Group3Filetr: Code[20];
-        Group4Filetr: Code[20];
-
 
 }
 
