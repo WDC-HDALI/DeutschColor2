@@ -76,6 +76,10 @@ report 50105 "WDC Analitic Overdue Invoices"
             {
 
             }
+            column(PostingCashDate; PostingCashDate)
+            {
+
+            }
 
             column(OnTime; OnTime)
             {
@@ -109,16 +113,20 @@ report 50105 "WDC Analitic Overdue Invoices"
 
             trigger OnAfterGetRecord()
             begin
+                OnTime := 0;
+                Sup30days := 0;
+                Sup60days := 0;
+                Sup90days := 0;
+                Sup120days := 0;
+                Clear(CollectionDate);
+                Clear(PostingCashDate);
                 "Cust. Ledger Entry".CalcFields("Remaining Amt. (LCY)");
                 LineNo += 1;
                 if Customer.GET("Cust. Ledger Entry"."Sell-to Customer No.") then;
                 if InvoiceHeader.GET("Cust. Ledger Entry"."Document No.") then
                     if "Cust. Ledger Entry"."Remaining Amt. (LCY)" <> "Cust. Ledger Entry"."Amount (LCY)" then
                         GetOverdueDay(InvoiceHeader."No.", InvoiceHeader."Due Date", "Cust. Ledger Entry"."Entry No.");
-                OnTime := 0;
-                Sup30days := 0;
-                Sup90days := 0;
-                Sup120days := 0;
+
             end;
 
         }
@@ -169,16 +177,20 @@ report 50105 "WDC Analitic Overdue Invoices"
         lCustLedgEnt.SetCurrentKey("Document No.");
         lCustLedgEnt.SetRange("Document No.", pPaymentNo);
         if lCustLedgEnt.FindFirst() then begin
-            if lCustLedgEnt."Cheque No." <> '' then
+            if lCustLedgEnt."Cheque No." <> '' then begin
                 If lCHQHeader.Get(lCustLedgEnt."Cheque No.") then begin
                     lCHQHeader.CalcFields("Collection date");
                     CollectionDate := lCHQHeader."Collection date";
                     if (pInvDueDate <> 0D) and (CollectionDate <> 0D) Then
-                        exit(pInvDueDate - CollectionDate);
-                end else begin
-                    if (pInvDueDate <> 0D) and (lCustLedgEnt."Posting Date" <> 0D) Then
-                        exit(pInvDueDate - lCustLedgEnt."Posting Date");
+                        exit(CollectionDate - pInvDueDate);
                 end;
+            end else begin
+                if (pInvDueDate <> 0D) and (lCustLedgEnt."Posting Date" <> 0D) Then begin
+                    PostingCashDate := lCustLedgEnt."Posting Date";
+                    exit(lCustLedgEnt."Posting Date" - pInvDueDate);
+                end;
+
+            end;
         end;
 
         exit(0)
@@ -198,6 +210,7 @@ report 50105 "WDC Analitic Overdue Invoices"
         Sup90days: Decimal;
         Sup120days: Decimal;
         CollectionDate: date;
+        PostingCashDate: Date;
 
 }
 
