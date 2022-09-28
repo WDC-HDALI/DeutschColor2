@@ -1461,14 +1461,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox22">
+                        <Textbox Name="TotalPaymentAmt">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!AmntIncVatInv.Value - Fields!RemainingAmtInv.Value</Value>
+                                  <Value>=Fields!TotalPaymentAmt.Value</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -1477,7 +1477,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox22</rd:DefaultName>
+                          <rd:DefaultName>TotalPaymentAmt</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -2148,7 +2148,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!AmntIncVatInv.Value - Fields!RemainingAmtInv.Value</Value>
+                                  <Value>=Fields!TotalPaymentAmt.Value</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -2861,7 +2861,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(Fields!AmntIncVatInv.Value) - SUM(Fields!RemainingAmtInv.Value)</Value>
+                                  <Value>=SUM(Fields!TotalPaymentAmt.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.000;-#,0.000;''</Format>
@@ -3562,7 +3562,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!AmntIncVatInv.Value) - Sum(Fields!RemainingAmtInv.Value)</Value>
+                                  <Value>=SUM(Fields!TotalPaymentAmt.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.000;-#,0.000;''</Format>
@@ -4181,6 +4181,12 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
         </Field>
         <Field Name="AmntIncVatInvFormat">
           <DataField>AmntIncVatInvFormat</DataField>
+        </Field>
+        <Field Name="TotalPaymentAmt">
+          <DataField>TotalPaymentAmt</DataField>
+        </Field>
+        <Field Name="TotalPaymentAmtFormat">
+          <DataField>TotalPaymentAmtFormat</DataField>
         </Field>
         <Field Name="RemainingAmtInv">
           <DataField>RemainingAmtInv</DataField>
