@@ -146,7 +146,7 @@ report 50105 "WDC Analitic Overdue Invoices"
         lDetCustLedg.Reset();
         lDetCustLedg.SetCurrentKey("Cust. Ledger Entry No.", "Posting Date");
         lDetCustLedg.SetRange("Cust. Ledger Entry No.", pCustLedgEntryNo);
-        lDetCustLedg.SetRange("Document Type", lDetCustLedg."Document Type"::Payment);
+        //lDetCustLedg.SetRange("Document Type", lDetCustLedg."Document Type"::Payment);
         lDetCustLedg.SetRange("Entry Type", lDetCustLedg."Entry Type"::Application);
         If lDetCustLedg.FindFirst() then
             repeat
