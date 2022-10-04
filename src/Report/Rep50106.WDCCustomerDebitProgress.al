@@ -205,7 +205,7 @@ report 50106 "WDC Customer Debit Progress"
         lSalesLines.SetRange("Sell-to Customer No.", pCustNo);
         lSalesLines.SetRange("Document Type", lSalesLines."Document Type"::Order);
         lSalesLines.SetRange("Posting Date", pStartDate, pEndDate);
-        lSalesLines.SetFilter(type, '<>%1', lSalesLines.Type::"Charge (Item)");
+        lSalesLines.SetFilter(type, '<>%1', lSalesLines.Type::"G/L Account");
         lSalesLines.SetFilter("Shipped Not Invoiced (LCY)", '<>%1', 0);
         if lSalesLines.FindSet() then
             lSalesLines.CalcSums("Shipped Not Invoiced (LCY)");
@@ -223,7 +223,7 @@ report 50106 "WDC Customer Debit Progress"
         lSalesLines.SetRange("Sell-to Customer No.", pCustNo);
         lSalesLines.SetRange("Document Type", lSalesLines."Document Type"::"Return Order");
         lSalesLines.SetRange("Posting Date", pStartDate, pEndDate);
-        lSalesLines.SetFilter(type, '<>%1', lSalesLines.Type::"Charge (Item)");
+        lSalesLines.SetFilter(type, '<>%1', lSalesLines.Type::"G/L Account");
         lSalesLines.SetFilter("Return Rcd. Not Invd. (LCY)", '<>%1', 0);
         if lSalesLines.FindSet() then
             lSalesLines.CalcSums("Return Rcd. Not Invd. (LCY)");
@@ -240,8 +240,8 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        //lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-004*', 'CH-004');
+        lCustLedgEnt.SetFilter("Document Type", '%1|%2', lCustLedgEnt."Document Type"::Payment, lCustLedgEnt."Document Type"::" ");
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3', 'TRT-004*', 'CH-004*', '');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
@@ -261,7 +261,7 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
         // lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-006*', 'CH-006', 'TRT-007*', 'CH-007');
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-006*', 'CH-006*', 'TRT-007*', 'CH-007*');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Remaining Amt. (LCY)");
@@ -282,7 +282,7 @@ report 50106 "WDC Customer Debit Progress"
         //lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
         lCustLedgEnt.SetRange(Reversed, false);
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-001*', 'CH-001');
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-001*', 'CH-001*');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
@@ -325,7 +325,7 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
         //lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-002*', 'CH-002', 'TRT-003*', 'CH-003');
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-002*', 'CH-002*', 'TRT-003*', 'CH-003*');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
