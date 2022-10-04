@@ -111,8 +111,11 @@ report 50105 "WDC Analitic Overdue Invoices"
                 CompanyInfo.get;
                 GLFilter := "Cust. Ledger Entry".GetFilters;
                 LineNo := 0;
-                FromDate := "Cust. Ledger Entry".GetRangeMin("Posting Date");
-                ToDate := "Cust. Ledger Entry".GetRangeMax("Posting Date");
+                If "Cust. Ledger Entry"."Posting Date" <> 0D then begin
+                    FromDate := "Cust. Ledger Entry".GetRangeMin("Posting Date");
+                    ToDate := "Cust. Ledger Entry".GetRangeMax("Posting Date");
+                end;
+
             end;
 
             trigger OnAfterGetRecord()
