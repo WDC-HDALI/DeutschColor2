@@ -286,12 +286,12 @@ report 50102 "WDC Total by Sales Person"
                                     End else begin
                                         If ("Cust. Ledger Entry"."Cheque No." <> '') and (Not lBatchName."Last Step of Cheque") and (Not lBatchName."Last Step of Traite") and
                                         ("Cust. Ledger Entry"."Source Code" <> 'REVERSAL') AND ("Cust. Ledger Entry"."Code Status" <> '') then begin
-                                            Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)"; //abs hd
-                                            TotalCheque += "Cust. Ledger Entry"."Amount (LCY)"; //abs hd 
+                                            Amount__LCY := "Cust. Ledger Entry"."Amount (LCY)";
+                                            TotalCheque += "Cust. Ledger Entry"."Amount (LCY)";
                                             Paymet_Type_Text := 'Cheque/Traite';
                                             DocumentNo := "Cust. Ledger Entry"."Cheque No.";
                                             DocDueDate := GetDueDateFromCheque("Cust. Ledger Entry"."Cheque No.");
-                                            TotalCustomer += "Cust. Ledger Entry"."Amount (LCY)"; //abs hd
+                                            TotalCustomer += "Cust. Ledger Entry"."Amount (LCY)";
                                         end else
                                             CurrReport.Skip();
                                     end;
