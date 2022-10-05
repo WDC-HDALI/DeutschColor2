@@ -149,6 +149,7 @@ report 50105 "WDC Analitic Overdue Invoices"
         lDetCustLedg.Reset();
         lDetCustLedg.SetCurrentKey("Cust. Ledger Entry No.", "Posting Date");
         lDetCustLedg.SetRange("Cust. Ledger Entry No.", pCustLedgEntryNo);
+        lDetCustLedg.SetRange("Customer No.", "Cust. Ledger Entry"."Customer No.");
         //lDetCustLedg.SetRange("Document Type", lDetCustLedg."Document Type"::Payment);
         lDetCustLedg.SetRange("Entry Type", lDetCustLedg."Entry Type"::Application);
         If lDetCustLedg.FindFirst() then
@@ -182,9 +183,12 @@ report 50105 "WDC Analitic Overdue Invoices"
         lCustLedgEnt: Record "Cust. Ledger Entry";
         lCHQHeader: Record "Cheque Header";
     begin
+        Clear(PostingCashDate);
         lCustLedgEnt.Reset();
         lCustLedgEnt.SetCurrentKey("Document No.");
         lCustLedgEnt.SetRange("Document No.", pPaymentNo);
+        lCustLedgEnt.SetFilter("Document Type", '<>%1', lCustLedgEnt."Document Type"::"Credit Memo");
+        lCustLedgEnt.setrange("Customer No.", "Cust. Ledger Entry"."Customer No.");
         if lCustLedgEnt.FindFirst() then begin
             if lCustLedgEnt."Cheque No." <> '' then begin
                 If lCHQHeader.Get(lCustLedgEnt."Cheque No.") then begin
