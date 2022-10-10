@@ -267,7 +267,7 @@ report 50106 "WDC Customer Debit Progress"
                 lCustLedgEnt.CalcFields("Remaining Amt. (LCY)");
                 lTotImpaid += lCustLedgEnt."Remaining Amt. (LCY)";
             until lCustLedgEnt.Next() = 0;
-        exit(lTotImpaid * -1);
+        exit(lTotImpaid);
     end;
 
     procedure GetTotalChqAndTrtByManager(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal

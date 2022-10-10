@@ -105,6 +105,10 @@ report 50105 "WDC Analitic Overdue Invoices"
             {
 
             }
+            column(Over120days; Over120days)
+            {
+
+            }
 
             trigger OnPreDataItem()
             begin
@@ -126,6 +130,7 @@ report 50105 "WDC Analitic Overdue Invoices"
                 Sup60days := 0;
                 Sup90days := 0;
                 Sup120days := 0;
+                Over120days := 0;
                 Clear(CollectionDate);
                 Clear(PostingCashDate);
                 "Cust. Ledger Entry".CalcFields("Remaining Amt. (LCY)");
@@ -169,8 +174,11 @@ report 50105 "WDC Analitic Overdue Invoices"
                                     if (60 < NbOverDueDays) and (NbOverDueDays <= 90) then
                                         Sup90days += (lDetCustLedg."Amount (LCY)" * -1)
                                     else
-                                        if (NbOverDueDays <= 120) then
+                                        if (90 < NbOverDueDays) and (NbOverDueDays <= 120) then
                                             Sup120days += (lDetCustLedg."Amount (LCY)" * -1)
+                                        else
+                                            if (NbOverDueDays > 120) then
+                                                Over120days += (lDetCustLedg."Amount (LCY)" * -1)
                     end;
                 End;
                 TotalPaymentAmt += lDetCustLedg."Amount (LCY)";
@@ -222,6 +230,7 @@ report 50105 "WDC Analitic Overdue Invoices"
         Sup60days: Decimal;
         Sup90days: Decimal;
         Sup120days: Decimal;
+        Over120days: Decimal;
         CollectionDate: date;
         PostingCashDate: Date;
         TotalPaymentAmt: Decimal;
