@@ -234,6 +234,7 @@ report 50106 "WDC Customer Debit Progress"
     procedure GetPayment(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     var
         lCustLedgEnt: Record 21;
+        lGlEntries: record 17;
         lTotalPayment: Decimal;
     begin
         lCustLedgEnt.Reset;
@@ -241,12 +242,23 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
         lCustLedgEnt.SetFilter("Document Type", '%1|%2', lCustLedgEnt."Document Type"::Payment, lCustLedgEnt."Document Type"::" ");
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3', 'TRT-004*', 'CH-004*', '');
+        lCustLedgEnt.SetRange("Cheque No.", '');
+        lCustLedgEnt.SetRange("Code Status", '');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
                 lTotalPayment += lCustLedgEnt."Amount (LCY)";
             until lCustLedgEnt.Next() = 0;
+
+        lGlEntries.Reset;
+        lGlEntries.SetCurrentKey("G/L Account No.", "Posting Date");
+        lGlEntries.SetRange("Bal. Account Type", lGlEntries."Bal. Account Type"::"Bank Account");
+        lGlEntries.SetRange("Customer No.", pCustNo);
+        lGlEntries.SetRange("Posting Date", pStartDate, pEndDate);
+        lGlEntries.SetFilter("Code Status", '%1|%2', 'TRT-004*', 'CH-004*');
+        if lGlEntries.FindFirst() Then
+            lGlEntries.CalcSums(Amount);
+        lTotalPayment += lGlEntries.Amount;
         exit(lTotalPayment * (-1));
     end;
 
@@ -259,7 +271,6 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        // lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
         lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-006*', 'CH-006*', 'TRT-007*', 'CH-007*');
         if lCustLedgEnt.FindFirst() Then
@@ -279,7 +290,6 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        //lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
         lCustLedgEnt.SetRange(Reversed, false);
         lCustLedgEnt.SetFilter("Code Status", '%1|%2', 'TRT-001*', 'CH-001*');
@@ -301,8 +311,6 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        // lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
-        //lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
         lCustLedgEnt.SetFilter("Code Status", '%1', 'CASH-SP');
         if lCustLedgEnt.FindFirst() Then
             repeat
@@ -323,9 +331,8 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
-        //lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
-        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-002*', 'CH-002*', 'TRT-003*', 'CH-003*');
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4|%5|%6', 'TRT-002*', 'CH-002*', 'TRT-003*', 'CH-003*', 'TRT-005*', 'CH-005*');
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
