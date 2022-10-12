@@ -1,6 +1,6 @@
 page 50101 "WDC Reversed Cheques"
 {
-    Caption = 'Reversed Cheque';
+    Caption = 'Reversed Cheque ';
     ApplicationArea = Basic, Suite;
     PageType = List;
     SourceTable = "Cheque Header";
