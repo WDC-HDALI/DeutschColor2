@@ -189,9 +189,22 @@ report 50106 "WDC Customer Debit Progress"
         lDetCustLedgEntry.Setrange("Entry Type", lDetCustLedgEntry."Entry Type"::"Initial Entry");
         lDetCustLedgEntry.SetFilter("Document Type", '%1|%2', lDetCustLedgEntry."Document Type"::"Credit Memo", lDetCustLedgEntry."Document Type"::Invoice);
         lDetCustLedgEntry.SetRange("Posting Date", pStartDate, pEndDate);
-        if lDetCustLedgEntry.Findset() Then
+        if lDetCustLedgEntry.Findset() Then Begin
             lDetCustLedgEntry.CalcSums("Amount (LCY)");
-        lTotal := lDetCustLedgEntry."Amount (LCY)";
+            lTotal := lDetCustLedgEntry."Amount (LCY)";
+        End;
+        lDetCustLedgEntry.Reset();
+        lDetCustLedgEntry.SetCurrentKey("Customer No.", "Entry Type", "Posting Date", "Initial Document Type");
+        lDetCustLedgEntry.SetRange("Customer No.", pCustNo);
+        lDetCustLedgEntry.Setrange("Entry Type", lDetCustLedgEntry."Entry Type"::"Initial Entry");
+        lDetCustLedgEntry.SetRange("Document Type", lDetCustLedgEntry."Document Type"::" ");
+        lDetCustLedgEntry.SetRange("Posting Date", pStartDate, pEndDate);
+        lDetCustLedgEntry.SetFilter("Amount (LCY)", '>%1', 0);
+        if lDetCustLedgEntry.Findset() Then Begin
+            lDetCustLedgEntry.CalcSums("Amount (LCY)");
+            lTotal += lDetCustLedgEntry."Amount (LCY)";
+        End;
+
         exit(lTotal);
     end;
 
@@ -247,7 +260,7 @@ report 50106 "WDC Customer Debit Progress"
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
-                if Not (lCustLedgEnt."Document Type" = lCustLedgEnt."Document Type"::" ") and (lCustLedgEnt."Amount (LCY)" > 0) Then
+                if Not ((lCustLedgEnt."Document Type" = lCustLedgEnt."Document Type"::" ") and (lCustLedgEnt."Amount (LCY)" > 0)) Then
                     lTotalPayment += lCustLedgEnt."Amount (LCY)";
             until lCustLedgEnt.Next() = 0;
 
@@ -260,7 +273,7 @@ report 50106 "WDC Customer Debit Progress"
         if lGlEntries.FindFirst() Then
             lGlEntries.CalcSums(Amount);
         lTotalPayment += lGlEntries.Amount;
-        exit(lTotalPayment * (-1));
+        Exit(lTotalPayment * (-1));
     end;
 
     procedure GetImpaid(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
@@ -279,7 +292,7 @@ report 50106 "WDC Customer Debit Progress"
                 lCustLedgEnt.CalcFields("Remaining Amt. (LCY)");
                 lTotImpaid += lCustLedgEnt."Remaining Amt. (LCY)";
             until lCustLedgEnt.Next() = 0;
-        exit(lTotImpaid);
+        exit(lTotImpaid * -1);
     end;
 
     procedure GetTotalChqAndTrtByManager(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
