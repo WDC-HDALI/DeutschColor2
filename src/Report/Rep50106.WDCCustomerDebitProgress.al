@@ -247,7 +247,8 @@ report 50106 "WDC Customer Debit Progress"
         if lCustLedgEnt.FindFirst() Then
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
-                lTotalPayment += lCustLedgEnt."Amount (LCY)";
+                if Not (lCustLedgEnt."Document Type" = lCustLedgEnt."Document Type"::" ") and (lCustLedgEnt."Amount (LCY)" > 0) Then
+                    lTotalPayment += lCustLedgEnt."Amount (LCY)";
             until lCustLedgEnt.Next() = 0;
 
         lGlEntries.Reset;
