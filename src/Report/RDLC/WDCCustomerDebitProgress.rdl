@@ -1626,7 +1626,7 @@
                                 <TextRun>
                                   <Value>=Fields!PrviousBalance.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1657,7 +1657,7 @@
                                 <TextRun>
                                   <Value>=Fields!InvoiceAndCrdMemo.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1688,7 +1688,7 @@
                                 <TextRun>
                                   <Value>=Fields!ShippedNotInvoiced.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1717,9 +1717,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ReturnedNotInvoiced.Value</Value>
+                                  <Value>=Fields!ReturnedNotInvoiced.Value * -1</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1750,7 +1750,7 @@
                                 <TextRun>
                                   <Value>=Fields!Payment.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1781,7 +1781,7 @@
                                 <TextRun>
                                   <Value>=Fields!Impaid.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1812,7 +1812,7 @@
                                 <TextRun>
                                   <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value -Fields!Payment.Value+Fields!Impaid.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1843,7 +1843,7 @@
                                 <TextRun>
                                   <Value>=Fields!TotalChqAndTrtByManager.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1874,7 +1874,7 @@
                                 <TextRun>
                                   <Value>=Fields!CashByManager.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1905,7 +1905,7 @@
                                 <TextRun>
                                   <Value>=Fields!ChqAndTrtWaitToEncaise.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1936,7 +1936,7 @@
                                 <TextRun>
                                   <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value - Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2404,7 +2404,7 @@
                                 <TextRun>
                                   <Value>=Fields!PrviousBalance.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2436,7 +2436,7 @@
                                 <TextRun>
                                   <Value>=Fields!InvoiceAndCrdMemo.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2468,7 +2468,7 @@
                                 <TextRun>
                                   <Value>=Fields!ShippedNotInvoiced.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2498,9 +2498,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ReturnedNotInvoiced.Value</Value>
+                                  <Value>=Fields!ReturnedNotInvoiced.Value * -1</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2532,7 +2532,7 @@
                                 <TextRun>
                                   <Value>=Fields!Payment.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2564,7 +2564,7 @@
                                 <TextRun>
                                   <Value>=Fields!Impaid.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2596,7 +2596,7 @@
                                 <TextRun>
                                   <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2628,7 +2628,7 @@
                                 <TextRun>
                                   <Value>=Fields!TotalChqAndTrtByManager.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2660,7 +2660,7 @@
                                 <TextRun>
                                   <Value>=Fields!CashByManager.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2692,7 +2692,7 @@
                                 <TextRun>
                                   <Value>=Fields!ChqAndTrtWaitToEncaise.Value</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2724,7 +2724,7 @@
                                 <TextRun>
                                   <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value )-( Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3205,7 +3205,7 @@
                                   <Value>=Sum(Fields!PrviousBalance.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3217,26 +3217,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3257,7 +3237,7 @@
                                   <Value>=Sum(Fields!InvoiceAndCrdMemo.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3289,7 +3269,7 @@
                                   <Value>=Sum(Fields!ShippedNotInvoiced.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3318,10 +3298,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!ReturnedNotInvoiced.Value)</Value>
+                                  <Value>=Sum(Fields!ReturnedNotInvoiced.Value) * -1</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3353,7 +3333,7 @@
                                   <Value>=Sum(Fields!Payment.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3385,7 +3365,7 @@
                                   <Value>=Sum(Fields!Impaid.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3417,7 +3397,7 @@
                                   <Value>=Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )- Sum(Fields!ReturnedNotInvoiced.Value) - Sum(Fields!Payment.Value) +Sum( Fields!Impaid.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3449,7 +3429,7 @@
                                   <Value>=Sum(Fields!TotalChqAndTrtByManager.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3481,7 +3461,7 @@
                                   <Value>=SUm(Fields!CashByManager.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3513,7 +3493,7 @@
                                   <Value>=Sum(Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3545,7 +3525,7 @@
                                   <Value>=(Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )- Sum(Fields!ReturnedNotInvoiced.Value) -Sum( Fields!Payment.Value)+Sum( Fields!Impaid.Value) )- Sum(Fields!TotalChqAndTrtByManager.Value )-Sum( Fields!CashByManager.Value )- Sum(Fields!ChqAndTrtWaitToEncaise.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.000;-#,0.000;''</Format>
+                                    <Format>#,0;-#,0;''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>

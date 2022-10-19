@@ -81,7 +81,7 @@ report 50106 "WDC Customer Debit Progress"
             {
 
             }
-            column(Impaid; GetImpaid(customer."No.", FromDate, ToDate))
+            column(Impaid; GetImpaid_Credit(customer."No.", FromDate, ToDate))
             {
 
             }
@@ -261,9 +261,18 @@ report 50106 "WDC Customer Debit Progress"
             repeat
                 lCustLedgEnt.CalcFields("Amount (LCY)");
                 if Not ((lCustLedgEnt."Document Type" = lCustLedgEnt."Document Type"::" ") and (lCustLedgEnt."Amount (LCY)" > 0)) Then
-                    lTotalPayment += lCustLedgEnt."Amount (LCY)";
+                    lTotalPayment += lCustLedgEnt."Amount (LCY)" * -1;
             until lCustLedgEnt.Next() = 0;
 
+        lTotalPayment += GetAmtPaymentFromGLEntries(pCustNo, pStartDate, pEndDate) + GetImpaid_Debit(pCustNo, pStartDate, pEndDate);
+        exit(lTotalPayment);
+    end;
+
+    procedure GetAmtPaymentFromGLEntries(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lGlEntries: record 17;
+        lTotalPayment: Decimal;
+    begin
         lGlEntries.Reset;
         lGlEntries.SetCurrentKey("G/L Account No.", "Posting Date");
         lGlEntries.SetRange("Bal. Account Type", lGlEntries."Bal. Account Type"::"Bank Account");
@@ -276,7 +285,7 @@ report 50106 "WDC Customer Debit Progress"
         Exit(lTotalPayment * (-1));
     end;
 
-    procedure GetImpaid(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    procedure GetImpaid_Debit(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     var
         lCustLedgEnt: Record 21;
         lTotImpaid: Decimal;
@@ -285,6 +294,27 @@ report 50106 "WDC Customer Debit Progress"
         lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
         lCustLedgEnt.SetRange("Customer No.", pCustNo);
         lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
+        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::Payment);
+        lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
+        lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-006*', 'CH-006*', 'TRT-007*', 'CH-007*');
+        if lCustLedgEnt.FindFirst() Then
+            repeat
+                lCustLedgEnt.CalcFields("Original Amt. (LCY)");
+                lTotImpaid += lCustLedgEnt."Original Amt. (LCY)";
+            until lCustLedgEnt.Next() = 0;
+        exit(lTotImpaid * -1);
+    end;
+
+    procedure GetImpaid_Credit(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
+    var
+        lCustLedgEnt: Record 21;
+        lTotImpaid: Decimal;
+    begin
+        lCustLedgEnt.Reset;
+        lCustLedgEnt.SetCurrentKey("Document Type", "Customer No.", "Posting Date", "Currency Code");
+        lCustLedgEnt.SetRange("Customer No.", pCustNo);
+        lCustLedgEnt.SetRange("Posting Date", pStartDate, pEndDate);
+        lCustLedgEnt.SetRange("Document Type", lCustLedgEnt."Document Type"::" ");
         lCustLedgEnt.SetFilter("Cheque No.", '<>%1', '');
         lCustLedgEnt.SetFilter("Code Status", '%1|%2|%3|%4', 'TRT-006*', 'CH-006*', 'TRT-007*', 'CH-007*');
         if lCustLedgEnt.FindFirst() Then
@@ -292,8 +322,9 @@ report 50106 "WDC Customer Debit Progress"
                 lCustLedgEnt.CalcFields("Remaining Amt. (LCY)");
                 lTotImpaid += lCustLedgEnt."Remaining Amt. (LCY)";
             until lCustLedgEnt.Next() = 0;
-        exit(lTotImpaid * -1);
+        exit(lTotImpaid);
     end;
+
 
     procedure GetTotalChqAndTrtByManager(pCustNo: code[20]; pStartDate: Date; pEndDate: Date): Decimal
     var
