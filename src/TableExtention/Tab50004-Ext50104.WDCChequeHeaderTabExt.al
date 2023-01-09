@@ -34,20 +34,37 @@ tableextension 50104 "WDC ChequeHeaderTabExt" extends "Cheque Header" //50004
         {
 
         }
+        field(50209; "Collection date"; Date)
+        {
+            Editable = False;
+            FieldClass = FlowField;
+            CalcFormula = lookup("G/L Entry"."Posting Date" where("Cheque No." = field("Cheque No."),
+                                                                 "Code Status" = FILTER('TRT-004-* | CH-004-*'),
+                                                                 "Bal. Account Type" = filter(3),
+                                                                 "Description Status" = FIELD("Description Status")));
+        }
 
     }
+    trigger OnRename()
+    var
+    begin
+        TestField("Cheque Generated", false);
+    end;
 
     trigger OnModify()
     var
     begin
         if Blocked = xRec.Blocked then
             TestField(Blocked, false);
+        if ("Cheque Generated" = xRec."Cheque Generated") and (Blocked = xRec.Blocked) then
+            TestField("Cheque Generated", false);
+
     end;
 
     trigger OnDelete()
     var
         myInt: Integer;
-        Ltext001: Label 'You cannot delete an applied cheque';
+        Ltext001: Label 'You cannot delete an applied document';
     begin
 
         If "Code Status" <> '' Then

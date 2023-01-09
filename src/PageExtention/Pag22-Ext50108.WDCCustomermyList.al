@@ -37,6 +37,39 @@ pageextension 50108 "WDC Customer List" extends "Customer List" //22
                 PromotedIsBig = true;
 
             }
+            action(WDC_Payment_Application)
+            {
+                ApplicationArea = All;
+                Caption = 'Payments Applications';
+                Image = ApplyEntries;
+                RunObject = report "WDC Payments Applications";
+                Promoted = true;
+                PromotedCategory = Report;
+                PromotedIsBig = true;
+
+            }
+            action(WDC_AnaliticOverdueInvoices)
+            {
+                ApplicationArea = All;
+                Caption = 'Analitic Overdue Invoices';
+                Image = ApplyEntries;
+                RunObject = report "WDC Analitic Overdue Invoices";
+                Promoted = true;
+                PromotedCategory = Report;
+                PromotedIsBig = true;
+
+            }
+            action(WDC_CustDebitProgress)
+            {
+                ApplicationArea = All;
+                Caption = 'Customer Debit Progress';
+                Image = ApplyEntries;
+                RunObject = report "WDC Customer Debit Progress";
+                Promoted = true;
+                PromotedCategory = Report;
+                PromotedIsBig = true;
+
+            }
         }
     }
 }

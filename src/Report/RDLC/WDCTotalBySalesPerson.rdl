@@ -909,7 +909,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Remainning_Amount__LCY.Value)</Value>
+                                  <Value>=Abs(Sum(Fields!Remainning_Amount__LCY.Value))</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -940,7 +940,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Amount__LCY.Value)</Value>
+                                  <Value>=Abs(Sum(Fields!Amount__LCY.Value))</Value>
                                   <Style>
                                     <Format>#,0.000;-#,0.000;''</Format>
                                   </Style>
@@ -1429,7 +1429,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!TTC_Shippement_Not_Invoiced.Value</Value>
+                                  <Value>=Abs(Fields!TTC_Shippement_Not_Invoiced.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.000;-#,0.000;''</Format>
@@ -1620,7 +1620,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!TTC_Return_Not_Invoiced.Value</Value>
+                                  <Value>=Abs(Fields!TTC_Return_Not_Invoiced.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.000;-#,0.000;''</Format>
@@ -1780,7 +1780,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Last(Fields!TotalCustomer.Value)- Fields!TTC_Return_Not_Invoiced.Value +Fields!TTC_Shippement_Not_Invoiced.Value</Value>
+                                  <Value>=Abs(Last(Fields!TotalCustomer.Value)- Fields!TTC_Return_Not_Invoiced.Value +Fields!TTC_Shippement_Not_Invoiced.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.000;-#,0.000;''</Format>

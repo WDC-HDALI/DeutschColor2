@@ -9,6 +9,11 @@ pageextension 50104 "WDC ChequeListPagExt" extends "Cheque List" //50010
             {
                 ApplicationArea = All;
             }
+
+            field("Collection date"; Rec."Collection date")
+            {
+                ApplicationArea = All;
+            }
         }
 
     }
