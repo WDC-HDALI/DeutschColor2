@@ -1810,7 +1810,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value -Fields!Payment.Value+Fields!Impaid.Value</Value>
+                                  <Value>=Fields!TotalDebit.Value</Value>
                                   <Style>
                                     <Format>#,0;-#,0;''</Format>
                                   </Style>
@@ -1934,7 +1934,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value - Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
+                                  <Value>=Fields!IncovredDebit.Value</Value>
                                   <Style>
                                     <Format>#,0;-#,0;''</Format>
                                   </Style>
@@ -2594,7 +2594,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value</Value>
+                                  <Value>=Fields!TotalDebit.Value</Value>
                                   <Style>
                                     <Format>#,0;-#,0;''</Format>
                                   </Style>
@@ -2722,7 +2722,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!PrviousBalance.Value+Fields!InvoiceAndCrdMemo.Value+Fields!ShippedNotInvoiced.Value-Fields!ReturnedNotInvoiced.Value-Fields!Payment.Value+Fields!Impaid.Value )-( Fields!TotalChqAndTrtByManager.Value - Fields!CashByManager.Value - Fields!ChqAndTrtWaitToEncaise.Value)</Value>
+                                  <Value>=Fields!IncovredDebit.Value</Value>
                                   <Style>
                                     <Format>#,0;-#,0;''</Format>
                                   </Style>
@@ -3394,7 +3394,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )- Sum(Fields!ReturnedNotInvoiced.Value) - Sum(Fields!Payment.Value) +Sum( Fields!Impaid.Value)</Value>
+                                  <Value>=Sum(Fields!TotalDebit.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0;-#,0;''</Format>
@@ -3522,7 +3522,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Sum(Fields!PrviousBalance.Value) + Sum(Fields!InvoiceAndCrdMemo.Value) + Sum(Fields!ShippedNotInvoiced.Value )- Sum(Fields!ReturnedNotInvoiced.Value) -Sum( Fields!Payment.Value)+Sum( Fields!Impaid.Value) )- Sum(Fields!TotalChqAndTrtByManager.Value )-Sum( Fields!CashByManager.Value )- Sum(Fields!ChqAndTrtWaitToEncaise.Value)</Value>
+                                  <Value>=SUM(Fields!IncovredDebit.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0;-#,0;''</Format>
@@ -3959,6 +3959,12 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
         <Field Name="ImpaidFormat">
           <DataField>ImpaidFormat</DataField>
         </Field>
+        <Field Name="TotalDebit">
+          <DataField>TotalDebit</DataField>
+        </Field>
+        <Field Name="TotalDebitFormat">
+          <DataField>TotalDebitFormat</DataField>
+        </Field>
         <Field Name="TotalChqAndTrtByManager">
           <DataField>TotalChqAndTrtByManager</DataField>
         </Field>
@@ -3976,6 +3982,12 @@ kp+fj1b6UHll4SMeWjnR2sYKDg5GCycesdzo6ChqnlDhUVBQkPiNiYnxkIMHD7Lo6Ghxzwj+LolIXFkG
         </Field>
         <Field Name="ChqAndTrtWaitToEncaiseFormat">
           <DataField>ChqAndTrtWaitToEncaiseFormat</DataField>
+        </Field>
+        <Field Name="IncovredDebit">
+          <DataField>IncovredDebit</DataField>
+        </Field>
+        <Field Name="IncovredDebitFormat">
+          <DataField>IncovredDebitFormat</DataField>
         </Field>
         <Field Name="LineNo">
           <DataField>LineNo</DataField>

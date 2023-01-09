@@ -61,41 +61,49 @@ report 50106 "WDC Customer Debit Progress"
             {
             }
 
-            column(PrviousBalance; GetPrviousBalance(customer."No.", FromDate - 1))
+            column(PrviousBalance; PrviousBalance)
             {
             }
 
-            column(InvoiceAndCrdMemo; GetInvoiceAndCrdMemo(customer."No.", FromDate, ToDate))
+            column(InvoiceAndCrdMemo; InvoiceAndCrdMemo)
             {
 
             }
-            column(ShippedNotInvoiced; GetShippedNotInvoiced(customer."No.", FromDate, ToDate))
+            column(ShippedNotInvoiced; ShippedNotInvoiced)
             {
 
             }
-            column(ReturnedNotInvoiced; GetReturnedNotInvoiced(customer."No.", FromDate, ToDate))
+            column(ReturnedNotInvoiced; ReturnedNotInvoiced)
             {
 
             }
-            column(Payment; GetPayment(customer."No.", FromDate, ToDate))
+            column(Payment; Payment)
             {
 
             }
-            column(Impaid; GetImpaid_Credit(customer."No.", FromDate, ToDate))
+            column(Impaid; Impaid)
+            {
+
+            }
+            column(TotalDebit; TotalDebit)
             {
 
             }
 
-            column(TotalChqAndTrtByManager; GetTotalChqAndTrtByManager(customer."No.", FromDate, ToDate))
+            column(TotalChqAndTrtByManager; TotalChqAndTrtByManager)
             {
 
             }
 
-            column(CashByManager; GetCashByManager(customer."No.", FromDate, ToDate))
+            column(CashByManager; CashByManager)
             {
 
             }
-            column(ChqAndTrtWaitToEncaise; GetChqAndTrtWaitToEncaise(customer."No.", FromDate, ToDate))
+            column(ChqAndTrtWaitToEncaise; ChqAndTrtWaitToEncaise)
+            {
+
+            }
+            column(IncovredDebit; IncovredDebit)
             {
 
             }
@@ -115,12 +123,23 @@ report 50106 "WDC Customer Debit Progress"
 
             trigger OnAfterGetRecord()
             begin
+                IniValue();
                 LineNo += 1;
+
+                PrviousBalance := GetPrviousBalance(customer."No.", FromDate - 1);
+                InvoiceAndCrdMemo := GetInvoiceAndCrdMemo(customer."No.", FromDate, ToDate);
+                ShippedNotInvoiced := GetShippedNotInvoiced(customer."No.", FromDate, ToDate);
+                ReturnedNotInvoiced := GetReturnedNotInvoiced(customer."No.", FromDate, ToDate);
+                Payment := GetPayment(customer."No.", FromDate, ToDate);
+                Impaid := GetImpaid_Credit(customer."No.", FromDate, ToDate);
+                TotalDebit := PrviousBalance + InvoiceAndCrdMemo + ShippedNotInvoiced - ReturnedNotInvoiced - Payment + Impaid;
+                TotalChqAndTrtByManager := GetTotalChqAndTrtByManager(customer."No.", FromDate, ToDate);
+                CashByManager := GetCashByManager(customer."No.", FromDate, ToDate);
+                ChqAndTrtWaitToEncaise := GetChqAndTrtWaitToEncaise(customer."No.", FromDate, ToDate);
+                IncovredDebit := TotalDebit - TotalChqAndTrtByManager - CashByManager - ChqAndTrtWaitToEncaise;
             end;
-
-
-
         }
+
 
     }
     requestpage
@@ -262,6 +281,8 @@ report 50106 "WDC Customer Debit Progress"
                 lCustLedgEnt.CalcFields("Amount (LCY)");
                 if Not ((lCustLedgEnt."Document Type" = lCustLedgEnt."Document Type"::" ") and (lCustLedgEnt."Amount (LCY)" > 0)) Then
                     lTotalPayment += lCustLedgEnt."Amount (LCY)" * -1;
+                if ((lCustLedgEnt."Document Type" = lCustLedgEnt."Document Type"::" ") and (lCustLedgEnt."Posting Date" = 20210801D)) Then //Start Bal if it is in filter period
+                    lTotalPayment += lCustLedgEnt."Amount (LCY)" * -1;
             until lCustLedgEnt.Next() = 0;
 
         lTotalPayment += GetAmtPaymentFromGLEntries(pCustNo, pStartDate, pEndDate) + GetImpaid_Debit(pCustNo, pStartDate, pEndDate);
@@ -386,6 +407,21 @@ report 50106 "WDC Customer Debit Progress"
         exit(lTotal * -1);
     end;
 
+    procedure IniValue()
+    Begin
+        PrviousBalance := 0;
+        InvoiceAndCrdMemo := 0;
+        ShippedNotInvoiced := 0;
+        ReturnedNotInvoiced := 0;
+        Payment := 0;
+        Impaid := 0;
+        TotalDebit := 0;
+        TotalChqAndTrtByManager := 0;
+        CashByManager := 0;
+        ChqAndTrtWaitToEncaise := 0;
+        IncovredDebit := 0;
+    End;
+
     var
         GLFilter: Text;
         CompanyInfo: Record "Company Information";
@@ -393,6 +429,17 @@ report 50106 "WDC Customer Debit Progress"
         LineNo: Integer;
         FromDate: Date;
         ToDate: Date;
+        PrviousBalance: Decimal;
+        InvoiceAndCrdMemo: Decimal;
+        ShippedNotInvoiced: Decimal;
+        ReturnedNotInvoiced: Decimal;
+        Payment: Decimal;
+        Impaid: Decimal;
+        TotalDebit: Decimal;
+        TotalChqAndTrtByManager: Decimal;
+        CashByManager: Decimal;
+        ChqAndTrtWaitToEncaise: Decimal;
+        IncovredDebit: Decimal;
 
 }
 

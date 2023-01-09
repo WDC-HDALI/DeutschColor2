@@ -5,6 +5,10 @@ pageextension 50106 "WDC GenLegEntryPagExt" extends "General Ledger Entries" //2
         addafter(Description)
         {
 
+            field("Source No."; Rec."Source No.")
+            {
+                ApplicationArea = All;
+            }
             field("Code Status"; Rec."Code Status")
             {
                 ApplicationArea = All;
